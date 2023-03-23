@@ -7,7 +7,7 @@
             "type": "process",
             "args": [
                 "build",
-                "${workspaceFolder}/410project.csproj",
+                "${workspaceFolder}/GamingGroupFinder/410project.csproj",
                 "/property:GenerateFullPaths=true",
                 "/consoleloggerparameters:NoSummary"
             ],
@@ -19,7 +19,7 @@
             "type": "process",
             "args": [
                 "publish",
-                "${workspaceFolder}/410project.csproj",
+                "${workspaceFolder}/GamingGroupFinder/410project.csproj",
                 "/property:GenerateFullPaths=true",
                 "/consoleloggerparameters:NoSummary"
             ],
@@ -33,7 +33,7 @@
                 "watch",
                 "run",
                 "--project",
-                "${workspaceFolder}/410project.csproj"
+                "${workspaceFolder}/GamingGroupFinder/410project.csproj"
             ],
             "problemMatcher": "$msCompile"
         }
