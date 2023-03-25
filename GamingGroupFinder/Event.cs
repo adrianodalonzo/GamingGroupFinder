@@ -7,8 +7,9 @@ namespace GamingGroupFinder {
         private Platform platform {get;set;}
         private string rank {get;set;}
         private string description {get;set;}
-        private User owner;
-        private List<User> attendees;
+        private User owner {get;set;}
+        private List<User> attendees {get;set;}
+        public List<User> Attendees {get {return attendees;}}
 
         public Event(string title, DateTime dateTime, string location, Game game, Platform platform, string rank, string description, User owner, List<User> attendees) {
             this.title = title;
@@ -34,6 +35,7 @@ namespace GamingGroupFinder {
             string builder = "";
             foreach (User user in attendees) {
                 builder += user.ToString();
+                builder += ", ";
             }
             return builder;
         }

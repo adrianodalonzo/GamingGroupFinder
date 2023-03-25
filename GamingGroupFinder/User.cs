@@ -19,5 +19,22 @@ namespace GamingGroupFinder {
         public void DeleteAccount() {
             
         }
+
+        public override string ToString() {
+            return username;
+        }
+
+        public override bool Equals(object? obj)
+        {
+            if (obj == null) {
+                return false;
+            }
+            if (obj.GetType() == typeof(User)) {
+                if (((User)obj).username == this.username && ((User)obj).password == this.password) {
+                    return true;
+                }
+            }
+            return false;
+        }
     }
 }
