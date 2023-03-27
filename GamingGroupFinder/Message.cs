@@ -5,6 +5,7 @@ namespace GamingGroupFinder {
         private DateTime timeSent;
         private string message;
         private bool isSeen;
+        public bool IsSeen {get {return isSeen;}}
 
         public Message(User sender, User recipient, DateTime timeSent, string message, bool isSeen) {
             this.sender = sender;

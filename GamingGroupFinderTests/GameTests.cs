@@ -16,6 +16,7 @@ namespace GamingGroupFinderTests {
         public void TestConstructor_ThrowsWhenGivenNull() {
             List<Platform> platforms = CreateListPlatforms();
             Game valorant = new Game(null, platforms, "GOLD");
+            Assert.Fail();
         }
     }
 }
