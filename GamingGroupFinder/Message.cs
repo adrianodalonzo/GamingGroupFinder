@@ -10,7 +10,7 @@ namespace GamingGroupFinder {
         public Message(User sender, User recipient, DateTime timeSent, string message, bool isSeen) {
             this.sender = sender;
             this.recipient = recipient;
-            this.timeSent = DateTime.Now;
+            this.timeSent = timeSent;
             this.message = message;
             this.isSeen = isSeen;
         }

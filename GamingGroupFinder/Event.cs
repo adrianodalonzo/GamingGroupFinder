@@ -13,7 +13,7 @@ namespace GamingGroupFinder {
 
         public Event(string title, DateTime dateTime, string location, Game game, string platform, string rank, string description, User owner, List<User> attendees) {
             this.title = title;
-            this.dateTime = DateTime.Now;
+            this.dateTime = dateTime;
             this.location = location;
             this.game = game;
             this.platform = platform;
