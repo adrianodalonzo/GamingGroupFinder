@@ -4,13 +4,13 @@ namespace GamingGroupFinder {
         private string name {get;set;}
         private string pronouns {get;set;}
         private int age;
-        private List<Platform> platforms {get;set;}
+        private List<string> platforms {get;set;}
         private List<Game> games {get;set;}
         private string bio {get;set;}
         private string profilePicture {get;set;}
         private List<string> interests {get;set;}
 
-        public Profile(User user, string name, string pronouns, int age, List<Platform> platforms, List<Game> games, string bio, string profilePicture, List<string> interests) {
+        public Profile(User user, string name, string pronouns, int age, List<string> platforms, List<Game> games, string bio, string profilePicture, List<string> interests) {
             this.user = user;
             this.name = name;
             this.pronouns = pronouns;
