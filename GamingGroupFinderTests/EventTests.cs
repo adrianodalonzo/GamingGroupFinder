@@ -3,15 +3,25 @@ using GamingGroupFinder;
 namespace GamingGroupFinderTests {
     [TestClass]
     public class EventTests {
+        public static Tuple<List<string>, List<int>> GameSplatoonRanks() {
+            List<string> splatoonRanks = new List<string>();
+            splatoonRanks.Add("A-");
+            splatoonRanks.Add("A");
+            splatoonRanks.Add("A+");
+
+            List<int> splatoonRankValues = new List<int>();
+            splatoonRankValues.Add(1);
+            splatoonRankValues.Add(2);
+            splatoonRankValues.Add(3);
+
+            return new Tuple<List<string>, List<int>>(splatoonRanks, splatoonRankValues);
+        }
         public static Event CreateBaseEvent() {
-            Platform pc = new Platform("PC");
-            Platform xbox = new Platform("xbox");
+            List<string> platforms = new List<string>();
+            platforms.Add("PC");
+            platforms.Add("NINTENDO SWITCH");
 
-            List<Platform> platforms = new List<Platform>();
-            platforms.Add(pc);
-            platforms.Add(xbox);
-
-            Game valorant = new Game("Valorant", platforms, "Gold");
+            Game splatoon = new Game("Splatoon", platforms, GameSplatoonRanks());
 
             User vince = new User("vince", "vince");
             User user1 = new User("u1", "you1");
@@ -23,20 +33,17 @@ namespace GamingGroupFinderTests {
             attendees.Add(user2);
 
             DateTime date = new DateTime(2023, 3, 25, 14, 30, 0);
-            return new Event("Base Event", date, "over there", valorant, pc, "Gold", "smth", vince, attendees);
+            return new Event("Base Event", date, "over there", splatoon, "NINTENDO SWITCH", "A+", "smth", vince, attendees);
         }
 
         [TestMethod]
         [ExpectedException (typeof(ArgumentNullException))]
         public void TestConstructor_ThrowsWhenGivenNull() {
-            Platform pc = new Platform("PC");
-            Platform xbox = new Platform("xbox");
+            List<string> platforms = new List<string>();
+            platforms.Add("PC");
+            platforms.Add("NINTENDO SWITCH");
 
-            List<Platform> platforms = new List<Platform>();
-            platforms.Add(pc);
-            platforms.Add(xbox);
-
-            Game valorant = new Game("Valorant", platforms, "Gold");
+            Game splatoon = new Game("Splatoon", platforms, GameSplatoonRanks());
 
             User vince = new User("vince", "vince");
             User user1 = new User("u1", "you1");
@@ -47,7 +54,7 @@ namespace GamingGroupFinderTests {
             attendees.Add(user1);
             attendees.Add(user2);
 
-            Event ev = new Event(null, DateTime.Now, "over there", valorant, pc, "Gold", "smth", vince, attendees);
+            Event ev = new Event(null, DateTime.Now, "over there", splatoon, "NINTENDO SWITCH", "A+", "smth", vince, attendees);
             Assert.Fail();
         }
 
