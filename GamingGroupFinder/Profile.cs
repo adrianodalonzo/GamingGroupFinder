@@ -18,7 +18,7 @@ namespace GamingGroupFinder {
         public string ProfilePicture {get {return profilePicture;}}
         public List<string> Interests {get {return interests;}}
 
-        public Profile(User user, string name, string pronouns, int age, List<Platform> platforms, List<Game> games, string bio, string profilePicture, List<string> interests) {
+        public Profile(User user, string name, string pronouns, int age, List<string> platforms, List<Game> games, string bio, string profilePicture, List<string> interests) {
             this.user = user;
             this.name = name;
             this.pronouns = pronouns;
