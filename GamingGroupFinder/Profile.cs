@@ -4,7 +4,7 @@ namespace GamingGroupFinder {
         private string name;
         private string pronouns;
         private int age;
-        private List<Platform> platforms;
+        private List<string> platforms;
         private List<Game> games;
         private string bio;
         private string profilePicture;
@@ -12,11 +12,11 @@ namespace GamingGroupFinder {
         public string Name {get {return name;}}
         public string Pronouns {get {return pronouns;}}
         public int Age {get {return age;}}
-        public List<Platform> Platforms {get {return platforms;}}
+        public List<string> Platforms {get {return platforms;}}
         public List<Game> Games {get {return games;}}
         public string Bio {get {return bio;}}
         public string ProfilePicture {get {return profilePicture;}}
-        public List<string> Interests {get {return interests;}}
+        public List<string> Interests {get {return Interests;}}
 
         public Profile(User user, string name, string pronouns, int age, List<string> platforms, List<Game> games, string bio, string profilePicture, List<string> interests) {
             this.user = user;
