@@ -1,5 +1,8 @@
 namespace GamingGroupFinder {
     public class Message {
+        // DateTime myDateTime = DateTime.Now;
+        // string sqlFormattedDate = myDateTime.Date.ToString("yyyy-MM-dd HH:mm:ss");
+        
         private User sender;
         private User recipient;
         private DateTime timeSent;
