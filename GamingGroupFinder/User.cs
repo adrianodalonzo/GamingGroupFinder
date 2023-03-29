@@ -1,7 +1,9 @@
 namespace GamingGroupFinder {
     public class User {
-        private string username {get;}
+        private string username;
         private string password;
+        public string Username {get {return username;}}
+        public string Password {get {return password;}}
 
         public User(string username, string password) {
             this.username = username;
