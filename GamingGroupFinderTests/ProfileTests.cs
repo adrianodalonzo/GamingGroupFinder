@@ -34,14 +34,14 @@ namespace GamingGroupFinderTests {
         [TestMethod]
         [ExpectedException (typeof(ArgumentNullException))]
         public void TestConstructor_ThrowsWhenGivenNull() {
-            User vince = new User("vince", "vince");
+            User vince = new User("vince", "vince", new List<User>());
             Profile profile = new Profile(vince, "Vince", "hehim", 18, null, null, "uhhhhhh", "some link", null);
             Assert.Fail();
         }
 
         [TestMethod]
         public void TestClearData_Clears() {
-            User vince = new User("vince", "vince");
+            User vince = new User("vince", "vince", new List<User>());
 
             List<string> platforms = new List<string>();
             platforms.Add("PC");
