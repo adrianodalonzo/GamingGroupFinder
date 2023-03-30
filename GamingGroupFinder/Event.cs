@@ -83,6 +83,9 @@ namespace GamingGroupFinder {
         }
 
         public Event(string title, DateTime dateTime, string location, Game game, string platform, string rank, string description, User owner, List<User> attendees) {
+            if (title == null || dateTime == null || location == null || game == null || platform == null || rank == null || description == null || owner == null || attendees == null){
+                throw new ArgumentNullException("one or multiple of the input is null");
+            }
             this.Title = title;
             this.DateTime = dateTime;
             this.Location = location;
@@ -95,10 +98,16 @@ namespace GamingGroupFinder {
         }
 
         public void AttendEvent(User user) {
+            if (user == null){
+                throw new ArgumentNullException("user is null");
+            }
             this.Attendees.Add(user);
         }
 
         public void LeaveEvent(User user) {
+            if (user == null){
+                throw new ArgumentNullException("user is null");
+            }
             this.Attendees.Remove(user);
         }
 
