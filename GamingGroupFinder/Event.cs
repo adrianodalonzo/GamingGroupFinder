@@ -63,7 +63,7 @@ namespace GamingGroupFinder {
                 this.Description = value;
             }
         }
-        private User Owner {
+        public User Owner {
             get{ return Owner; }
             set {
                 if (value == null) {
@@ -72,7 +72,7 @@ namespace GamingGroupFinder {
                 _ = value;
             }
         }
-        private List<User> Attendees {
+        public List<User> Attendees {
             get{ return Attendees; }
             set {
                 if (value == null) {
