@@ -1,28 +1,58 @@
 namespace GamingGroupFinder {
     public class User {
-        private string username;
-        private string password;
-        private List<User> contactList;
-        public string Username {get {return username;}}
-        public string Password {get {return password;}}
-        public List<User> ContactList {get {return contactList;}}
+        public string Username {get {return Username;} 
+            set{
+                    if (string.IsNullOrEmpty(value)){
+                        throw new ArgumentNullException("Username is null");
+                    }
+                    this.Username = value;
+            }
+        }
+        public string Password {get {return Password;}
+            set{
+                    if (string.IsNullOrEmpty(value)){
+                        throw new ArgumentNullException("Password is null");
+                    }
+                    this.Password = value;
+            }
+        }
+        public List<User> ContactList {get {return ContactList;}
+            set{
+                    if (value == null){
+                        throw new ArgumentNullException("ContactList is null");
+                    }
+                    this.ContactList = value;
+            }
+        }
 
         public User(string username, string password, List<User> contactList) {
-            this.username = username;
-            this.password = password;
-            this.contactList = contactList;
+            if(username == null || password == null || contactList == null){
+                throw new ArgumentNullException("one or multiple of the input is null");
+            }
+            this.Username = username;
+            this.Password = password;
+            this.ContactList = contactList;
         }
 
         public bool VerifyUser(string username, string password) {
+            if(username == null || password == null){
+                throw new ArgumentNullException("one or multiple of the input is null");
+            }
             return false;
         }   
 
         public void AddToContacts(string userName) {
             // add checking for seeing if user exists in database
+            if(userName == null){
+                throw new ArgumentNullException("userName is null");
+            }
         }
 
         public void ChangePassword(string newPassword) {
-            this.password = newPassword;
+            if(newPassword == null){
+                throw new ArgumentNullException("newPassword is null");
+            }
+            this.Password = newPassword;
         }
 
         public void DeleteAccount() {
@@ -30,7 +60,7 @@ namespace GamingGroupFinder {
         }
 
         public override string ToString() {
-            return username;
+            return Username;
         }
 
         public override bool Equals(object? obj)
@@ -39,7 +69,7 @@ namespace GamingGroupFinder {
                 return false;
             }
             if (obj.GetType() == typeof(User)) {
-                if (((User)obj).username == this.username && ((User)obj).password == this.password) {
+                if (((User)obj).Username == this.Username && ((User)obj).Password == this.Password) {
                     return true;
                 }
             }

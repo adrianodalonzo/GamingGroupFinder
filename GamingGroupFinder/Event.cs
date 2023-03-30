@@ -1,39 +1,119 @@
 namespace GamingGroupFinder {
     public class Event {
-        private string title {get;set;}
-        private DateTime dateTime {get;set;}
-        private string location {get;set;}
-        private Game game {get;set;}
-        private string platform {get;set;}
-        private string rank {get;set;}
-        private string description {get;set;}
-        private User owner {get;set;}
-        private List<User> attendees {get;set;}
-        public List<User> Attendees {get {return attendees;}}
+        public string Title{
+            get{ return Title; }
+            set {
+                if (string.IsNullOrEmpty(value)){
+                    throw new ArgumentNullException("Title is null");
+                }
+                this.Title = value;
+            }
+        }
+        public DateTime DateTime{
+            get{ return DateTime; }
+            set {
+                if (value == null) {
+                    throw new ArgumentNullException("Date is null");
+                }
+                _ = value;
+            }
+        }
+        public string Location{
+            get{ return Location; }
+            set {
+                if (string.IsNullOrEmpty(value)){
+                    throw new ArgumentNullException("Location is null");
+                }
+                this.Location = value;
+            }
+        }
+        public Game Game{
+            get{ return Game; }
+            set {
+                if (value == null){
+                    throw new ArgumentNullException("Game is null");
+                }
+                this.Game = value;
+            }
+        }
+        public string Platform {
+            get{return Platform;} 
+            set{
+                if (string.IsNullOrEmpty(value)){
+                    throw new ArgumentNullException("Platform is null");
+                }
+                this.Platform = value;
+            }
+        }
+        public string Rank {
+            get{return Rank;} 
+            set{
+                if (string.IsNullOrEmpty(value)){
+                    throw new ArgumentNullException("Rank is null");
+                }
+                this.Rank = value;
+            }
+        }
+        public string Description {
+            get{return Description;} 
+            set{
+                if (string.IsNullOrEmpty(value)){
+                    throw new ArgumentNullException("Description is null");
+                }
+                this.Description = value;
+            }
+        }
+        public User Owner {
+            get{ return Owner; }
+            set {
+                if (value == null) {
+                    throw new ArgumentNullException("Owner is null");
+                }
+                _ = value;
+            }
+        }
+        public List<User> Attendees {
+            get{ return Attendees; }
+            set {
+                if (value == null) {
+                    throw new ArgumentNullException("Attendees is null");
+                }
+                _ = value;
+            }
+        }
 
         public Event(string title, DateTime dateTime, string location, Game game, string platform, string rank, string description, User owner, List<User> attendees) {
-            this.title = title;
-            this.dateTime = dateTime;
-            this.location = location;
-            this.game = game;
-            this.platform = platform;
-            this.rank = rank;
-            this.description = description;
-            this.owner = owner;
-            this.attendees = attendees;
+            if (title == null || dateTime == null || location == null || game == null || platform == null || rank == null || description == null || owner == null || attendees == null){
+                throw new ArgumentNullException("one or multiple of the input is null");
+            }
+            this.Title = title;
+            this.DateTime = dateTime;
+            this.Location = location;
+            this.Game = game;
+            this.Platform = platform;
+            this.Rank = rank;
+            this.Description = description;
+            this.Owner = owner;
+            this.Attendees = attendees;
         }
 
         public void AttendEvent(User user) {
-            this.attendees.Add(user);
+            if (user == null){
+                throw new ArgumentNullException("user is null");
+            }
+            this.Attendees.Add(user);
         }
 
         public void LeaveEvent(User user) {
-            this.attendees.Remove(user);
+            if (user == null){
+                throw new ArgumentNullException("user is null");
+            }
+            this.Attendees.Remove(user);
         }
 
         public string ViewAttendees() {
             string builder = "";
-            foreach (User user in attendees) {
+            foreach (User user in Attendees) {
                 builder += user.ToString();
                 builder += ", ";
             }
