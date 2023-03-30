@@ -2,8 +2,10 @@ namespace GamingGroupFinder {
     public class User {
         private string username;
         private string password;
+        private List<User> contactList;
         public string Username {get {return username;}}
         public string Password {get {return password;}}
+        public List<User> ContactList {get {return contactList;}}
 
         public User(string username, string password, List<User> contactList) {
             this.username = username;
