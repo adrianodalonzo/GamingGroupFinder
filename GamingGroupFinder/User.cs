@@ -44,13 +44,13 @@ namespace GamingGroupFinder {
         public void AddToContacts(string userName) {
             // add checking for seeing if user exists in database
             if(userName == null){
-                throw new ArgumentNullException("one or multiple of the input is null");
+                throw new ArgumentNullException("userName is null");
             }
         }
 
         public void ChangePassword(string newPassword) {
             if(newPassword == null){
-                throw new ArgumentNullException("one or multiple of the input is null");
+                throw new ArgumentNullException("newPassword is null");
             }
             this.Password = newPassword;
         }

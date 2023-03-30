@@ -28,7 +28,7 @@ namespace GamingGroupFinder {
         public int Age {get {return Age;}
             set{
                 if (value <= 0){
-                    throw new ArgumentNullException("Age is not in acceptable range");
+                    throw new ArgumentNullException("Age is not in acceptable range (can't be negative)");
                 }
                 this.Age = value;
             }
