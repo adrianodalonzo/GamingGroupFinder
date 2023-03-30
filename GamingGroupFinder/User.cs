@@ -1,8 +1,9 @@
 namespace GamingGroupFinder {
     public class User {
-        private string username {get;}
+        private string username;
         private string password;
-        private List<User> contactList;
+        public string Username {get {return username;}}
+        public string Password {get {return password;}}
 
         public User(string username, string password, List<User> contactList) {
             this.username = username;
@@ -24,6 +25,23 @@ namespace GamingGroupFinder {
 
         public void DeleteAccount() {
             
+        }
+
+        public override string ToString() {
+            return username;
+        }
+
+        public override bool Equals(object? obj)
+        {
+            if (obj == null) {
+                return false;
+            }
+            if (obj.GetType() == typeof(User)) {
+                if (((User)obj).username == this.username && ((User)obj).password == this.password) {
+                    return true;
+                }
+            }
+            return false;
         }
     }
 }
