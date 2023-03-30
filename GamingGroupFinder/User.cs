@@ -35,14 +35,23 @@ namespace GamingGroupFinder {
         }
 
         public bool VerifyUser(string username, string password) {
+            if(username == null || password == null){
+                throw new ArgumentNullException("one or multiple of the input is null");
+            }
             return false;
         }   
 
         public void AddToContacts(string userName) {
             // add checking for seeing if user exists in database
+            if(userName == null){
+                throw new ArgumentNullException("one or multiple of the input is null");
+            }
         }
 
         public void ChangePassword(string newPassword) {
+            if(newPassword == null){
+                throw new ArgumentNullException("one or multiple of the input is null");
+            }
             this.Password = newPassword;
         }
 
