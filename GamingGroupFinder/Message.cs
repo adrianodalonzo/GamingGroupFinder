@@ -39,7 +39,7 @@ namespace GamingGroupFinder {
                 this.MessageText = value;
             }
         }
-        public bool IsSeen {get { return IsSeen; } set{ _ = value; }}
+        public bool IsSeen { get; set; }
 
         public Message(User sender, User recipient, DateTime timeSent, string message, bool isSeen) {
             if(sender == null || recipient == null || timeSent == null || message == null){
