@@ -92,5 +92,21 @@ namespace GamingGroupFinder {
         public void ClearData() {
             
         }
+
+        public override string ToString() {
+            string PlatformsString = "";
+            foreach(string platform in Platforms) {
+                PlatformsString += $"{platform}, ";
+            }
+            string GamesString = "";
+            foreach(Game game in Games) {
+                GamesString += $"{game.Name}, ";
+            }
+            string InterestsString = "";
+            foreach(string interest in Interests) {
+                InterestsString += $"{interest}, ";
+            }
+            return $"{User}:\n\t{Pronouns}\n\t{Age} years old\n\tPlays on {PlatformsString}\n\tPlays {GamesString}\n\tBio: {Bio}\n\tOther interests: {InterestsString}";
+        }
     }
 }
