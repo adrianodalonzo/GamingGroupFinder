@@ -1,76 +1,85 @@
 namespace GamingGroupFinder {
     public class Profile {
+        private User _user;
         public User User {
-            get{ return User; }
+            get{ return _user; }
             set {
                 if (value == null) {
                     throw new ArgumentNullException("User is null");
                 }
-                _ = value;
+                _user = value;
             }
         }
-        public string Name {get {return Name;}
+        private string _name;
+        public string Name {get {return _name;}
             set{
                 if (string.IsNullOrEmpty(value)){
                     throw new ArgumentNullException("Name is null");
                 }
-                this.Name = value;
+                this._name = value;
             }
         }
-        public string Pronouns {get {return Pronouns;}
+        private string _pronouns;
+        public string Pronouns {get {return _pronouns;}
             set{
                 if (string.IsNullOrEmpty(value)){
                     throw new ArgumentNullException("Description is null");
                 }
-                this.Pronouns = value;
+                this._pronouns = value;
             }
         }
-        public int Age {get {return Age;}
+        private int _age;
+        public int Age {get {return _age;}
             set{
                 if (value <= 0){
                     throw new ArgumentNullException("Age is not in acceptable range (can't be negative)");
                 }
-                this.Age = value;
+                this._age = value;
             }
         }
-        public List<string> Platforms {get {return Platforms;}
+        private List<string> _platforms;
+        public List<string> Platforms {get {return _platforms;}
             set{
                 if (value == null){
                     throw new ArgumentNullException("Platforms is null");
                 }
-                this.Platforms = value;
+                this._platforms = value;
             }
         }
-        public List<Game> Games {get {return Games;}
+        private List<Game> _games;
+        public List<Game> Games {get {return _games;}
             set{
                 if (value == null){
                     throw new ArgumentNullException("Games is null");
                 }
-                this.Games = value;
+                this._games = value;
             }
         }
-        public string Bio {get {return Bio;}
+        private string _bio;
+        public string Bio {get {return _bio;}
             set{
                 if (string.IsNullOrEmpty(value)){
                     throw new ArgumentNullException("Bio is null");
                 }
-                this.Bio = value;
+                this._bio = value;
             }
         }
-        public string ProfilePicture {get {return ProfilePicture;}
+        private string _profilePicture;
+        public string ProfilePicture {get {return _profilePicture;}
             set{
                 if (string.IsNullOrEmpty(value)){
                     throw new ArgumentNullException("ProfilePicture is null");
                 }
-                this.ProfilePicture = value;
+                this._profilePicture = value;
             }
         }
-        public List<string> Interests {get {return Interests;}
+        private List<string> _interests;
+        public List<string> Interests {get {return _interests;}
             set{
                 if (value == null){
                     throw new ArgumentNullException("Interests is null");
                 }
-                this.Interests = value;
+                this._interests = value;
             }
         }
 
