@@ -97,6 +97,8 @@ namespace GamingGroupFinder {
             this.ProfilePicture = profilePicture;
             this.Interests = interests;
         }
+        private Profile() {
+        }
 
         public void ClearData() {
             

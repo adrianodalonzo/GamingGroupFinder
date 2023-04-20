@@ -36,6 +36,8 @@ namespace GamingGroupFinder {
             this.Password = password;
             this.ContactList = contactList;
         }
+        private User(){
+        }
 
         public bool VerifyUser(string username, string password) {
             if(username == null || password == null){

@@ -54,6 +54,8 @@ namespace GamingGroupFinder {
             this.MessageText = message;
             this.IsSeen = isSeen;
         }
+        private Message(){
+        }
 
         public void ListMessages() {
             

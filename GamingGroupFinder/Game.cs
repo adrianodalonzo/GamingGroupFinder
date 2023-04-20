@@ -21,8 +21,8 @@ namespace GamingGroupFinder {
             }
         }
         // key 1: rank name. key 2: rank value
-        private Tuple<List<string>, List<int>> _rank;
-        public Tuple<List<string>, List<int>> Rank{
+        private List<Rank> _rank;
+        public List<Rank> Rank{
             get{ return _rank; }
             set {
                 if (value == null){
@@ -32,13 +32,15 @@ namespace GamingGroupFinder {
             }
         }
 
-        public Game(string name, List<string> platforms, Tuple<List<string>, List<int>> rank) {
+        public Game(string name, List<string> platforms, List<Rank> rank) {
             if (name == null || platforms == null || rank == null){
                 throw new ArgumentNullException("one or multiple of the input is null");
             }
             this.Name = name;
             this.AvailablePlatforms = platforms;
             this.Rank = rank;
+        }
+        private Game(){
         }
     }
 }

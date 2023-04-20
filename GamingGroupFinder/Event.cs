@@ -116,5 +116,7 @@ namespace GamingGroupFinder {
             this.Owner = owner;
             this.Attendees = attendees;
         }
+        private Event(){
+        }
     }
 }
