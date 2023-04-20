@@ -4,13 +4,14 @@ namespace GamingGroupFinder {
         // methods:
         // check if they can join an event
         // check if a user can view messages by either them sending a message or recieving one
+        private User _loggedInUser;
         public User LoggedInUser{
-            get{ return LoggedInUser; }
+            get{ return _loggedInUser; }
             set {
                 if (value == null){
                     throw new ArgumentNullException("LoggedInUser is null");
                 }
-                this.LoggedInUser = value;
+                this._loggedInUser = value;
             }
         }
 

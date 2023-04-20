@@ -1,31 +1,34 @@
 namespace GamingGroupFinder {
     public class Game {
+        private string _name;
         public string Name{
-            get{ return Name; }
+            get{ return _name; }
             set {
                 if (string.IsNullOrEmpty(value)){
                     throw new ArgumentNullException("Name is null");
                 }
-                this.Name = value;
+                this._name = value;
             }
         }
+        private List<string> _availablePlatforms;
         public List<string> AvailablePlatforms{
-            get{ return AvailablePlatforms; }
+            get{ return _availablePlatforms; }
             set {
                 if (value == null){
                     throw new ArgumentNullException("AvailablePlatforms is null");
                 }
-                this.AvailablePlatforms = value;
+                this._availablePlatforms = value;
             }
         }
         // key 1: rank name. key 2: rank value
+        private Tuple<List<string>, List<int>> _rank;
         public Tuple<List<string>, List<int>> Rank{
-            get{ return Rank; }
+            get{ return _rank; }
             set {
                 if (value == null){
                     throw new ArgumentNullException("Rank is null");
                 }
-                this.Rank = value;
+                this._rank = value;
             }
         }
 
