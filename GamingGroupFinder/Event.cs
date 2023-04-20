@@ -50,14 +50,24 @@ namespace GamingGroupFinder {
                 this._platform = value;
             }
         }
-        private string _rank;
-        public string Rank {
-            get{return _rank;} 
+        private Rank _minRank;
+        public Rank MinRank {
+            get{return _minRank;} 
             set{
-                if (string.IsNullOrEmpty(value)){
+                if (value == null){
                     throw new ArgumentNullException("Rank is null");
                 }
-                this._rank = value;
+                this._minRank = value;
+            }
+        }
+        private Rank _maxRank;
+        public Rank MaxRank {
+            get{return _maxRank;} 
+            set{
+                if (value == null){
+                    throw new ArgumentNullException("Rank is null");
+                }
+                this._maxRank = value;
             }
         }
         private string _description;
@@ -91,8 +101,8 @@ namespace GamingGroupFinder {
             }
         }
 
-        public Event(string title, DateTime dateTime, string location, Game game, string platform, string rank, string description, User owner, List<User> attendees) {
-            if (title == null || dateTime == null || location == null || game == null || platform == null || rank == null || description == null || owner == null || attendees == null){
+        public Event(string title, DateTime dateTime, string location, Game game, string platform, Rank minRank, Rank maxRank, string description, User owner, List<User> attendees) {
+            if (title == null || dateTime == null || location == null || game == null || platform == null || minRank == null || maxRank == null || description == null || owner == null || attendees == null){
                 throw new ArgumentNullException("one or multiple of the input is null");
             }
             this.Title = title;
@@ -100,7 +110,8 @@ namespace GamingGroupFinder {
             this.Location = location;
             this.Game = game;
             this.Platform = platform;
-            this.Rank = rank;
+            this.MinRank = minRank;
+            this.MaxRank = maxRank;
             this.Description = description;
             this.Owner = owner;
             this.Attendees = attendees;
