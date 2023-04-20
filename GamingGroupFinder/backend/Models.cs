@@ -84,5 +84,5 @@ public class Event {
     public int MaxRankId { get; set; }
     public Rank? MaxRank { get; set; }
     public string Description { get; set; }
-    public List<User> Users { get; } = new();
+    // public List<User> Users { get; } = new();
 }
