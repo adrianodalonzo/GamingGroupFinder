@@ -1,5 +1,5 @@
 namespace GamingGroupFinder {
-    public class Manager {
+    public class UserManager {
 
         // methods:
         // check if they can join an event
@@ -20,6 +20,10 @@ namespace GamingGroupFinder {
                 throw new ArgumentNullException("user is null");
             }
             this.LoggedInUser = user;
+        }
+
+        public void LogOutUser() {
+            this.LoggedInUser = null;
         }
     }
 }

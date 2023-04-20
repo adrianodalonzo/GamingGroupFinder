@@ -12,3 +12,4 @@ drop table "Profiles" cascade constraints;
 drop table "GamePlatform" cascade constraints;
 drop table "InterestProfile" cascade constraints;
 drop table "PlatformProfile" cascade constraints;
+drop table "EventUser" cascade constraints;
