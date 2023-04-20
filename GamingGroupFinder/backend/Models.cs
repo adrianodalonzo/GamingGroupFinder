@@ -1,3 +1,5 @@
+using System.ComponentModel.DataAnnotations.Schema;
+
 namespace GamingGroupFinderDatabase;
 
 public class User {
@@ -6,7 +8,14 @@ public class User {
     public string Password { get; set; }
     public string Salt { get; set; }
     public Profile? Profile { get; set; }
-    public List<Event> Events { get; } = new();
+    [InverseProperty("UsersAttending")]
+    public List<Event> EventsAttending { get; set; } = new();
+    [InverseProperty("Owner")]
+    public List<Event> EventsOwned { get; set; } = new();
+}
+
+public class Reader {
+
 }
 
 // public class Contact {
@@ -71,7 +80,7 @@ public class Message {
 public class Event {
     public int EventId { get; set; }
     public int OwnerId { get; set; }
-    public User? User { get; set; }
+    public User? Owner { get; set; }
     public string Title { get; set; }
     public DateTime Time { get; set; }
     public string Location { get; set; }
@@ -84,5 +93,5 @@ public class Event {
     public int MaxRankId { get; set; }
     public Rank? MaxRank { get; set; }
     public string Description { get; set; }
-    // public List<User> Users { get; } = new();
+    public List<User> UsersAttending { get; } = new();
 }

@@ -3,6 +3,7 @@ using System;
 using GamingGroupFinderDatabase;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Oracle.EntityFrameworkCore.Metadata;
 
@@ -11,9 +12,11 @@ using Oracle.EntityFrameworkCore.Metadata;
 namespace _410project.Migrations
 {
     [DbContext(typeof(ApplicationContext))]
-    partial class ApplicationContextModelSnapshot : ModelSnapshot
+    [Migration("20230420173930_UserEventAttendingOwned")]
+    partial class UserEventAttendingOwned
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -27,12 +30,12 @@ namespace _410project.Migrations
                     b.Property<int>("EventsAttendingEventId")
                         .HasColumnType("NUMBER(10)");
 
-                    b.Property<int>("UsersAttendingUserId")
+                    b.Property<int>("UsersUserId")
                         .HasColumnType("NUMBER(10)");
 
-                    b.HasKey("EventsAttendingEventId", "UsersAttendingUserId");
+                    b.HasKey("EventsAttendingEventId", "UsersUserId");
 
-                    b.HasIndex("UsersAttendingUserId");
+                    b.HasIndex("UsersUserId");
 
                     b.ToTable("EventUser");
                 });
@@ -120,6 +123,9 @@ namespace _410project.Migrations
                         .IsRequired()
                         .HasColumnType("NVARCHAR2(2000)");
 
+                    b.Property<int?>("UserId")
+                        .HasColumnType("NUMBER(10)");
+
                     b.HasKey("EventId");
 
                     b.HasIndex("GameId");
@@ -128,9 +134,9 @@ namespace _410project.Migrations
 
                     b.HasIndex("MinRankId");
 
-                    b.HasIndex("OwnerId");
-
                     b.HasIndex("PlatformId");
+
+                    b.HasIndex("UserId");
 
                     b.ToTable("Events");
                 });
@@ -342,7 +348,7 @@ namespace _410project.Migrations
 
                     b.HasOne("GamingGroupFinderDatabase.User", null)
                         .WithMany()
-                        .HasForeignKey("UsersAttendingUserId")
+                        .HasForeignKey("UsersUserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
@@ -412,17 +418,15 @@ namespace _410project.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("GamingGroupFinderDatabase.User", "Owner")
-                        .WithMany("EventsOwned")
-                        .HasForeignKey("OwnerId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.HasOne("GamingGroupFinderDatabase.Platform", "Platform")
                         .WithMany()
                         .HasForeignKey("PlatformId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.HasOne("GamingGroupFinderDatabase.User", "User")
+                        .WithMany("EventsOwned")
+                        .HasForeignKey("UserId");
 
                     b.Navigation("Game");
 
@@ -430,9 +434,9 @@ namespace _410project.Migrations
 
                     b.Navigation("MinRank");
 
-                    b.Navigation("Owner");
-
                     b.Navigation("Platform");
+
+                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("GamingGroupFinderDatabase.Message", b =>
