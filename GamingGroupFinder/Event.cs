@@ -1,84 +1,93 @@
 namespace GamingGroupFinder {
     public class Event {
+        private string _title;
         public string Title{
-            get{ return Title; }
+            get{ return _title; }
             set {
                 if (string.IsNullOrEmpty(value)){
                     throw new ArgumentNullException("Title is null");
                 }
-                this.Title = value;
+                this._title = value;
             }
         }
+        private DateTime _dateTime;
         public DateTime DateTime{
-            get{ return DateTime; }
+            get{ return _dateTime; }
             set {
                 if (value == null) {
                     throw new ArgumentNullException("Date is null");
                 }
-                _ = value;
+                _dateTime = value;
             }
         }
+        private string _location;
         public string Location{
-            get{ return Location; }
+            get{ return _location; }
             set {
                 if (string.IsNullOrEmpty(value)){
                     throw new ArgumentNullException("Location is null");
                 }
-                this.Location = value;
+                this._location = value;
             }
         }
+        private Game _game;
         public Game Game{
-            get{ return Game; }
+            get{ return _game; }
             set {
                 if (value == null){
                     throw new ArgumentNullException("Game is null");
                 }
-                this.Game = value;
+                this._game = value;
             }
         }
+        private string _platform;
         public string Platform {
-            get{return Platform;} 
+            get{return _platform;} 
             set{
                 if (string.IsNullOrEmpty(value)){
                     throw new ArgumentNullException("Platform is null");
                 }
-                this.Platform = value;
+                this._platform = value;
             }
         }
+        private string _rank;
         public string Rank {
-            get{return Rank;} 
+            get{return _rank;} 
             set{
                 if (string.IsNullOrEmpty(value)){
                     throw new ArgumentNullException("Rank is null");
                 }
-                this.Rank = value;
+                this._rank = value;
             }
         }
+        private string _description;
         public string Description {
-            get{return Description;} 
+            get{return _description;} 
             set{
                 if (string.IsNullOrEmpty(value)){
                     throw new ArgumentNullException("Description is null");
                 }
-                this.Description = value;
+                this._description = value;
             }
         }
+        private User _owner;
         public User Owner {
-            get{ return Owner; }
+            get{ return _owner; }
             set {
                 if (value == null) {
                     throw new ArgumentNullException("Owner is null");
                 }
-                _ = value;
+                _owner = value;
             }
         }
+        private List<User> _attendees;
         public List<User> Attendees {
-            get{ return Attendees; }
+            get{ return _attendees; }
             set {
                 if (value == null) {
                     throw new ArgumentNullException("Attendees is null");
                 }
-                _ = value;
+                _attendees = value;
             }
         }
 
