@@ -14,10 +14,6 @@ public class User {
     public List<Event> EventsOwned { get; set; } = new();
 }
 
-public class Reader {
-
-}
-
 // public class Contact {
 //     public int ContactId { get; set; }
 //     public int UserId { get; set; }
