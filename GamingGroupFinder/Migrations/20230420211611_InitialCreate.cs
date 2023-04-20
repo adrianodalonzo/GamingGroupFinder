@@ -134,7 +134,6 @@ namespace _410project.Migrations
                     EventId = table.Column<int>(type: "NUMBER(10)", nullable: false)
                         .Annotation("Oracle:Identity", "START WITH 1 INCREMENT BY 1"),
                     OwnerId = table.Column<int>(type: "NUMBER(10)", nullable: false),
-                    UserId = table.Column<int>(type: "NUMBER(10)", nullable: true),
                     Title = table.Column<string>(type: "NVARCHAR2(2000)", nullable: false),
                     Time = table.Column<DateTime>(type: "TIMESTAMP(7)", nullable: false),
                     Location = table.Column<string>(type: "NVARCHAR2(2000)", nullable: false),
@@ -172,10 +171,11 @@ namespace _410project.Migrations
                         principalColumn: "RankId",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_Events_Users_UserId",
-                        column: x => x.UserId,
+                        name: "FK_Events_Users_OwnerId",
+                        column: x => x.OwnerId,
                         principalTable: "Users",
-                        principalColumn: "UserId");
+                        principalColumn: "UserId",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -226,6 +226,30 @@ namespace _410project.Migrations
                     table.ForeignKey(
                         name: "FK_Profiles_Users_UserId",
                         column: x => x.UserId,
+                        principalTable: "Users",
+                        principalColumn: "UserId",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "EventUser",
+                columns: table => new
+                {
+                    EventsAttendingEventId = table.Column<int>(type: "NUMBER(10)", nullable: false),
+                    UsersAttendingUserId = table.Column<int>(type: "NUMBER(10)", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_EventUser", x => new { x.EventsAttendingEventId, x.UsersAttendingUserId });
+                    table.ForeignKey(
+                        name: "FK_EventUser_Events_EventsAttendingEventId",
+                        column: x => x.EventsAttendingEventId,
+                        principalTable: "Events",
+                        principalColumn: "EventId",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_EventUser_Users_UsersAttendingUserId",
+                        column: x => x.UsersAttendingUserId,
                         principalTable: "Users",
                         principalColumn: "UserId",
                         onDelete: ReferentialAction.Cascade);
@@ -319,14 +343,19 @@ namespace _410project.Migrations
                 column: "MinRankId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_Events_OwnerId",
+                table: "Events",
+                column: "OwnerId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Events_PlatformId",
                 table: "Events",
                 column: "PlatformId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Events_UserId",
-                table: "Events",
-                column: "UserId");
+                name: "IX_EventUser_UsersAttendingUserId",
+                table: "EventUser",
+                column: "UsersAttendingUserId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_GamePlatform_PlatformsPlatformId",
@@ -374,7 +403,7 @@ namespace _410project.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "Events");
+                name: "EventUser");
 
             migrationBuilder.DropTable(
                 name: "GamePlatform");
@@ -395,19 +424,22 @@ namespace _410project.Migrations
                 name: "PlatformProfile");
 
             migrationBuilder.DropTable(
-                name: "Games");
-
-            migrationBuilder.DropTable(
-                name: "Ranks");
+                name: "Events");
 
             migrationBuilder.DropTable(
                 name: "Interest");
 
             migrationBuilder.DropTable(
+                name: "Profiles");
+
+            migrationBuilder.DropTable(
+                name: "Games");
+
+            migrationBuilder.DropTable(
                 name: "Platforms");
 
             migrationBuilder.DropTable(
-                name: "Profiles");
+                name: "Ranks");
 
             migrationBuilder.DropTable(
                 name: "Users");

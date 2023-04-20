@@ -12,8 +12,8 @@ using Oracle.EntityFrameworkCore.Metadata;
 namespace _410project.Migrations
 {
     [DbContext(typeof(ApplicationContext))]
-    [Migration("20230420171128_InitialCreate")]
-    partial class InitialCreate
+    [Migration("20230420212313_UpdateTables")]
+    partial class UpdateTables
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -24,6 +24,21 @@ namespace _410project.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             OracleModelBuilderExtensions.UseIdentityColumns(modelBuilder);
+
+            modelBuilder.Entity("EventUser", b =>
+                {
+                    b.Property<int>("EventsAttendingEventId")
+                        .HasColumnType("NUMBER(10)");
+
+                    b.Property<int>("UsersAttendingUserId")
+                        .HasColumnType("NUMBER(10)");
+
+                    b.HasKey("EventsAttendingEventId", "UsersAttendingUserId");
+
+                    b.HasIndex("UsersAttendingUserId");
+
+                    b.ToTable("EventUser");
+                });
 
             modelBuilder.Entity("GamePlatform", b =>
                 {
@@ -108,9 +123,6 @@ namespace _410project.Migrations
                         .IsRequired()
                         .HasColumnType("NVARCHAR2(2000)");
 
-                    b.Property<int?>("UserId")
-                        .HasColumnType("NUMBER(10)");
-
                     b.HasKey("EventId");
 
                     b.HasIndex("GameId");
@@ -119,9 +131,9 @@ namespace _410project.Migrations
 
                     b.HasIndex("MinRankId");
 
-                    b.HasIndex("PlatformId");
+                    b.HasIndex("OwnerId");
 
-                    b.HasIndex("UserId");
+                    b.HasIndex("PlatformId");
 
                     b.ToTable("Events");
                 });
@@ -323,6 +335,21 @@ namespace _410project.Migrations
                     b.ToTable("PlatformProfile");
                 });
 
+            modelBuilder.Entity("EventUser", b =>
+                {
+                    b.HasOne("GamingGroupFinderDatabase.Event", null)
+                        .WithMany()
+                        .HasForeignKey("EventsAttendingEventId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("GamingGroupFinderDatabase.User", null)
+                        .WithMany()
+                        .HasForeignKey("UsersAttendingUserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
             modelBuilder.Entity("GamePlatform", b =>
                 {
                     b.HasOne("GamingGroupFinderDatabase.Game", null)
@@ -388,15 +415,17 @@ namespace _410project.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.HasOne("GamingGroupFinderDatabase.User", "Owner")
+                        .WithMany("EventsOwned")
+                        .HasForeignKey("OwnerId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.HasOne("GamingGroupFinderDatabase.Platform", "Platform")
                         .WithMany()
                         .HasForeignKey("PlatformId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-
-                    b.HasOne("GamingGroupFinderDatabase.User", "User")
-                        .WithMany("Events")
-                        .HasForeignKey("UserId");
 
                     b.Navigation("Game");
 
@@ -404,9 +433,9 @@ namespace _410project.Migrations
 
                     b.Navigation("MinRank");
 
-                    b.Navigation("Platform");
+                    b.Navigation("Owner");
 
-                    b.Navigation("User");
+                    b.Navigation("Platform");
                 });
 
             modelBuilder.Entity("GamingGroupFinderDatabase.Message", b =>
@@ -471,7 +500,7 @@ namespace _410project.Migrations
 
             modelBuilder.Entity("GamingGroupFinderDatabase.User", b =>
                 {
-                    b.Navigation("Events");
+                    b.Navigation("EventsOwned");
 
                     b.Navigation("Profile");
                 });
