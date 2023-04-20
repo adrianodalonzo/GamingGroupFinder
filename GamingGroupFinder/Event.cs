@@ -96,28 +96,5 @@ namespace GamingGroupFinder {
             this.Owner = owner;
             this.Attendees = attendees;
         }
-
-        public void AttendEvent(User user) {
-            if (user == null){
-                throw new ArgumentNullException("user is null");
-            }
-            this.Attendees.Add(user);
-        }
-
-        public void LeaveEvent(User user) {
-            if (user == null){
-                throw new ArgumentNullException("user is null");
-            }
-            this.Attendees.Remove(user);
-        }
-
-        public string ViewAttendees() {
-            string builder = "";
-            foreach (User user in Attendees) {
-                builder += user.ToString();
-                builder += ", ";
-            }
-            return builder;
-        }
     }
 }
