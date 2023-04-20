@@ -12,8 +12,6 @@ namespace GamingGroupFinder {
         //     return null;
         // }
 
-        public List<Event> FindEvent(Game game, string platform, string rank) {
-            return null;
-        }
+        //put FindEvent in ProfileManager
     }
 }

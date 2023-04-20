@@ -1,10 +1,10 @@
 namespace GamingGroupFinder {
-    public class Manager {
+    public class UserManager {
 
         // methods:
         // check if they can join an event
         // check if a user can view messages by either them sending a message or recieving one
-        public User LoggedInUser{
+        public User LoggedInUser {
             get{ return LoggedInUser; }
             set {
                 if (value == null){
@@ -19,6 +19,10 @@ namespace GamingGroupFinder {
                 throw new ArgumentNullException("user is null");
             }
             this.LoggedInUser = user;
+        }
+
+        public void LogOutUser() {
+            this.LoggedInUser = null;
         }
     }
 }
