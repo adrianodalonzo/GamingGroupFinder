@@ -10,8 +10,8 @@ namespace GamingGroupFinder {
                 this._name = value;
             }
         }
-        private List<string> _availablePlatforms;
-        public List<string> AvailablePlatforms{
+        private List<Platform> _availablePlatforms;
+        public List<Platform> AvailablePlatforms{
             get{ return _availablePlatforms; }
             set {
                 if (value == null){
@@ -32,7 +32,7 @@ namespace GamingGroupFinder {
             }
         }
 
-        public Game(string name, List<string> platforms, List<Rank> ranks) {
+        public Game(string name, List<Platform> platforms, List<Rank> ranks) {
             if (name == null || platforms == null || ranks == null){
                 throw new ArgumentNullException("one or multiple of the input is null");
             }

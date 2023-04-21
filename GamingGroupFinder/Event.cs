@@ -40,11 +40,11 @@ namespace GamingGroupFinder {
                 this._game = value;
             }
         }
-        private string _platform;
-        public string Platform {
+        private Platform _platform;
+        public Platform Platform {
             get{return _platform;} 
             set{
-                if (string.IsNullOrEmpty(value)){
+                if (value == null){
                     throw new ArgumentNullException("Platform is null");
                 }
                 this._platform = value;
@@ -101,7 +101,7 @@ namespace GamingGroupFinder {
             }
         }
 
-        public Event(string title, DateTime dateTime, string location, Game game, string platform, Rank minRank, Rank maxRank, string description, User owner, List<User> attendees) {
+        public Event(string title, DateTime dateTime, string location, Game game, Platform platform, Rank minRank, Rank maxRank, string description, User owner, List<User> attendees) {
             if (title == null || dateTime == null || location == null || game == null || platform == null || minRank == null || maxRank == null || description == null || owner == null || attendees == null){
                 throw new ArgumentNullException("one or multiple of the input is null");
             }
