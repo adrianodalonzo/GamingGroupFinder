@@ -80,7 +80,9 @@ namespace GamingGroupFinderTests {
             attendees.Add(user2);
             attendees.Add(otherUser);
 
-            ev.AttendEvent(otherUser);
+            EventManager evMan = new EventManager(ev);
+
+            evMan.AttendEvent(otherUser);
 
             Assert.IsTrue(attendees.SequenceEqual(ev.Attendees));
         }
@@ -89,9 +91,10 @@ namespace GamingGroupFinderTests {
         [ExpectedException (typeof(ArgumentNullException))]
         public void TestAttendEvent_ThrowsWhenGivenNull() {
             Event ev = CreateBaseEvent();
+            EventManager evMan = new EventManager(ev);
             User? otherUser = null;
 
-            ev.AttendEvent(otherUser);
+            evMan.AttendEvent(otherUser);
             Assert.Fail();
         }
 
@@ -107,7 +110,9 @@ namespace GamingGroupFinderTests {
             attendees.Add(vince);
             attendees.Add(user2);
 
-            ev.LeaveEvent(user1);
+            EventManager evMan = new EventManager(ev);
+
+            evMan.LeaveEvent(user1);
 
             Assert.IsTrue(attendees.SequenceEqual(ev.Attendees));
         }
@@ -116,19 +121,21 @@ namespace GamingGroupFinderTests {
         [ExpectedException (typeof(ArgumentNullException))]
         public void TestLeaveEvent_ThrowsWhenGivenNull() {
             Event ev = CreateBaseEvent();
+            EventManager evMan = new EventManager(ev);
             User? user1 = null;
 
-            ev.LeaveEvent(user1);
+            evMan.LeaveEvent(user1);
             Assert.Fail();
         }
 
         [TestMethod]
         public void TestViewAttendees_ReturnsCorrect() {
             Event ev = CreateBaseEvent();
+            EventManager evMan = new EventManager(ev);
             
             string expectedString = "vince, u1, u2, ";
 
-            Assert.AreEqual(expectedString, ev.ViewAttendees());
+            Assert.AreEqual(expectedString, evMan.ViewAttendees());
         }
     }
 }
