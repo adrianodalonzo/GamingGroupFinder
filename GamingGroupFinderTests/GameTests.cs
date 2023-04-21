@@ -3,32 +3,31 @@ using GamingGroupFinder;
 namespace GamingGroupFinderTests {
     [TestClass]
     public class GameTests {
-        public static List<string> CreateListPlatforms() {
-            List<string> platforms = new List<string>();
-            platforms.Add("PC");
-            platforms.Add("NINTENDO SWITCH");
+        public static List<Platform> CreateListPlatforms() {
+            List<Platform> platforms = new List<Platform>();
+            platforms.Add(new Platform(1, "PC"));
+            platforms.Add(new Platform(2, "NINTENDO SWITCH"));
 
             return platforms;
         }
 
-        public static Tuple<List<string>, List<int>> GameSplatoonRanks() {
-            List<string> splatoonRanks = new List<string>();
-            splatoonRanks.Add("A-");
-            splatoonRanks.Add("A");
-            splatoonRanks.Add("A+");
+        public static List<Rank> GameSplatoonRanks() {
+            Rank am = new Rank(1, 1, "A-");
+            Rank a = new Rank(2, 2, "A");
+            Rank ap = new Rank(3, 3, "A+");
 
-            List<int> splatoonRankValues = new List<int>();
-            splatoonRankValues.Add(1);
-            splatoonRankValues.Add(2);
-            splatoonRankValues.Add(3);
+            List<Rank> ranks = new List<Rank>();
+            ranks.Add(am);
+            ranks.Add(a);
+            ranks.Add(ap);
 
-            return new Tuple<List<string>, List<int>>(splatoonRanks, splatoonRankValues);
+            return ranks;
         }
 
         [TestMethod]
         [ExpectedException (typeof(ArgumentNullException))]
         public void TestConstructor_ThrowsWhenGivenNull() {
-            List<string> platforms = CreateListPlatforms();
+            List<Platform> platforms = CreateListPlatforms();
             Game splatoon = new Game(null, platforms, GameSplatoonRanks());
             Assert.Fail();
         }

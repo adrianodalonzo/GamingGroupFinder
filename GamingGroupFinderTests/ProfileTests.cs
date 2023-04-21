@@ -3,32 +3,30 @@ using GamingGroupFinder;
 namespace GamingGroupFinderTests {
     [TestClass]
     public class ProfileTests {
-        public static Tuple<List<string>, List<int>> GameSplatoonRanks() {
-            List<string> splatoonRanks = new List<string>();
-            splatoonRanks.Add("A-");
-            splatoonRanks.Add("A");
-            splatoonRanks.Add("A+");
+        public static List<Rank> GameSplatoonRanks() {
+            Rank am = new Rank(1, 1, "A-");
+            Rank a = new Rank(2, 2, "A");
+            Rank ap = new Rank(3, 3, "A+");
 
-            List<int> splatoonRankValues = new List<int>();
-            splatoonRankValues.Add(1);
-            splatoonRankValues.Add(2);
-            splatoonRankValues.Add(3);
+            List<Rank> ranks = new List<Rank>();
+            ranks.Add(am);
+            ranks.Add(a);
+            ranks.Add(ap);
 
-            return new Tuple<List<string>, List<int>>(splatoonRanks, splatoonRankValues);
+            return ranks;
         }
 
-        public static Tuple<List<string>, List<int>> GameValorantRanks() {
-            List<string> valorantRanks = new List<string>();
-            valorantRanks.Add("BRONZE");
-            valorantRanks.Add("SILVER");
-            valorantRanks.Add("GOLD");
+        public static List<Rank> GameValorantRanks() {
+            Rank bronze = new Rank(4, 1, "BRONZE");
+            Rank silver = new Rank(5, 2, "SILVER");
+            Rank gold = new Rank(6, 3, "GOLD");
 
-            List<int> valorantRankValues = new List<int>();
-            valorantRankValues.Add(1);
-            valorantRankValues.Add(2);
-            valorantRankValues.Add(3);
+            List<Rank> ranks = new List<Rank>();
+            ranks.Add(bronze);
+            ranks.Add(silver);
+            ranks.Add(gold);
 
-            return new Tuple<List<string>, List<int>>(valorantRanks, valorantRankValues);
+            return ranks;
         }
 
         [TestMethod]
@@ -43,18 +41,18 @@ namespace GamingGroupFinderTests {
         public void TestClearData_Clears() {
             User vince = new User("vince", "vince", new List<User>());
 
-            List<string> platforms = new List<string>();
-            platforms.Add("PC");
-            platforms.Add("NINTENDO SWITCH");
+            List<Platform> platforms = new List<Platform>();
+            platforms.Add(new Platform(1, "PC"));
+            platforms.Add(new Platform(2, "NINTENDO SWITCH"));
 
             List<Game> games = new List<Game>();
             games.Add(new Game("Splatoon 3", platforms, GameSplatoonRanks()));
             games.Add(new Game("Brawlhalla", platforms, GameValorantRanks()));
 
-            List<string> interests = new List<string>();
-            interests.Add("MUSIC");
-            interests.Add("READING");
-            interests.Add("BIKING");
+            List<Interest> interests = new List<Interest>();
+            interests.Add(new Interest(1, "MUSIC"));
+            interests.Add(new Interest(1, "READING"));
+            interests.Add(new Interest(1, "BIKING"));
 
             Profile profile = new Profile(vince, "Vince", "hehim", 18, platforms, games, "uhhhhhh", "some link", interests);
             // Profile profile = new Profile(vince, "", "", 0, platforms, games, "", "", interests);

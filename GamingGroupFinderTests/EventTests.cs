@@ -3,23 +3,23 @@ using GamingGroupFinder;
 namespace GamingGroupFinderTests {
     [TestClass]
     public class EventTests {
-        public static Tuple<List<string>, List<int>> GameSplatoonRanks() {
-            List<string> splatoonRanks = new List<string>();
-            splatoonRanks.Add("A-");
-            splatoonRanks.Add("A");
-            splatoonRanks.Add("A+");
+        public static List<Rank> GameSplatoonRanks() {
+            Rank am = new Rank(1, 1, "A-");
+            Rank a = new Rank(2, 2, "A");
+            Rank ap = new Rank(3, 3, "A+");
 
-            List<int> splatoonRankValues = new List<int>();
-            splatoonRankValues.Add(1);
-            splatoonRankValues.Add(2);
-            splatoonRankValues.Add(3);
+            List<Rank> ranks = new List<Rank>();
+            ranks.Add(am);
+            ranks.Add(a);
+            ranks.Add(ap);
 
-            return new Tuple<List<string>, List<int>>(splatoonRanks, splatoonRankValues);
+            return ranks;
         }
         public static Event CreateBaseEvent() {
-            List<string> platforms = new List<string>();
-            platforms.Add("PC");
-            platforms.Add("NINTENDO SWITCH");
+            List<Platform> platforms = new List<Platform>();
+            platforms.Add(new Platform(1, "PC"));
+            Platform nintendoSwitch = new Platform(2, "NINTENDO SWITCH");
+            platforms.Add(nintendoSwitch);
 
             Game splatoon = new Game("Splatoon", platforms, GameSplatoonRanks());
 
@@ -32,16 +32,20 @@ namespace GamingGroupFinderTests {
             attendees.Add(user1);
             attendees.Add(user2);
 
+            Rank minRank = new Rank(1, 1, "A-");
+            Rank maxRank = new Rank(3, 3, "A+");
+
             DateTime date = new DateTime(2023, 3, 25, 14, 30, 0);
-            return new Event("Base Event", date, "over there", splatoon, "NINTENDO SWITCH", "A+", "smth", vince, attendees);
+            return new Event("Base Event", date, "over there", splatoon, nintendoSwitch, minRank, maxRank, "smth", vince, attendees);
         }
 
         [TestMethod]
         [ExpectedException (typeof(ArgumentNullException))]
         public void TestConstructor_ThrowsWhenGivenNull() {
-            List<string> platforms = new List<string>();
-            platforms.Add("PC");
-            platforms.Add("NINTENDO SWITCH");
+            List<Platform> platforms = new List<Platform>();
+            platforms.Add(new Platform(1, "PC"));
+            Platform nintendoSwitch = new Platform(2, "NINTENDO SWITCH");
+            platforms.Add(nintendoSwitch);
 
             Game splatoon = new Game("Splatoon", platforms, GameSplatoonRanks());
 
@@ -54,7 +58,10 @@ namespace GamingGroupFinderTests {
             attendees.Add(user1);
             attendees.Add(user2);
 
-            Event ev = new Event(null, DateTime.Now, "over there", splatoon, "NINTENDO SWITCH", "A+", "smth", vince, attendees);
+            Rank minRank = new Rank(1, 1, "A-");
+            Rank maxRank = new Rank(3, 3, "A+");
+
+            Event ev = new Event(null, DateTime.Now, "over there", splatoon, nintendoSwitch, minRank, maxRank, "smth", vince, attendees);
             Assert.Fail();
         }
 
