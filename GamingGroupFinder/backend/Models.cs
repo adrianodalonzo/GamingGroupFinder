@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 namespace GamingGroupFinderDatabase;
 
 public class UserDB {
-    public int UserId { get; set; }
+    public int UserDBId { get; set; }
     public string Username { get; set; }
     public string Password { get; set; }
     public string Salt { get; set; }
@@ -32,7 +32,7 @@ public class UserDB {
 // }
 
 public class ProfileDB {
-    public int ProfileId { get; set; }
+    public int ProfileDBId { get; set; }
     public int UserId { get; set; }
     public UserDB User { get; set; } = null!;
     public string Name { get; set; }
@@ -59,7 +59,7 @@ public class ProfileDB {
 }
 
 public class GameDB {
-    public int GameId { get; set; }
+    public int GameDBId { get; set; }
     public string GameName { get; set; }
     public List<PlatformDB> Platforms { get; } = new();
     public List<RankDB> Ranks { get; } = new();
@@ -75,7 +75,7 @@ public class GameDB {
 }
 
 public class PlatformDB {
-    public int PlatformId { get; set; }
+    public int PlatformDBId { get; set; }
     public string PlatformName { get; set; }
     public List<GameDB> Games { get; } = new();
     public List<ProfileDB> Profiles { get; } = new();
@@ -90,7 +90,7 @@ public class PlatformDB {
 }
 
 public class RankDB {
-    public int RankId { get; set; }
+    public int RankDBId { get; set; }
     public int RankValue { get; set; }
     public string RankName { get; set; }
     public List<GameDB> Games { get; } = new();
@@ -106,7 +106,7 @@ public class RankDB {
 }
 
 public class InterestDB {
-    public int InterestId { get; set; }
+    public int InterestDBId { get; set; }
     public string InterestName { get; set; }
     public List<ProfileDB> Profiles { get; } = new();
 
@@ -120,7 +120,7 @@ public class InterestDB {
 }
 
 public class MessageDB {
-    public int MessageId { get; set; }
+    public int MessageDBId { get; set; }
     public int SenderId { get; set; }
     public UserDB Sender { get; set; } = null!;
     public int ReceiverId { get; set; }
@@ -143,7 +143,7 @@ public class MessageDB {
 }
 
 public class EventDB {
-    public int EventId { get; set; }
+    public int EventDBId { get; set; }
     public int OwnerId { get; set; }
     public UserDB? Owner { get; set; }
     public string Title { get; set; }
