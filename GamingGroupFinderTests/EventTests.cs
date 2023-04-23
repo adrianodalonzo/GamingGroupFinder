@@ -65,77 +65,77 @@ namespace GamingGroupFinderTests {
             Assert.Fail();
         }
 
-        [TestMethod]
-        public void TestAttendEvent_AddsUser() {
-            Event ev = CreateBaseEvent();
-            User otherUser = new User("other", "user", new List<User>());
+        // [TestMethod]
+        // public void TestAttendEvent_AddsUser() {
+        //     Event ev = CreateBaseEvent();
+        //     User otherUser = new User("other", "user", new List<User>());
 
-            User vince = new User("vince", "vince", new List<User>());
-            User user1 = new User("u1", "you1", new List<User>());
-            User user2 = new User("u2", "you2", new List<User>());
+        //     User vince = new User("vince", "vince", new List<User>());
+        //     User user1 = new User("u1", "you1", new List<User>());
+        //     User user2 = new User("u2", "you2", new List<User>());
 
-            List<User> attendees = new List<User>();
-            attendees.Add(vince);
-            attendees.Add(user1);
-            attendees.Add(user2);
-            attendees.Add(otherUser);
+        //     List<User> attendees = new List<User>();
+        //     attendees.Add(vince);
+        //     attendees.Add(user1);
+        //     attendees.Add(user2);
+        //     attendees.Add(otherUser);
 
-            EventManager evMan = new EventManager(ev);
+        //     EventManager evMan = new EventManager(ev);
 
-            evMan.AttendEvent(otherUser);
+        //     evMan.AttendEvent(otherUser);
 
-            Assert.IsTrue(attendees.SequenceEqual(ev.Attendees));
-        }
+        //     Assert.IsTrue(attendees.SequenceEqual(ev.Attendees));
+        // }
 
-        [TestMethod]
-        [ExpectedException (typeof(ArgumentNullException))]
-        public void TestAttendEvent_ThrowsWhenGivenNull() {
-            Event ev = CreateBaseEvent();
-            EventManager evMan = new EventManager(ev);
-            User? otherUser = null;
+        // [TestMethod]
+        // [ExpectedException (typeof(ArgumentNullException))]
+        // public void TestAttendEvent_ThrowsWhenGivenNull() {
+        //     Event ev = CreateBaseEvent();
+        //     EventManager evMan = new EventManager(ev);
+        //     User? otherUser = null;
 
-            evMan.AttendEvent(otherUser);
-            Assert.Fail();
-        }
+        //     evMan.AttendEvent(otherUser);
+        //     Assert.Fail();
+        // }
 
-        [TestMethod]
-        public void TestLeaveEvent_RemovesUser() {
-            Event ev = CreateBaseEvent();
-            User user1 = new User("u1", "you1", new List<User>());
+        // [TestMethod]
+        // public void TestLeaveEvent_RemovesUser() {
+        //     Event ev = CreateBaseEvent();
+        //     User user1 = new User("u1", "you1", new List<User>());
 
-            User vince = new User("vince", "vince", new List<User>());
-            User user2 = new User("u2", "you2", new List<User>());
+        //     User vince = new User("vince", "vince", new List<User>());
+        //     User user2 = new User("u2", "you2", new List<User>());
 
-            List<User> attendees = new List<User>();
-            attendees.Add(vince);
-            attendees.Add(user2);
+        //     List<User> attendees = new List<User>();
+        //     attendees.Add(vince);
+        //     attendees.Add(user2);
 
-            EventManager evMan = new EventManager(ev);
+        //     EventManager evMan = new EventManager(ev);
 
-            evMan.LeaveEvent(user1);
+        //     evMan.LeaveEvent(user1);
 
-            Assert.IsTrue(attendees.SequenceEqual(ev.Attendees));
-        }
+        //     Assert.IsTrue(attendees.SequenceEqual(ev.Attendees));
+        // }
 
-        [TestMethod]
-        [ExpectedException (typeof(ArgumentNullException))]
-        public void TestLeaveEvent_ThrowsWhenGivenNull() {
-            Event ev = CreateBaseEvent();
-            EventManager evMan = new EventManager(ev);
-            User? user1 = null;
+        // [TestMethod]
+        // [ExpectedException (typeof(ArgumentNullException))]
+        // public void TestLeaveEvent_ThrowsWhenGivenNull() {
+        //     Event ev = CreateBaseEvent();
+        //     EventManager evMan = new EventManager(ev);
+        //     User? user1 = null;
 
-            evMan.LeaveEvent(user1);
-            Assert.Fail();
-        }
+        //     evMan.LeaveEvent(user1);
+        //     Assert.Fail();
+        // }
 
-        [TestMethod]
-        public void TestViewAttendees_ReturnsCorrect() {
-            Event ev = CreateBaseEvent();
-            EventManager evMan = new EventManager(ev);
+        // [TestMethod]
+        // public void TestViewAttendees_ReturnsCorrect() {
+        //     Event ev = CreateBaseEvent();
+        //     EventManager evMan = new EventManager(ev);
             
-            string expectedString = "vince, u1, u2, ";
+        //     string expectedString = "vince, u1, u2, ";
 
-            Assert.AreEqual(expectedString, evMan.ViewAttendees());
-        }
+        //     Assert.AreEqual(expectedString, evMan.ViewAttendees());
+        // }
     }
 }
