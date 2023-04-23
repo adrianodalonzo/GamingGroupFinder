@@ -5,7 +5,7 @@ namespace GamingGroupFinder {
             get{ return _platformId; }
             set {
                 if (value < 0){
-                    throw new ArgumentNullException("Name is negative");
+                    throw new ArgumentNullException("Platform ID is negative");
                 }
                 this._platformId = value;
             }

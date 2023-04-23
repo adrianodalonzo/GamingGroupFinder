@@ -5,7 +5,7 @@ namespace GamingGroupFinder {
             get{ return _interestId; }
             set {
                 if (value < 0){
-                    throw new ArgumentNullException("Name is negative");
+                    throw new ArgumentNullException("Interest ID is negative");
                 }
                 this._interestId = value;
             }

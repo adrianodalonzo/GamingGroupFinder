@@ -23,7 +23,7 @@ namespace GamingGroupFinder {
         public string Pronouns {get {return _pronouns;}
             set{
                 if (string.IsNullOrEmpty(value)){
-                    throw new ArgumentNullException("Description is null");
+                    throw new ArgumentNullException("Pronouns are null");
                 }
                 this._pronouns = value;
             }
