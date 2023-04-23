@@ -21,7 +21,8 @@ namespace GamingGroupFinder {
 
         // this is probably just going to create a new user and add it to the database
         public User CreateUser(User u) {
-            return null!;
+            this.LoggedInUser = u;
+            return LoggedInUser;
         }
 
         public void LogInUser(User user) {
@@ -40,7 +41,7 @@ namespace GamingGroupFinder {
         }
 
         public void DeleteAccount() {
-            
+
         }
     }
 }

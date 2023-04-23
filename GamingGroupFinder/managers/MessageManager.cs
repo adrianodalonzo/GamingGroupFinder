@@ -1,6 +1,6 @@
 //might need to keep track of logged in user somewhere here (to know whos signed in and who sent/recieved messages)
 
-namespace GamingGroupFinderDatabase;
+namespace GamingGroupFinder;
 
 public class MessageManager {
 

@@ -18,6 +18,16 @@ namespace GamingGroupFinder {
                     this._password = value;
             }
         }
+
+        private string _salt;
+        public string Salt { get { return _salt; } 
+            set {
+                if (string.IsNullOrEmpty(value)) {
+                    throw new ArgumentNullException("Salt is null");
+                }
+                this._salt = value;
+            }
+        }
         private List<User> _contactList;
         public List<User> ContactList {get {return _contactList;}
             set{
@@ -28,12 +38,13 @@ namespace GamingGroupFinder {
             }
         }
 
-        public User(string username, string password, List<User> contactList) {
+        public User(string username, string password, string salt, List<User> contactList) {
             if(username == null || password == null || contactList == null){
                 throw new ArgumentNullException("one or multiple of the input is null");
             }
             this.Username = username;
             this.Password = password;
+            this.Salt = salt;
             this.ContactList = contactList;
         }
         private User(){

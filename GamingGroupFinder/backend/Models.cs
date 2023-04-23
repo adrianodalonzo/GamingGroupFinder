@@ -2,25 +2,25 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace GamingGroupFinderDatabase;
 
-public class User {
+public class UserDB {
     public int UserId { get; set; }
     public string Username { get; set; }
     public string Password { get; set; }
     public string Salt { get; set; }
-    public Profile? Profile { get; set; }
+    public ProfileDB? Profile { get; set; }
     [InverseProperty("UsersAttending")]
-    public List<Event> EventsAttending { get; set; } = new();
+    public List<EventDB> EventsAttending { get; set; } = new();
     [InverseProperty("Owner")]
-    public List<Event> EventsOwned { get; set; } = new();
+    public List<EventDB> EventsOwned { get; set; } = new();
 
-    public User(string username, string password, string salt, Profile profile) {
+    public UserDB(string username, string password, string salt, ProfileDB profile) {
         this.Username = username;
         this.Password = password;
         this.Salt = salt;
         this.Profile = profile;
     }
 
-    private User() {
+    private UserDB() {
 
     }
 }
@@ -31,20 +31,20 @@ public class User {
 //     public User User { get; set; } = null!;
 // }
 
-public class Profile {
+public class ProfileDB {
     public int ProfileId { get; set; }
     public int UserId { get; set; }
-    public User User { get; set; } = null!;
+    public UserDB User { get; set; } = null!;
     public string Name { get; set; }
     public string Pronouns { get; set; }
     public int Age { get; set; }
     public string Bio { get; set; }
     public string ProfilePicture { get; set; }
-    public List<Interest> Interests { get; } = new();
-    public List<Platform> Platforms { get; } = new();
-    public List<Game> Games { get; } = new();
+    public List<InterestDB> Interests { get; } = new();
+    public List<PlatformDB> Platforms { get; } = new();
+    public List<GameDB> Games { get; } = new();
 
-    public Profile(User user, string name, string pronouns, int age, string bio, string profilePicture) {
+    public ProfileDB(UserDB user, string name, string pronouns, int age, string bio, string profilePicture) {
         this.User = user;
         this.Name = name;
         this.Pronouns = pronouns;
@@ -53,83 +53,83 @@ public class Profile {
         this.ProfilePicture = profilePicture;
     }
 
-    private Profile() {
+    private ProfileDB() {
 
     }
 }
 
-public class Game {
+public class GameDB {
     public int GameId { get; set; }
     public string GameName { get; set; }
-    public List<Platform> Platforms { get; } = new();
-    public List<Rank> Ranks { get; } = new();
-    public List<Profile> Profiles { get; } = new();
+    public List<PlatformDB> Platforms { get; } = new();
+    public List<RankDB> Ranks { get; } = new();
+    public List<ProfileDB> Profiles { get; } = new();
 
-    public Game(string gameName) {
+    public GameDB(string gameName) {
         this.GameName = gameName;
     }
 
-    private Game() {
+    private GameDB() {
 
     }
 }
 
-public class Platform {
+public class PlatformDB {
     public int PlatformId { get; set; }
     public string PlatformName { get; set; }
-    public List<Game> Games { get; } = new();
-    public List<Profile> Profiles { get; } = new();
+    public List<GameDB> Games { get; } = new();
+    public List<ProfileDB> Profiles { get; } = new();
 
-    public Platform(string platformName) {
+    public PlatformDB(string platformName) {
         this.PlatformName = platformName;
     }
 
-    private Platform() {
+    private PlatformDB() {
         
     }
 }
 
-public class Rank {
+public class RankDB {
     public int RankId { get; set; }
     public int RankValue { get; set; }
     public string RankName { get; set; }
-    public List<Game> Games { get; } = new();
+    public List<GameDB> Games { get; } = new();
     
-    public Rank(int rankValue, string rankName) {
+    public RankDB(int rankValue, string rankName) {
         this.RankValue = rankValue;
         this.RankName = rankName;
     }
 
-    private Rank() {
+    private RankDB() {
 
     }
 }
 
-public class Interest {
+public class InterestDB {
     public int InterestId { get; set; }
     public string InterestName { get; set; }
-    public List<Profile> Profiles { get; } = new();
+    public List<ProfileDB> Profiles { get; } = new();
 
-    public Interest(string interestName) {
+    public InterestDB(string interestName) {
         this.InterestName = interestName;
     }
 
-    private Interest() {
+    private InterestDB() {
 
     }
 }
 
-public class Message {
+public class MessageDB {
     public int MessageId { get; set; }
     public int SenderId { get; set; }
-    public User Sender { get; set; } = null!;
+    public UserDB Sender { get; set; } = null!;
     public int ReceiverId { get; set; }
-    public User Receiver { get; set; } = null!;
+    public UserDB Receiver { get; set; } = null!;
     public DateTime Time { get; set; }
     public string MessageText { get; set; }
     public bool IsSeen { get; set; }
 
-    public Message(User sender, User receiver, DateTime time, string messageText, bool isSeen) {
+    public MessageDB(UserDB sender, UserDB receiver, DateTime time, string messageText, bool isSeen) {
         this.Sender = sender;
         this.Receiver = receiver;
         this.Time = time;
@@ -137,30 +137,30 @@ public class Message {
         this.IsSeen = isSeen;
     }
 
-    private Message() {
+    private MessageDB() {
 
     }
 }
 
-public class Event {
+public class EventDB {
     public int EventId { get; set; }
     public int OwnerId { get; set; }
-    public User? Owner { get; set; }
+    public UserDB? Owner { get; set; }
     public string Title { get; set; }
     public DateTime Time { get; set; }
     public string Location { get; set; }
     public int GameId { get; set; }
-    public Game? Game { get; set; }
+    public GameDB? Game { get; set; }
     public int PlatformId { get; set; }
-    public Platform? Platform { get; set; }
+    public PlatformDB? Platform { get; set; }
     public int MinRankId { get; set; }
-    public Rank? MinRank { get; set; }
+    public RankDB? MinRank { get; set; }
     public int MaxRankId { get; set; }
-    public Rank? MaxRank { get; set; }
+    public RankDB? MaxRank { get; set; }
     public string Description { get; set; }
-    public List<User> UsersAttending { get; } = new();
+    public List<UserDB> UsersAttending { get; } = new();
 
-    public Event(User owner, string title, DateTime time, string location, Game game, Platform platform, Rank minRank, Rank maxRank, string description) {
+    public EventDB(UserDB owner, string title, DateTime time, string location, GameDB game, PlatformDB platform, RankDB minRank, RankDB maxRank, string description) {
         this.Owner = owner;
         this.Title = title;
         this.Time = time;
@@ -172,7 +172,7 @@ public class Event {
         this.Description = description;
     }
 
-    private Event() {
+    private EventDB() {
         
     }
 }

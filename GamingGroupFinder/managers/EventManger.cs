@@ -3,7 +3,7 @@
         - connections to ranks/platforms/games ????
 */
 
-namespace GamingGroupFinderDatabase;
+namespace GamingGroupFinder;
 
 public class EventManager {
 

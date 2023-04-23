@@ -8,7 +8,7 @@
     
 // }
 
-namespace GamingGroupFinderDatabase;
+namespace GamingGroupFinder;
 
 public class ProfileManager {
 
