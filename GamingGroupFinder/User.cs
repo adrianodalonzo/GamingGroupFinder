@@ -1,27 +1,30 @@
 namespace GamingGroupFinder {
     public class User {
-        public string Username {get {return Username;} 
+        private string _username;
+        public string Username {get {return _username;} 
             set{
                     if (string.IsNullOrEmpty(value)){
                         throw new ArgumentNullException("Username is null");
                     }
-                    this.Username = value;
+                    this._username = value;
             }
         }
-        public string Password {get {return Password;}
+        private string _password;
+        public string Password {get {return _password;}
             set{
                     if (string.IsNullOrEmpty(value)){
                         throw new ArgumentNullException("Password is null");
                     }
-                    this.Password = value;
+                    this._password = value;
             }
         }
-        public List<User> ContactList {get {return ContactList;}
+        private List<User> _contactList;
+        public List<User> ContactList {get {return _contactList;}
             set{
                     if (value == null){
                         throw new ArgumentNullException("ContactList is null");
                     }
-                    this.ContactList = value;
+                    this._contactList = value;
             }
         }
 
@@ -32,6 +35,8 @@ namespace GamingGroupFinder {
             this.Username = username;
             this.Password = password;
             this.ContactList = contactList;
+        }
+        private User(){
         }
 
         public bool VerifyUser(string username, string password) {

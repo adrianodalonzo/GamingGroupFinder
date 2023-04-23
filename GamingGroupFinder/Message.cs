@@ -2,41 +2,44 @@ namespace GamingGroupFinder {
     public class Message {
         // DateTime myDateTime = DateTime.Now;
         // string sqlFormattedDate = myDateTime.Date.ToString("yyyy-MM-dd HH:mm:ss");
-        
+        private User _sender;
         public User Sender{
-            get{ return Sender; }
+            get{ return _sender; }
             set {
                 if (value == null){
                     throw new ArgumentNullException("sender is null");
                 }
-                this.Sender = value;
+                this._sender = value;
             }
         }
+        private User _recipient;
         public User Recipient{
-            get{ return Recipient; }
+            get{ return _recipient; }
             set {
                 if (value == null){
                     throw new ArgumentNullException("Recipient is null");
                 }
-                this.Recipient = value;
+                this._recipient = value;
             }
         }
+        private DateTime _timeSent;
         public DateTime TimeSent{
-            get{ return TimeSent; }
+            get{ return _timeSent; }
             set {
                 if (value == null){
                     throw new ArgumentNullException("TimeSent is null");
                 }
-                this.TimeSent = value;
+                this._timeSent = value;
             }
         }
+        private string _messageText;
         public string MessageText{
-            get{ return MessageText; }
+            get{ return _messageText; }
             set {
                 if (value == null){
                     throw new ArgumentNullException("Message is null");
                 }
-                this.MessageText = value;
+                this._messageText = value;
             }
         }
         public bool IsSeen { get; set; }
@@ -50,6 +53,8 @@ namespace GamingGroupFinder {
             this.TimeSent = timeSent;
             this.MessageText = message;
             this.IsSeen = isSeen;
+        }
+        private Message(){
         }
 
         public void ListMessages() {
