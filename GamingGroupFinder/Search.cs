@@ -12,6 +12,6 @@ namespace GamingGroupFinder {
         //     return null;
         // }
 
-        //put FindEvent in ProfileManager
+        //put FindEvent in EventManager
     }
 }

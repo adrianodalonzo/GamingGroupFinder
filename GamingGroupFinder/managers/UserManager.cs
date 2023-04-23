@@ -15,7 +15,16 @@ namespace GamingGroupFinder {
             }
         }
 
-        public void SetLoggedInUser(User user) {
+        public UserManager(User user) {
+            this.LoggedInUser = user;
+        }
+
+        // this is probably just going to create a new user and add it to the database
+        public User CreateUser(User u) {
+            return null!;
+        }
+
+        public void LogInUser(User user) {
             if (user == null){
                 throw new ArgumentNullException("user is null");
             }
@@ -24,6 +33,14 @@ namespace GamingGroupFinder {
 
         public void LogOutUser() {
             this.LoggedInUser = null;
+        }
+
+        public void ChangePassword(string password) {
+
+        }
+
+        public void DeleteAccount() {
+            
         }
     }
 }
