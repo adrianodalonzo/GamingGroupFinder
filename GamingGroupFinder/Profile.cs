@@ -37,11 +37,12 @@ namespace GamingGroupFinder {
                 this._age = value;
             }
         }
-        private List<string> _platforms;
-        public List<string> Platforms {get {return _platforms;}
-            set{
+        private List<Platform> _platforms;
+        public List<Platform> Platforms{
+            get{ return _platforms; }
+            set {
                 if (value == null){
-                    throw new ArgumentNullException("Platforms is null");
+                    throw new ArgumentNullException("Platforms are null");
                 }
                 this._platforms = value;
             }
@@ -73,8 +74,8 @@ namespace GamingGroupFinder {
                 this._profilePicture = value;
             }
         }
-        private List<string> _interests;
-        public List<string> Interests {get {return _interests;}
+        private List<Interest> _interests;
+        public List<Interest> Interests {get {return _interests;}
             set{
                 if (value == null){
                     throw new ArgumentNullException("Interests is null");
@@ -83,7 +84,7 @@ namespace GamingGroupFinder {
             }
         }
 
-        public Profile(User user, string name, string pronouns, int age, List<string> platforms, List<Game> games, string bio, string profilePicture, List<string> interests) {
+        public Profile(User user, string name, string pronouns, int age, List<Platform> platforms, List<Game> games, string bio, string profilePicture, List<Interest> interests) {
             if(user == null || name == null || pronouns == null || platforms == null || games == null || bio == null || profilePicture == null || interests == null){
                 throw new ArgumentNullException("one or multiple of the input is null");
             }
@@ -106,7 +107,7 @@ namespace GamingGroupFinder {
 
         public override string ToString() {
             string PlatformsString = "";
-            foreach(string platform in Platforms) {
+            foreach(Platform platform in Platforms) {
                 PlatformsString += $"{platform}, ";
             }
             string GamesString = "";
@@ -114,7 +115,7 @@ namespace GamingGroupFinder {
                 GamesString += $"{game.Name}, ";
             }
             string InterestsString = "";
-            foreach(string interest in Interests) {
+            foreach(Interest interest in Interests) {
                 InterestsString += $"{interest}, ";
             }
             return $"{User}:\n\t{Pronouns}\n\t{Age} years old\n\tPlays on {PlatformsString}\n\tPlays {GamesString}\n\tBio: {Bio}\n\tOther interests: {InterestsString}";
