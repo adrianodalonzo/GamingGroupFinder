@@ -51,28 +51,53 @@ namespace GamingGroupFinder {
         }
 
         // this is probably just going to add a user to the event's list of attendees
-        public void AttendEvent(User user) {
-            //????????????????????????????
+        public void AttendEvent(User u, Event e) {
+            UserDB Owner = (from user in db.UsersDB where user.Username.Equals(e.Owner.Username) select user).Single();
+            GameDB Game = (from game in db.GamesDB where game.GameName.Equals(e.Game.Name) select game).Single();
+            PlatformDB Platform = (from platform in db.PlatformsDB where platform.PlatformName.Equals(e.Platform.Name) select platform).Single();
+            RankDB MinRank = (from rank in db.RanksDB where rank.RankName.Equals(e.MinRank.RankName) select rank).Single();
+            RankDB MaxRank = (from rank in db.RanksDB where rank.RankName.Equals(e.MaxRank.RankName) select rank).Single();
+            EventDB eventEntity = new EventDB(Owner, e.Title, e.DateTime, e.Location, Game, Platform, MinRank, MaxRank, e.Description);
+            UserDB userEntity = (from user in db.UsersDB where user.Username.Equals(u.Username) select user).Single();
+            eventEntity.UsersAttending.Add(userEntity);
+            db.SaveChanges();
         }
 
         // this is probably just going to remove a user from the event's list of attendees
-        public void LeaveEvent(User user) {
-            //???????????????????????????
+        public void LeaveEvent(User u, Event e) {
+            UserDB Owner = (from user in db.UsersDB where user.Username.Equals(e.Owner.Username) select user).Single();
+            GameDB Game = (from game in db.GamesDB where game.GameName.Equals(e.Game.Name) select game).Single();
+            PlatformDB Platform = (from platform in db.PlatformsDB where platform.PlatformName.Equals(e.Platform.Name) select platform).Single();
+            RankDB MinRank = (from rank in db.RanksDB where rank.RankName.Equals(e.MinRank.RankName) select rank).Single();
+            RankDB MaxRank = (from rank in db.RanksDB where rank.RankName.Equals(e.MaxRank.RankName) select rank).Single();
+            EventDB eventEntity = new EventDB(Owner, e.Title, e.DateTime, e.Location, Game, Platform, MinRank, MaxRank, e.Description);
+            UserDB userEntity = (from user in db.UsersDB where user.Username.Equals(u.Username) select user).Single();
+            eventEntity.UsersAttending.Remove(userEntity);
+            db.SaveChanges();
         }
 
         // this is probably just going to return the event's list of attendees
-        public string ViewAttendees() {
-            return "";
-            //???????????????????????????
+        public List<UserDB> ViewAttendees(Event e) {
+            List<UserDB> Attendees = new List<UserDB>();
+            UserDB Owner = (from user in db.UsersDB where user.Username.Equals(e.Owner.Username) select user).Single();
+            GameDB Game = (from game in db.GamesDB where game.GameName.Equals(e.Game.Name) select game).Single();
+            PlatformDB Platform = (from platform in db.PlatformsDB where platform.PlatformName.Equals(e.Platform.Name) select platform).Single();
+            RankDB MinRank = (from rank in db.RanksDB where rank.RankName.Equals(e.MinRank.RankName) select rank).Single();
+            RankDB MaxRank = (from rank in db.RanksDB where rank.RankName.Equals(e.MaxRank.RankName) select rank).Single();
+            EventDB eventEntity = new EventDB(Owner, e.Title, e.DateTime, e.Location, Game, Platform, MinRank, MaxRank, e.Description);
+            foreach (UserDB user in eventEntity.UsersAttending) {
+                Attendees.Add(user);
+            }
+            return Attendees;
         }
 
         // same as search event
-        public List<Event> FindEvent(Game game, string platform, string rank) {
-            List<Event> EventList = new List<Event>();
+        public List<EventDB> FindEvent(Game game, string platform, string rank) {
+            List<EventDB> EventList = new List<EventDB>();
             for (int i = 0; i < db.EventsDB.Count(); i++) {
                 if (db.EventsDB.ElementAt(i).Game.GameName.Equals(game.Name) || db.EventsDB.ElementAt(i).Platform.PlatformName.Equals(platform) || db.EventsDB.ElementAt(i).MinRank.RankName.Equals(rank)) {
                     EventDB DBEvent = db.EventsDB.ElementAt(i);
-                    //EventList.Add(DBEvent convert to Event object);
+                    EventList.Add(DBEvent);
                 }
             }
             return EventList;
