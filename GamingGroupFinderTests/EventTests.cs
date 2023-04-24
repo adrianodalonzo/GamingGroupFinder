@@ -23,9 +23,9 @@ namespace GamingGroupFinderTests {
 
             Game splatoon = new Game("Splatoon", platforms, GameSplatoonRanks());
 
-            User vince = new User("vince", "vince", new List<User>());
-            User user1 = new User("u1", "you1", new List<User>());
-            User user2 = new User("u2", "you2", new List<User>());
+            User vince = new User("vince", "vince", "salt", new List<User>());
+            User user1 = new User("u1", "you1", "salt", new List<User>());
+            User user2 = new User("u2", "you2", "salt", new List<User>());
 
             List<User> attendees = new List<User>();
             attendees.Add(vince);
@@ -49,9 +49,9 @@ namespace GamingGroupFinderTests {
 
             Game splatoon = new Game("Splatoon", platforms, GameSplatoonRanks());
 
-            User vince = new User("vince", "vince", new List<User>());
-            User user1 = new User("u1", "you1", new List<User>());
-            User user2 = new User("u2", "you2", new List<User>());
+            User vince = new User("vince", "vince", "salt", new List<User>());
+            User user1 = new User("u1", "you1", "salt", new List<User>());
+            User user2 = new User("u2", "you2", "salt", new List<User>());
 
             List<User> attendees = new List<User>();
             attendees.Add(vince);
