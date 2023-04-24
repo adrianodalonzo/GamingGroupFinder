@@ -23,7 +23,7 @@ namespace GamingGroupFinder {
         public void CreateUser(User u) {
             // add checking for an existing user
             UserDB userEntity = new UserDB(u.Username, u.Password, u.Salt, null);
-            db.Add(userEntity);
+            db.UsersDB.Add(userEntity);
             db.SaveChanges();
         }
 

@@ -3,14 +3,14 @@ using Microsoft.EntityFrameworkCore;
 namespace GamingGroupFinderDatabase;
 
 public class ApplicationContext : DbContext {
-    public DbSet<UserDB> UsersDB {get;set;}
-    public DbSet<MessageDB> MessagesDB {get;set;}
-    public DbSet<ProfileDB> ProfilesDB {get;set;}
+    public virtual DbSet<UserDB> UsersDB {get;set;}
+    public virtual DbSet<MessageDB> MessagesDB {get;set;}
+    public virtual DbSet<ProfileDB> ProfilesDB {get;set;}
     // public DbSet<Contact> Contacts {get;set;}
-    public DbSet<GameDB> GamesDB {get;set;}
-    public DbSet<RankDB> RanksDB {get;set;}
-    public DbSet<PlatformDB> PlatformsDB {get;set;}
-    public DbSet<EventDB> EventsDB {get;set;}
+    public virtual DbSet<GameDB> GamesDB {get;set;}
+    public virtual DbSet<RankDB> RanksDB {get;set;}
+    public virtual DbSet<PlatformDB> PlatformsDB {get;set;}
+    public virtual DbSet<EventDB> EventsDB {get;set;}
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder) {
         string? oracleUser = Environment.GetEnvironmentVariable("ORACLE_APP_USER");
         string? oraclePassword = Environment.GetEnvironmentVariable("ORACLE_APP_PASSWORD");

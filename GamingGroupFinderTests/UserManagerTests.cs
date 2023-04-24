@@ -13,7 +13,7 @@ public class UserManagerTests {
         var mockSet = new Mock<DbSet<UserDB>>();
         var mockContext = new Mock<ApplicationContext>();
         mockContext.Setup(u => u.UsersDB).Returns(mockSet.Object);
-        var userManager = new UserManager();
+        UserManager userManager = new UserManager();
 
         // Act
         User user = new User("newuser", "newpass", "salt", new List<User>());
@@ -22,5 +22,50 @@ public class UserManagerTests {
         // Assert
         mockSet.Verify(u => u.Add(It.IsAny<UserDB>()), Times.Once());
         mockContext.Verify(u => u.SaveChanges(), Times.Once());
+    }
+
+    [TestMethod]
+    public void TestLogInUser_LogsUserIn() {
+
+    }
+
+    [TestMethod]
+    public void TestLogInUser_ThrowsWhenGivenNull() {
+
+    }
+
+    [TestMethod]
+    public void TestLogOutUser_LogsUserOut() {
+
+    }
+
+    [TestMethod]
+    public void TestLogOutUser_ThrowsWhenGivenNull() {
+
+    }
+
+    [TestMethod]
+    public void TestChangePassword_ChangesPassword() {
+
+    }
+
+    [TestMethod]
+    public void TestChangePassword_ThrowsWhenGivenNull() {
+
+    }
+
+    [TestMethod]
+    public void TestDeleteAccount_DeletesLoggedInUser() {
+
+    }
+
+    [TestMethod]
+    public void TestDeleteAccount_DeletesGivenUser() {
+
+    }
+
+    [TestMethod]
+    public void TestDeleteAccount_ThrowsWhenGivenNull() {
+        
     }
 }
