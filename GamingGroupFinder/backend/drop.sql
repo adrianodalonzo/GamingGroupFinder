@@ -7,7 +7,7 @@ drop table "InterestDB" cascade constraints purge;
 drop table "RanksDB" cascade constraints purge;
 drop table "GameDBPlatformDB" cascade constraints purge;
 drop table "GameDBProfileDB" cascade constraints purge;
-drop table "GameDBRankDB" cascade constraints purge;
+drop table "GamesDBRanksDB" cascade constraints purge;
 drop table "EventsDB" cascade constraints purge;
 drop table "ProfilesDB" cascade constraints purge;
 drop table "GameDBPlatformDB" cascade constraints purge;
