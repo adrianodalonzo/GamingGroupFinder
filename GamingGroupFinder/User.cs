@@ -47,6 +47,16 @@ namespace GamingGroupFinder {
             this.Salt = salt;
             this.ContactList = contactList;
         }
+
+        public User(string username, string password, string salt) {
+            if(username == null || password == null){
+                throw new ArgumentNullException("one or multiple of the input is null");
+            }
+            this.Username = username;
+            this.Password = password;
+            this.Salt = salt;
+        }
+
         private User(){
         }
 
