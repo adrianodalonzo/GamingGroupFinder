@@ -1,4 +1,5 @@
 using System.ComponentModel.DataAnnotations.Schema;
+using Microsoft.EntityFrameworkCore;
 
 namespace GamingGroupFinderDatabase;
 
@@ -62,7 +63,7 @@ public class GameDB {
     public int GameDBId { get; set; }
     public string GameName { get; set; }
     public List<PlatformDB> Platforms { get; } = new();
-    public List<RankDB> Ranks { get; } = new();
+    // public List<RankDB> Ranks { get; } = new();
     public List<ProfileDB> Profiles { get; } = new();
 
     public GameDB(string gameName) {
@@ -70,6 +71,32 @@ public class GameDB {
     }
 
     private GameDB() {
+
+    }
+}
+
+[Keyless]
+public class GameDBRankDB {
+    [ForeignKey("GameDBId")]
+    public int GameDBId { get; set; }
+    public GameDB Game { get; set; } = null!;
+    [ForeignKey("RankDBId")]
+    public int RankDBId { get; set; }
+    public RankDB Rank { get; set; } = null!;
+}
+
+public class RankDB {
+    public int RankDBId { get; set; }
+    public int RankValue { get; set; }
+    public string RankName { get; set; }
+    // public List<GameDB> Games { get; } = new();
+    
+    public RankDB(int rankValue, string rankName) {
+        this.RankValue = rankValue;
+        this.RankName = rankName;
+    }
+
+    private RankDB() {
 
     }
 }
@@ -86,22 +113,6 @@ public class PlatformDB {
 
     private PlatformDB() {
         
-    }
-}
-
-public class RankDB {
-    public int RankDBId { get; set; }
-    public int RankValue { get; set; }
-    public string RankName { get; set; }
-    public List<GameDB> Games { get; } = new();
-    
-    public RankDB(int rankValue, string rankName) {
-        this.RankValue = rankValue;
-        this.RankName = rankName;
-    }
-
-    private RankDB() {
-
     }
 }
 
