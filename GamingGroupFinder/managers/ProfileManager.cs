@@ -13,14 +13,14 @@ using GamingGroupFinderDatabase;
 namespace GamingGroupFinder;
 
 public class ProfileManager {
-
+    private ApplicationContext db = new ApplicationContext();
     private Profile _profile;
 
     // this is probably just going to create a new profile and add it to the database
     public void CreateProfile(Profile p, User u) {
-        ApplicationContext db = new ApplicationContext();
         ProfileDB profile1 = new ProfileDB(null, p.Name, p.Pronouns, p.Age, p.Bio, p.ProfilePicture);
-        profile1.User = new UserDB(u.Username, u.Password, u.Salt, profile1);
+        var profileUser = (from user in db.UsersDB where user.Username.Equals(u.Username) select user).First();
+        profile1.User = profileUser;
         db.Add(profile1);
         db.SaveChanges();
     }

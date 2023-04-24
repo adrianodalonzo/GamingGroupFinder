@@ -1,3 +1,5 @@
+using GamingGroupFinderDatabase;
+
 namespace GamingGroupFinder {
     public class Message {
         // DateTime myDateTime = DateTime.Now;
