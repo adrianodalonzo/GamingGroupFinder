@@ -6,7 +6,7 @@ namespace GamingGroupFinder;
 
 public class MessageManager {
     private ApplicationContext db = new ApplicationContext();
-    private Message _message;
+    // private Message _message;
 
     // this is probably just going to create a new message and add it to the database
     public void CreateMessage(Message m) {
@@ -15,7 +15,7 @@ public class MessageManager {
 
         MessageDB message = new MessageDB(sender, reciever, m.TimeSent, m.MessageText, m.IsSeen);
         db.Add(message);
-        this._message = m;
+        // this._message = m;
         db.SaveChanges();
     }
 
@@ -25,11 +25,11 @@ public class MessageManager {
         if (messagesSent == null) {
             throw new Exception("User hasn't sent any messages");
         }
-        List<Message> messages = (messagesSent.Select(message => new Message(user, ToUser(message.Receiver), message.Time, message.MessageText, message.IsSeen))).ToList();
+        List<Message> messages = (messagesSent.Select(message => new Message(user, UserDBToUser(message.Receiver), message.Time, message.MessageText, message.IsSeen))).ToList();
         return messages;
     }
 
-    private static User ToUser(UserDB user) {
+    private static User UserDBToUser(UserDB user) {
         return new User(user.Username, user.Password, user.Salt, new List<User>());
     }
 
@@ -39,7 +39,7 @@ public class MessageManager {
         if (messagesRecieved == null) {
             throw new Exception("User hasn't recieved any messages");
         }
-        List<Message> messages = (messagesRecieved.Select(message => new Message(ToUser(message.Sender), user, message.Time, message.MessageText, message.IsSeen))).ToList();
+        List<Message> messages = (messagesRecieved.Select(message => new Message(UserDBToUser(message.Sender), user, message.Time, message.MessageText, message.IsSeen))).ToList();
         return messages;
     }
 
@@ -53,6 +53,7 @@ public class MessageManager {
         if (testMessage == null) {
             throw new Exception("Error occurred trying to find the message");
         }
+        
         testMessage.IsSeen = true;
         db.SaveChanges();
     }

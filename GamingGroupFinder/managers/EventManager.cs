@@ -20,8 +20,8 @@ namespace GamingGroupFinder {
             UserDB Owner = (from user in db.UsersDB where user.Username.Equals(e.Owner.Username) select user).Single();
             GameDB Game = (from game in db.GamesDB where game.GameName.Equals(e.Game.Name) select game).Single();
             PlatformDB Platform = (from platform in db.PlatformsDB where platform.PlatformName.Equals(e.Platform.Name) select platform).Single();
-            RankDB MinRank = (from rank in db.RanksDB where rank.RankName.Equals(e.MinRank.RankName) select rank).Single();
-            RankDB MaxRank = (from rank in db.RanksDB where rank.RankName.Equals(e.MaxRank.RankName) select rank).Single();
+            RankDB MinRank = (from rank in db.RanksDB where rank.RankName.Equals(e.MinRank.RankName) && rank.RankValue >= e.MinRank.RankValue select rank).Single();
+            RankDB MaxRank = (from rank in db.RanksDB where rank.RankName.Equals(e.MaxRank.RankName) && rank.RankValue == e.MaxRank.RankValue select rank).Single();
             EventDB eventEntity = new EventDB(Owner, e.Title, e.DateTime, e.Location, Game, Platform, MinRank, MaxRank, e.Description);
             db.Add(eventEntity);
             db.SaveChanges();
