@@ -30,6 +30,7 @@ public class UserManagerTests {
     }
 
     [TestMethod]
+    [ExpectedException (typeof(ArgumentNullException))]
     public void TestLogInUser_ThrowsWhenGivenNull() {
 
     }
@@ -40,6 +41,7 @@ public class UserManagerTests {
     }
 
     [TestMethod]
+    [ExpectedException (typeof(ArgumentNullException))]
     public void TestLogOutUser_ThrowsWhenGivenNull() {
 
     }
@@ -50,6 +52,7 @@ public class UserManagerTests {
     }
 
     [TestMethod]
+    [ExpectedException (typeof(ArgumentNullException))]
     public void TestChangePassword_ThrowsWhenGivenNull() {
 
     }
@@ -65,6 +68,7 @@ public class UserManagerTests {
     }
 
     [TestMethod]
+    [ExpectedException (typeof(ArgumentNullException))]
     public void TestDeleteAccount_ThrowsWhenGivenNull() {
         
     }

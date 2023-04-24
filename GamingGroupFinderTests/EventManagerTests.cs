@@ -18,6 +18,7 @@ public class EventManagerTests {
     }
 
     [TestMethod]
+    [ExpectedException (typeof(ArgumentNullException))]
     public void TestCreateEvent_ThrowsWhenGivenNull() {
 
     }
@@ -33,6 +34,7 @@ public class EventManagerTests {
     }
 
     [TestMethod]
+    [ExpectedException (typeof(ArgumentNullException))]
     public void TestEditEvent_ThrowsWhenGivenNull() {
 
     }
@@ -48,6 +50,7 @@ public class EventManagerTests {
     }
 
     [TestMethod]
+    [ExpectedException (typeof(ArgumentNullException))]
     public void TestDeleteEvent_ThrowsWhenGivenNull() {
 
     }
@@ -68,6 +71,7 @@ public class EventManagerTests {
     }
 
     [TestMethod]
+    [ExpectedException (typeof(ArgumentNullException))]
     public void TestAttendEvent_ThrowsWhenGivenNull() {
 
     }
@@ -88,6 +92,7 @@ public class EventManagerTests {
     }
 
     [TestMethod]
+    [ExpectedException (typeof(ArgumentNullException))]
     public void TestLeaveEvent_ThrowsWhenGivenNull() {
 
     }
@@ -103,6 +108,7 @@ public class EventManagerTests {
     }
 
     [TestMethod]
+    [ExpectedException (typeof(ArgumentNullException))]
     public void TestViewAttendees_ThrowsWhenGivenNull() {
 
     }
@@ -113,6 +119,7 @@ public class EventManagerTests {
     }
 
     [TestMethod]
+    [ExpectedException (typeof(ArgumentNullException))]
     public void TestFindEvent_ThrowsWhenGivenNull() {
         
     }
