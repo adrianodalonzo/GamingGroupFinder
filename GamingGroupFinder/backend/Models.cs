@@ -41,17 +41,20 @@ public class ProfileDB {
     public int Age { get; set; }
     public string Bio { get; set; }
     public string ProfilePicture { get; set; }
-    public List<InterestDB> Interests { get; } = new();
-    public List<PlatformDB> Platforms { get; } = new();
-    public List<GameDB> Games { get; } = new();
+    public List<InterestDB> Interests { get; set; } = new();
+    public List<PlatformDB> Platforms { get; set; } = new();
+    public List<GameDB> Games { get; set; } = new();
 
-    public ProfileDB(UserDB user, string name, string pronouns, int age, string bio, string profilePicture) {
+    public ProfileDB(UserDB user, string name, string pronouns, int age, string bio, string profilePicture, List<InterestDB> interests, List<PlatformDB> platforms, List<GameDB> games) {
         this.User = user;
         this.Name = name;
         this.Pronouns = pronouns;
         this.Age = age;
         this.Bio = bio;
         this.ProfilePicture = profilePicture;
+        this.Interests = interests;
+        this.Platforms = platforms;
+        this.Games = games;
     }
 
     private ProfileDB() {

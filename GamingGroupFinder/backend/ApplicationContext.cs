@@ -12,6 +12,7 @@ public class ApplicationContext : DbContext {
     public DbSet<RankDB> RanksDB {get;set;}
     public DbSet<PlatformDB> PlatformsDB {get;set;}
     public DbSet<EventDB> EventsDB {get;set;}
+    public DbSet<InterestDB> InterestsDB {get;set;}
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder) {
         string? oracleUser = Environment.GetEnvironmentVariable("ORACLE_APP_USER");
         string? oraclePassword = Environment.GetEnvironmentVariable("ORACLE_APP_PASSWORD");
