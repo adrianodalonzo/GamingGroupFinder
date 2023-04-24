@@ -29,16 +29,16 @@ public class Program {
         u1Ranks.Add(new Rank(2, 3, "Gold"));
 
         List<Game> u1Games = new List<Game>();
-        u1Games.Add(new Game("League of Legends", u1Platforms, u1Ranks));
+        u1Games.Add(new Game("League of Legends", new List<Platform>(), new List<Rank>()));
 
         List<Interest> u1Interests = new List<Interest>();
         u1Interests.Add(new Interest(1, "Competitive"));
         u1Interests.Add(new Interest(2, "Casual"));
 
         Profile p1 = new Profile(u1, "Adriano", "he/him", 19, u1Platforms, u1Games, "Biography", "pic", u1Interests);
-        Event e1 = new Event("Event 1", DateTime.Now, "Dawson", new Game("Splatoon 3", u1Platforms, u1Ranks), u1Platforms[1], u1Ranks[0], u1Ranks[1], "Description", u1, new List<User>());
+        Event e1 = new Event("Event 1", DateTime.Now, "Dawson", new Game("League of Legends", new List<Platform>(), new List<Rank>()), new Platform("PC"), new Rank(1, "Iron"), new Rank(4, "Gold"), "This is a LOL tourny", u1, new List<User>());
 
-        // userManager.CreateUser(u1);
+        userManager.CreateUser(u1);
         userManager.LogInUser(u1);
         profileManager.CreateProfile(p1, u1);
         eventManager.CreateEvent(e1);
