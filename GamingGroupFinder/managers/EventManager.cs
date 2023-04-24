@@ -5,11 +5,11 @@ namespace GamingGroupFinder {
     public class EventManager {
 
         private ApplicationContext db = new ApplicationContext();
-        private Event _event;
+        // private Event _event;
 
-        public EventManager(Event _event) {
-            this._event = _event;
-        }
+        // public EventManager(Event _event) {
+        //     this._event = _event;
+        // }
 
         // this is probably just going to create a new event and add it to the database
         public void CreateEvent(Event e) {
