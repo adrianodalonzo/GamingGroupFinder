@@ -7,21 +7,21 @@ namespace GamingGroupFinder {
         // check if they can join an event
         // check if a user can view messages by either them sending a message or recieving one
 
-        private ApplicationContext _db;
-        private User _loggedInUser;
+        private static UserManager? _instance;
+        private ApplicationContext _db = null;
+        private User _loggedInUser { get; set; }
 
-        public UserManager(ApplicationContext db) {
-            _db = db;
+        private UserManager() {
         }
 
-        public ApplicationContext GetDB() {
-            if (_db == null) {
-                _db = new ApplicationContext();
+        public static UserManager GetInstance() {
+            if (_instance == null) {
+                _instance = new UserManager();
             }
-            return _db;
+            return _instance;
         }
 
-        public void SetDB(ApplicationContext db) {
+        public void setApplicationContext(ApplicationContext db) {
             _db = db;
         }
 
