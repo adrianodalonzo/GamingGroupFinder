@@ -7,8 +7,24 @@ namespace GamingGroupFinder {
         // check if they can join an event
         // check if a user can view messages by either them sending a message or recieving one
 
-        private ApplicationContext db = new ApplicationContext();
+        private ApplicationContext _db;
         private User _loggedInUser;
+
+        public UserManager(ApplicationContext db) {
+            _db = db;
+        }
+
+        public ApplicationContext GetDB() {
+            if (_db == null) {
+                _db = new ApplicationContext();
+            }
+            return _db;
+        }
+
+        public void SetDB(ApplicationContext db) {
+            _db = db;
+        }
+
         public User LoggedInUser{
             get{ return _loggedInUser; }
             set {
@@ -23,8 +39,8 @@ namespace GamingGroupFinder {
         public void CreateUser(User u) {
             // add checking for an existing user
             UserDB userEntity = new UserDB(u.Username, u.Password, u.Salt, null);
-            db.UsersDB.Add(userEntity);
-            db.SaveChanges();
+            _db.UsersDB.Add(userEntity);
+            _db.SaveChanges();
         }
 
         public void LogInUser(User user) {
@@ -39,15 +55,15 @@ namespace GamingGroupFinder {
         }
 
         public void ChangePassword(string password) {
-            UserDB testUser = (from user in db.UsersDB where user.Username.Equals(LoggedInUser.Username) select user).Single();
+            UserDB testUser = (from user in _db.UsersDB where user.Username.Equals(LoggedInUser.Username) select user).Single();
             testUser.Password = password;
-            db.SaveChanges();
+            _db.SaveChanges();
         }
 
         public void DeleteAccount() {
-            UserDB testUser = (from user in db.UsersDB where user.Username.Equals(LoggedInUser.Username) select user).Single();
-            db.UsersDB.Remove(testUser);
-            db.SaveChanges();
+            UserDB testUser = (from user in _db.UsersDB where user.Username.Equals(LoggedInUser.Username) select user).Single();
+            _db.UsersDB.Remove(testUser);
+            _db.SaveChanges();
         }
     }
 }

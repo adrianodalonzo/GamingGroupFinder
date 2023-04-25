@@ -13,7 +13,7 @@ public class UserManagerTests {
         var mockSet = new Mock<DbSet<UserDB>>();
         var mockContext = new Mock<ApplicationContext>();
         mockContext.Setup(u => u.UsersDB).Returns(mockSet.Object);
-        UserManager userManager = new UserManager();
+        UserManager userManager = new UserManager(mockContext.Object);
 
         // Act
         User user = new User("newuser", "newpass", "salt", new List<User>());
@@ -26,7 +26,13 @@ public class UserManagerTests {
 
     [TestMethod]
     public void TestLogInUser_LogsUserIn() {
+        // Arrange
+        var mockSet = new Mock<DbSet<UserDB>>();
+        var mockContext = new Mock<ApplicationContext>();
+        mockContext.Setup(u => u.UsersDB).Returns(mockSet.Object);
+        UserManager userManager = new UserManager(mockContext.Object);
 
+        // Act
     }
 
     [TestMethod]

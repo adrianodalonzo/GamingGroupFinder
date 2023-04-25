@@ -5,7 +5,7 @@ Console.Clear();
 Console.WriteLine("Welcome to GamingGroupFinder!");
 
 ApplicationContext db = new ApplicationContext();
-UserManager userManager = new UserManager();
+// UserManager userManager = new UserManager();
 ProfileManager profileManager = new ProfileManager();
 
 User user1 = new User("user1", "password", "salt", new List<User>());
@@ -22,8 +22,8 @@ Profile profile1 = new Profile(user1, "user1", "pro", 11, new List<Platform>(), 
 // profileManager.CreateProfile(profile1, user1);
 // Console.Write("User added");
 
-userManager.LogInUser(user1);
-userManager.ChangePassword("test");
+// userManager.LogInUser(user1);
+// userManager.ChangePassword("test");
 Console.Write("User password changed");
 
 
