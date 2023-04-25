@@ -4,7 +4,24 @@ namespace GamingGroupFinder {
 
     public class EventManager {
 
-        private ApplicationContext db = new ApplicationContext();
+        private static EventManager? _instance;
+        private static ApplicationContext db = null!;
+
+        private EventManager() {
+
+        }
+        
+        public static EventManager getInstance() {
+            if(_instance == null) {
+                _instance = new EventManager();
+            }
+            return _instance;
+        }
+
+        public void setLibraryContext(ApplicationContext context) {
+            db = context;
+        }
+
         // private Event _event;
 
         // public EventManager(Event _event) {

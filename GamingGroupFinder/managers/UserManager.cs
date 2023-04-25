@@ -7,11 +7,27 @@ namespace GamingGroupFinder {
         // check if they can join an event
         // check if a user can view messages by either them sending a message or recieving one
 
-        private static ApplicationContext db = new ApplicationContext();
+        private static UserManager? _instance;
+        private static ApplicationContext db = null!;
         private User _loggedInUser;
         public User LoggedInUser{
             get{ return _loggedInUser; }
             set { this._loggedInUser = value; }
+        }
+
+        private UserManager() {
+
+        }
+
+        public static UserManager GetInstance() {
+            if(_instance == null) {
+                _instance = new UserManager();
+            }
+            return _instance;
+        }
+
+        public void setApplicationContext(ApplicationContext context) {
+            db = context;
         }
 
         public static List<UserDB> GetListOfUsers() {
@@ -61,8 +77,14 @@ namespace GamingGroupFinder {
         }
 
         public void ChangePassword(string password) {
-            UserDB testUser = (from user in db.UsersDB where user.Username.Equals(LoggedInUser.Username) select user).Single();
+            UserDB testUser = (from user in db.UsersDB where user.Username.Equals(LoggedInUser.Username) select user).SingleOrDefault();
+            if(testUser == null) {
+                throw new NullReferenceException("User could not be found!");
+            }
             if(LoggedInUser.Username.Equals(testUser.Username)) {
+                if(testUser.Password.Equals(password)) {
+                    throw new ArgumentException("New password must not match old password!");
+                }
                 testUser.Password = password;
                 db.SaveChanges();
             } else {
@@ -71,7 +93,26 @@ namespace GamingGroupFinder {
         }
 
         public void DeleteAccount() {
-            UserDB testUser = (from user in db.UsersDB where user.Username.Equals(LoggedInUser.Username) select user).Single();
+            UserDB testUser = (from user in db.UsersDB where user.Username.Equals(LoggedInUser.Username) select user).SingleOrDefault();
+            if(testUser == null) {
+                throw new NullReferenceException("There is no user which exists following the criteria of the logged in user!");
+            }
+            if(LoggedInUser.Username.Equals(testUser.Username)) {
+                db.UsersDB.Remove(testUser);
+                db.SaveChanges();
+            } else {
+                throw new Exception("Only the user of the requested account may delete their account!");
+            }
+        }
+
+        public void DeleteAccount(User u) {
+            if(u == null) {
+                throw new NullReferenceException("User inputed can't be null!");
+            }
+            UserDB testUser = (from user in db.UsersDB where user.Username.Equals(u.Username) select user).SingleOrDefault();
+            if(testUser == null) {
+                throw new NullReferenceException("No user can be found with the user you inputed!");
+            }
             if(LoggedInUser.Username.Equals(testUser.Username)) {
                 db.UsersDB.Remove(testUser);
                 db.SaveChanges();

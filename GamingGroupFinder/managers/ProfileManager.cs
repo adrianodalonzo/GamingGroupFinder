@@ -9,7 +9,25 @@ using GamingGroupFinderDatabase;
 namespace GamingGroupFinder;
 
 public class ProfileManager {
-    private static ApplicationContext db = new ApplicationContext();
+
+    private static ProfileManager? _instance;
+    private static ApplicationContext db = null!;
+
+    private ProfileManager() {
+
+    }
+
+    public static ProfileManager getInstance() {
+        if(_instance == null) {
+            _instance = new ProfileManager();
+        }
+        return _instance;
+    }
+
+    public void setApplicationContext(ApplicationContext context) {
+        db = context;
+    }
+    
     // private Profile _profile;
 
     // this is probably just going to create a new profile and add it to the database

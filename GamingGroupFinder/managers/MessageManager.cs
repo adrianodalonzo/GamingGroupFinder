@@ -5,7 +5,24 @@ using GamingGroupFinderDatabase;
 namespace GamingGroupFinder;
 
 public class MessageManager {
-    private ApplicationContext db = new ApplicationContext();
+    private static MessageManager? _instance;
+    private static ApplicationContext db = null!;
+
+    private MessageManager() {
+
+    }
+    
+    public static MessageManager getInstance(){
+        if(_instance == null) {
+            _instance = new MessageManager();
+        }
+        return _instance;
+    }
+
+    public void setLibraryContext(ApplicationContext context) {
+        db = context;
+    }
+
     // private Message _message;
 
     // this is probably just going to create a new message and add it to the database
