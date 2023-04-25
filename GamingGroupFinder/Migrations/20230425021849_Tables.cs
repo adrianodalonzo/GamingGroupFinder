@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace _410project.Migrations
 {
     /// <inheritdoc />
-    public partial class UpdatedTableNames : Migration
+    public partial class Tables : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -25,7 +25,7 @@ namespace _410project.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "InterestDB",
+                name: "InterestsDB",
                 columns: table => new
                 {
                     InterestDBId = table.Column<int>(type: "NUMBER(10)", nullable: false)
@@ -34,7 +34,7 @@ namespace _410project.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_InterestDB", x => x.InterestDBId);
+                    table.PrimaryKey("PK_InterestsDB", x => x.InterestDBId);
                 });
 
             migrationBuilder.CreateTable(
@@ -104,24 +104,23 @@ namespace _410project.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "GameDBRankDB",
+                name: "GamesDBRanksDB",
                 columns: table => new
                 {
-                    GamesGameDBId = table.Column<int>(type: "NUMBER(10)", nullable: false),
-                    RanksRankDBId = table.Column<int>(type: "NUMBER(10)", nullable: false)
+                    GameDBId = table.Column<int>(type: "NUMBER(10)", nullable: false),
+                    RankDBId = table.Column<int>(type: "NUMBER(10)", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_GameDBRankDB", x => new { x.GamesGameDBId, x.RanksRankDBId });
                     table.ForeignKey(
-                        name: "FK_GameDBRankDB_GamesDB_GamesGameDBId",
-                        column: x => x.GamesGameDBId,
+                        name: "FK_GamesDBRanksDB_GamesDB_GameDBId",
+                        column: x => x.GameDBId,
                         principalTable: "GamesDB",
                         principalColumn: "GameDBId",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_GameDBRankDB_RanksDB_RanksRankDBId",
-                        column: x => x.RanksRankDBId,
+                        name: "FK_GamesDBRanksDB_RanksDB_RankDBId",
+                        column: x => x.RankDBId,
                         principalTable: "RanksDB",
                         principalColumn: "RankDBId",
                         onDelete: ReferentialAction.Cascade);
@@ -290,9 +289,9 @@ namespace _410project.Migrations
                 {
                     table.PrimaryKey("PK_InterestDBProfileDB", x => new { x.InterestsInterestDBId, x.ProfilesProfileDBId });
                     table.ForeignKey(
-                        name: "FK_InterestDBProfileDB_InterestDB_InterestsInterestDBId",
+                        name: "FK_InterestDBProfileDB_InterestsDB_InterestsInterestDBId",
                         column: x => x.InterestsInterestDBId,
-                        principalTable: "InterestDB",
+                        principalTable: "InterestsDB",
                         principalColumn: "InterestDBId",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
@@ -368,9 +367,14 @@ namespace _410project.Migrations
                 column: "ProfilesProfileDBId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_GameDBRankDB_RanksRankDBId",
-                table: "GameDBRankDB",
-                column: "RanksRankDBId");
+                name: "IX_GamesDBRanksDB_GameDBId",
+                table: "GamesDBRanksDB",
+                column: "GameDBId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_GamesDBRanksDB_RankDBId",
+                table: "GamesDBRanksDB",
+                column: "RankDBId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_InterestDBProfileDB_ProfilesProfileDBId",
@@ -412,7 +416,7 @@ namespace _410project.Migrations
                 name: "GameDBProfileDB");
 
             migrationBuilder.DropTable(
-                name: "GameDBRankDB");
+                name: "GamesDBRanksDB");
 
             migrationBuilder.DropTable(
                 name: "InterestDBProfileDB");
@@ -427,7 +431,7 @@ namespace _410project.Migrations
                 name: "EventsDB");
 
             migrationBuilder.DropTable(
-                name: "InterestDB");
+                name: "InterestsDB");
 
             migrationBuilder.DropTable(
                 name: "ProfilesDB");

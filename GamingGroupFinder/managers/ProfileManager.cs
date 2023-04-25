@@ -18,10 +18,12 @@ public class ProfileManager {
 
     // this is probably just going to create a new profile and add it to the database
     public void CreateProfile(Profile p, User u) {
-        ProfileDB profile = new ProfileDB(null, p.Name, p.Pronouns, p.Age, p.Bio, p.ProfilePicture, null, null, null);
+        ProfileDB profile = new ProfileDB(null, p.Name, p.Pronouns, p.Age, p.Bio, p.ProfilePicture, new List<InterestDB>(), new List<PlatformDB>(), new List<GameDB>());
         var profileUser = (from user in db.UsersDB where user.Username.Equals(u.Username) select user).First();
 
         profile.User = profileUser;
+
+        // figure out how to add lists of items to the profiles in database
 
         // List<GameDB> profileGames = GetProfileGames(p);
         // List<InterestDB> profileInterests = GetProfileInterests(p);

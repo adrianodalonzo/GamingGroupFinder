@@ -92,3 +92,4 @@ insert into "GamesDBRanksDB" values (2, 25);
 insert into "GamesDBRanksDB" values (2, 26);
 insert into "GamesDBRanksDB" values (2, 27);
 
+commit;

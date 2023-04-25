@@ -12,8 +12,8 @@ using Oracle.EntityFrameworkCore.Metadata;
 namespace _410project.Migrations
 {
     [DbContext(typeof(ApplicationContext))]
-    [Migration("20230424204142_GameRanksBridgingTable")]
-    partial class GameRanksBridgingTable
+    [Migration("20230425021849_Tables")]
+    partial class Tables
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -169,7 +169,7 @@ namespace _410project.Migrations
 
                     b.HasKey("InterestDBId");
 
-                    b.ToTable("InterestDB");
+                    b.ToTable("InterestsDB");
                 });
 
             modelBuilder.Entity("GamingGroupFinderDatabase.MessageDB", b =>

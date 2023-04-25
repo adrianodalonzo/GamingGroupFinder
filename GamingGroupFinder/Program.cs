@@ -16,9 +16,10 @@ public class Program {
         EventManager eventManager = new EventManager();
 
         byte[] salt = GenerateSalt();
-        byte[] hashedPassword = GenerateHash("password", salt);
+        byte[] hashedPassword = GenerateHash("dog123", salt);
 
         User u1 = new User("adridalo", ByteArrayToString(hashedPassword), ByteArrayToString(salt));
+        User u2 = new User("bob", ByteArrayToString(hashedPassword), ByteArrayToString(salt));
 
         List<Platform> u1Platforms = new List<Platform>();
         u1Platforms.Add(new Platform(1, "PC"));
@@ -36,14 +37,39 @@ public class Program {
         u1Interests.Add(new Interest(2, "Casual"));
 
         Profile p1 = new Profile(u1, "Adriano", "he/him", 19, u1Platforms, u1Games, "Biography", "pic", u1Interests);
-        Event e1 = new Event("Event 1", DateTime.Now, "Dawson", new Game("League of Legends", new List<Platform>(), new List<Rank>()), new Platform("PC"), new Rank(1, "Iron"), new Rank(4, "Gold"), "This is a LOL tourny", u1, new List<User>());
+        Profile p2 = new Profile(u2, "bob", "they/them", 43, u1Platforms, u1Games, "I have 3 dogs!", "dog_pic", u1Interests);
 
-        userManager.CreateUser(u1);
-        userManager.LogInUser(u1);
-        profileManager.CreateProfile(p1, u1);
-        eventManager.CreateEvent(e1);
-        userManager.LogOutUser();
-        Console.WriteLine("User Logged Out");
+        List<Platform> gamePlatforms = new List<Platform>();
+        gamePlatforms.Add(new Platform("PC"));
+
+        List<Rank> gameRanks = new List<Rank>();
+        // create ranks for the game Valorant (just the names and not the numbers (iron not iron 1))
+        gameRanks.Add(new Rank(1, "Iron"));
+        gameRanks.Add(new Rank(2, "Bronze"));
+        gameRanks.Add(new Rank(3, "Silver"));
+        gameRanks.Add(new Rank(4, "Gold"));
+        gameRanks.Add(new Rank(5, "Platinum"));
+        gameRanks.Add(new Rank(6, "Diamond"));
+        gameRanks.Add(new Rank(7, "Immortal"));
+        gameRanks.Add(new Rank(8, "Radiant"));
+
+        // Game game = new Game("Valorant", gamePlatforms, gameRanks);
+        // Event e1 = new Event("Event 1", DateTime.Now, "Dawson", game, gamePlatforms[0], gameRanks[0], gameRanks[2], "This is a valorant tourny", u1, new List<User>());
+
+        // userManager.CreateUser(u1);
+        userManager.CreateUser(u2);
+        // profileManager.CreateProfile(p1, u1);
+        profileManager.CreateProfile(p2, u2);
+        Message m1 = new Message(u1, u2, DateTime.Now, "You have yourself a great day!", false);
+        messageManager.CreateMessage(m1);
+        Console.WriteLine("Message created!");
+        // userManager.CreateUser(u1);
+        // userManager.LogInUser(u1);
+        // Console.WriteLine("user created and logged in.");
+        // profileManager.CreateProfile(p1, u1);
+        // eventManager.CreateEvent(e1);
+        // userManager.LogOutUser();
+        // Console.WriteLine("User Logged Out");
 
 
         // userManager.CreateUser(u2);

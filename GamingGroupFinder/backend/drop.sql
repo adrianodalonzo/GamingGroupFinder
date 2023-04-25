@@ -14,3 +14,5 @@ drop table "GameDBProfileDB" cascade constraints purge;
 drop table "GameDBPlatformDB" cascade constraints purge;
 drop table "EventsDB" cascade constraints purge;
 drop table "EventDBUserDB" cascade constraints purge;
+
+commit;
