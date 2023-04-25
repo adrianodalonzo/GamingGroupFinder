@@ -116,7 +116,7 @@ public class ProfileManager {
             GameDB Game = (from g in db.GamesDB where g.GameName.Equals(game.Name) select g).First();
             Games.Add(Game);
         }
-        UserDB profileUser = (from user in db.UsersDB where user.Username.Equals(u.Username) select user).First();
+        UserDB profileUser = (from user in db.UsersDB where user.Username.Equals(p.User.Username) select user).First();
         ProfileDB Edited = new ProfileDB(profileUser, p.Name, p.Pronouns, p.Age, p.Bio, p.ProfilePicture, Interests, Platforms, Games);
         toEdit = Edited;
         db.SaveChanges();
