@@ -53,25 +53,25 @@ public class Program {
         gameRanks.Add(new Rank(7, "Immortal"));
         gameRanks.Add(new Rank(8, "Radiant"));
 
-        // Game game = new Game("Valorant", gamePlatforms, gameRanks);
-        // Event e1 = new Event("Event 1", DateTime.Now, "Dawson", game, gamePlatforms[0], gameRanks[0], gameRanks[2], "This is a valorant tourny", u1, new List<User>());
+        Game game = new Game("Valorant", gamePlatforms, gameRanks);
+        Event e1 = new Event("Event 1", DateTime.Now, "Dawson", game, gamePlatforms[0], gameRanks[0], gameRanks[2], "This is a valorant tourny", u1, new List<User>());
 
+        userManager.CreateUser(u1);
+        userManager.LogInUser(u1);
+        profileManager.CreateProfile(p1, u1);
+        eventManager.CreateEvent(e1);
+        userManager.LogOutUser();
+        Console.WriteLine("User Logged Out");
+
+
+        // userManager.CreateUser(u2);
+        // profileManager.CreateProfile(p2, u2);
+        // Message m1 = new Message(u1, u2, DateTime.Now, "You have yourself a great day!", false);
+        // messageManager.CreateMessage(m1);
+        // Console.WriteLine("Message created!");
         // userManager.CreateUser(u1);
-        userManager.CreateUser(u2);
-        // profileManager.CreateProfile(p1, u1);
-        profileManager.CreateProfile(p2, u2);
-        Message m1 = new Message(u1, u2, DateTime.Now, "You have yourself a great day!", false);
-        messageManager.CreateMessage(m1);
-        Console.WriteLine("Message created!");
-        // userManager.CreateUser(u1);
-        // userManager.LogInUser(u1);
         // Console.WriteLine("user created and logged in.");
         // profileManager.CreateProfile(p1, u1);
-        // eventManager.CreateEvent(e1);
-        // userManager.LogOutUser();
-        // Console.WriteLine("User Logged Out");
-
-
         // userManager.CreateUser(u2);
         // profileManager.CreateProfile(p2, u2);
         // userManager.LogInUser(u1);
