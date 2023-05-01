@@ -12,14 +12,14 @@ public class MessageManager {
 
     }
     
-    public static MessageManager getInstance(){
+    public static MessageManager GetInstance(){
         if(_instance == null) {
             _instance = new MessageManager();
         }
         return _instance;
     }
 
-    public void setLibraryContext(ApplicationContext context) {
+    public void SetLibraryContext(ApplicationContext context) {
         db = context;
     }
 

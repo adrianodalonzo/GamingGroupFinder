@@ -26,7 +26,7 @@ namespace GamingGroupFinder {
             return _instance;
         }
 
-        public void setApplicationContext(ApplicationContext context) {
+        public void SetApplicationContext(ApplicationContext context) {
             db = context;
         }
 
@@ -53,6 +53,7 @@ namespace GamingGroupFinder {
             UserDB userEntity = new UserDB(u.Username, u.Password, u.Salt, null);
             db.Add(userEntity);
             db.SaveChanges();
+            this.LoggedInUser = u;
         }
 
         public void LogInUser(User user) {

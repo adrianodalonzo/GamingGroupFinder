@@ -11,14 +11,14 @@ namespace GamingGroupFinder {
 
         }
         
-        public static EventManager getInstance() {
+        public static EventManager GetInstance() {
             if(_instance == null) {
                 _instance = new EventManager();
             }
             return _instance;
         }
 
-        public void setLibraryContext(ApplicationContext context) {
+        public void SetLibraryContext(ApplicationContext context) {
             db = context;
         }
 
