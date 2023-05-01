@@ -3,7 +3,7 @@ using GamingGroupFinderGUI.Models;
 using GamingGroupFinderGUI.ViewModels;
 using ReactiveUI;
 
-namespace StudyApp.ViewModels
+namespace GamingGroupFinderGUI.ViewModels
 {
     public class ProfileEditViewModel : ViewModelBase
     {

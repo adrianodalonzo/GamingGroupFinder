@@ -1,6 +1,5 @@
 ﻿using GamingGroupFinderGUI.Models;
 using ReactiveUI;
-using StudyApp.ViewModels;
 
 namespace GamingGroupFinderGUI.ViewModels;
 
@@ -27,7 +26,7 @@ class MainWindowViewModel : ViewModelBase
         }
 
 
-        public void PrepareMainPage(UserDB u){
+        public void PrepareMainPage(UserDB u) {
             LoggedInUser = u;
             ProfileDB p = new ProfileDB(u, null, null, 0, null, null);
             Content = new ProfileDisplayViewModel(p);
