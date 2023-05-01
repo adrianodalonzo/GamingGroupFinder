@@ -7,28 +7,20 @@
   <StackPanel HorizontalAlignment="Center"
               VerticalAlignment="Center"
               Width="400">
-    <Grid ColumnDefinitions="1*,4*"
-            RowDefinitions="*,*"  
-            Margin="4">
-        <TextBlock Text="Username: " Grid.Row="0" Grid.Column="0"/>
+        <TextBlock Text="Username: "/>
         <TextBox AcceptsReturn="False"
                 Text="{Binding Username}"
-                Watermark="Username"
-                Grid.Row="0" Grid.Column="1"/>
+                Watermark="Username"/>
 
-      <TextBlock Text="Password: " Grid.Row="1" Grid.Column="0"/>
+      <TextBlock Text="Password: "/>
       <TextBox AcceptsReturn="False"
               Text="{Binding Password}"
               Watermark="Password"
-              PasswordChar="·"
-              Grid.Row="1" Grid.Column="1"/>
-  </Grid>
-  <StackPanel HorizontalAlignment="Center"
-              VerticalAlignment="Center"
-              Orientation="Horizontal"
-              Width="200">
-    <Button Command="{Binding Register}">Register</Button>
-    <Button Command="{Binding Login}">Login</Button>
+              PasswordChar="🎮"/>
+  <StackPanel Width="200"
+              Orientation="Horizontal">
+    <Button Command="{Binding Register}" HorizontalAlignment="Center" VerticalAlignment="Center">Register</Button>
+    <Button Command="{Binding Login}" HorizontalAlignment="Center" VerticalAlignment="Center">Login</Button>
   </StackPanel>
   </StackPanel>
 </UserControl>
