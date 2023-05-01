@@ -16,7 +16,7 @@
       <TextBox AcceptsReturn="False"
               Text="{Binding Password}"
               Watermark="Password"
-              PasswordChar="🎮"/>
+              PasswordChar="●"/>
   <StackPanel Width="200"
               Orientation="Horizontal">
     <Button Command="{Binding Register}" HorizontalAlignment="Center" VerticalAlignment="Center">Register</Button>

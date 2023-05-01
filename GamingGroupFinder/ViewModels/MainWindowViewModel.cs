@@ -22,7 +22,7 @@ class MainWindowViewModel : ViewModelBase
             ProfileEditViewModel pvm = new ProfileEditViewModel(null);
             
             vm.Login.Subscribe(x => {PrepareMainPage(vm.LoginUser());});
-            vm.Register.Subscribe(x => { Content = pvm; });
+            vm.Register.Subscribe(x => {PrepareMainPage(vm.RegisterUser());});
             Content = vm;
         }
 

@@ -12,14 +12,16 @@
 
 
       <StackPanel Spacing="2">
-        <TextBlock Text="{Binding Profile.Name, StringFormat='Name: {0}'}"
-                   IsVisible="{Binding Profile.Name, Converter={x:Static StringConverters.IsNotNullOrEmpty}}"/>
-      
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+          <TextBlock Text="{Binding Profile.Name}"
+                    IsVisible="{Binding Profile.Name, Converter={x:Static StringConverters.IsNotNullOrEmpty}}"/>
+          <TextBlock Text=", "/>
+          <TextBlock Text="{Binding Profile.Age}"
+                    IsVisible="{Binding Profile.Age, Converter={x:Static StringConverters.IsNotNullOrEmpty}}"/>
+        </StackPanel>
+
         <TextBlock Text="{Binding Profile.Pronouns, StringFormat='Pronouns: {0}'}"
                    IsVisible="{Binding Profile.Pronouns, Converter={x:Static StringConverters.IsNotNullOrEmpty}}"/>  
-      
-        <TextBlock Text="{Binding Profile.Age, StringFormat='Age: {0}'}"
-                   IsVisible="{Binding Profile.Age, Converter={x:Static StringConverters.IsNotNullOrEmpty}}"/>
 
         <TextBlock Text="{Binding Profile.Description}"
                    IsVisible="{Binding Profile.Description, Converter={x:Static StringConverters.IsNotNullOrEmpty}}"/>
