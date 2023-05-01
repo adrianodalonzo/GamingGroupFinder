@@ -19,9 +19,10 @@ class MainWindowViewModel : ViewModelBase
         {
 
             LogInViewModel vm = new LogInViewModel();
+            ProfileEditViewModel pvm = new ProfileEditViewModel(null);
             
             vm.Login.Subscribe(x => {PrepareMainPage(vm.LoginUser());});
-            vm.Register.Subscribe(x => {PrepareMainPage(vm.RegisterUser());});
+            vm.Register.Subscribe(x => { Content = pvm; });
             Content = vm;
         }
 

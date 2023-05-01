@@ -1,6 +1,5 @@
 using System.Reactive;
 using GamingGroupFinderGUI.Models;
-using GamingGroupFinderGUI.ViewModels;
 using ReactiveUI;
 
 namespace GamingGroupFinderGUI.ViewModels
@@ -10,6 +9,7 @@ namespace GamingGroupFinderGUI.ViewModels
         
         public ProfileDB Profile {get; set;}
         public ReactiveCommand<Unit, Unit> Ok { get; }
+        public List<string> Pronouns { get; } = new List<string> { "He/Him", "She/Her", "They/Them", "Other" };
         public ProfileEditViewModel(ProfileDB p)
         {
             Profile = p;
@@ -17,8 +17,6 @@ namespace GamingGroupFinderGUI.ViewModels
             Ok = ReactiveCommand.Create(() => { });
 
         }
-
-
         
     }
 }
