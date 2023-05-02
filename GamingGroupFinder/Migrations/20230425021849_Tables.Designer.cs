@@ -12,8 +12,8 @@ using Oracle.EntityFrameworkCore.Metadata;
 namespace _410project.Migrations
 {
     [DbContext(typeof(ApplicationContext))]
-    [Migration("20230423220600_UpdatedTableNames")]
-    partial class UpdatedTableNames
+    [Migration("20230425021849_Tables")]
+    partial class Tables
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -68,21 +68,6 @@ namespace _410project.Migrations
                     b.HasIndex("ProfilesProfileDBId");
 
                     b.ToTable("GameDBProfileDB");
-                });
-
-            modelBuilder.Entity("GameDBRankDB", b =>
-                {
-                    b.Property<int>("GamesGameDBId")
-                        .HasColumnType("NUMBER(10)");
-
-                    b.Property<int>("RanksRankDBId")
-                        .HasColumnType("NUMBER(10)");
-
-                    b.HasKey("GamesGameDBId", "RanksRankDBId");
-
-                    b.HasIndex("RanksRankDBId");
-
-                    b.ToTable("GameDBRankDB");
                 });
 
             modelBuilder.Entity("GamingGroupFinderDatabase.EventDB", b =>
@@ -155,6 +140,21 @@ namespace _410project.Migrations
                     b.ToTable("GamesDB");
                 });
 
+            modelBuilder.Entity("GamingGroupFinderDatabase.GameDBRankDB", b =>
+                {
+                    b.Property<int>("GameDBId")
+                        .HasColumnType("NUMBER(10)");
+
+                    b.Property<int>("RankDBId")
+                        .HasColumnType("NUMBER(10)");
+
+                    b.HasIndex("GameDBId");
+
+                    b.HasIndex("RankDBId");
+
+                    b.ToTable("GamesDBRanksDB");
+                });
+
             modelBuilder.Entity("GamingGroupFinderDatabase.InterestDB", b =>
                 {
                     b.Property<int>("InterestDBId")
@@ -169,7 +169,7 @@ namespace _410project.Migrations
 
                     b.HasKey("InterestDBId");
 
-                    b.ToTable("InterestDB");
+                    b.ToTable("InterestsDB");
                 });
 
             modelBuilder.Entity("GamingGroupFinderDatabase.MessageDB", b =>
@@ -380,21 +380,6 @@ namespace _410project.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("GameDBRankDB", b =>
-                {
-                    b.HasOne("GamingGroupFinderDatabase.GameDB", null)
-                        .WithMany()
-                        .HasForeignKey("GamesGameDBId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("GamingGroupFinderDatabase.RankDB", null)
-                        .WithMany()
-                        .HasForeignKey("RanksRankDBId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
             modelBuilder.Entity("GamingGroupFinderDatabase.EventDB", b =>
                 {
                     b.HasOne("GamingGroupFinderDatabase.GameDB", "Game")
@@ -436,6 +421,25 @@ namespace _410project.Migrations
                     b.Navigation("Owner");
 
                     b.Navigation("Platform");
+                });
+
+            modelBuilder.Entity("GamingGroupFinderDatabase.GameDBRankDB", b =>
+                {
+                    b.HasOne("GamingGroupFinderDatabase.GameDB", "Game")
+                        .WithMany()
+                        .HasForeignKey("GameDBId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("GamingGroupFinderDatabase.RankDB", "Rank")
+                        .WithMany()
+                        .HasForeignKey("RankDBId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Game");
+
+                    b.Navigation("Rank");
                 });
 
             modelBuilder.Entity("GamingGroupFinderDatabase.MessageDB", b =>

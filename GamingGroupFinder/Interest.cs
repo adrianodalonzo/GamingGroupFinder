@@ -27,6 +27,13 @@ namespace GamingGroupFinder {
             this.InterestId = interestId;
             this.Name = name;
         }
+
+        public Interest(string name) {
+            if(string.IsNullOrEmpty(name)) {
+                throw new ArgumentNullException("Name can't be null!");
+            }
+            this.Name = name;
+        }
         private Interest(){
         }
     }

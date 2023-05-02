@@ -8,9 +8,11 @@ public class ApplicationContext : DbContext {
     public virtual DbSet<ProfileDB> ProfilesDB {get;set;}
     // public DbSet<Contact> Contacts {get;set;}
     public virtual DbSet<GameDB> GamesDB {get;set;}
+    public virtual DbSet<GameDBRankDB> GamesDBRanksDB {get;set;}
     public virtual DbSet<RankDB> RanksDB {get;set;}
     public virtual DbSet<PlatformDB> PlatformsDB {get;set;}
     public virtual DbSet<EventDB> EventsDB {get;set;}
+    public virtual DbSet<InterestDB> InterestsDB {get;set;}
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder) {
         string? oracleUser = Environment.GetEnvironmentVariable("ORACLE_APP_USER");
         string? oraclePassword = Environment.GetEnvironmentVariable("ORACLE_APP_PASSWORD");

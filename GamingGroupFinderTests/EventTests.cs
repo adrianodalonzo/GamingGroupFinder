@@ -65,14 +65,14 @@ namespace GamingGroupFinderTests {
             Assert.Fail();
         }
 
-        // [TestMethod]
-        // public void TestAttendEvent_AddsUser() {
-        //     Event ev = CreateBaseEvent();
-        //     User otherUser = new User("other", "user", new List<User>());
+        [TestMethod]
+        public void TestAttendEvent_AddsUser() {
+            Event ev = CreateBaseEvent();
+            User otherUser = new User("other", "user", "salt", new List<User>());
 
-        //     User vince = new User("vince", "vince", new List<User>());
-        //     User user1 = new User("u1", "you1", new List<User>());
-        //     User user2 = new User("u2", "you2", new List<User>());
+            User vince = new User("vince", "vince", "salt", new List<User>());
+            User user1 = new User("u1", "you1", "salt", new List<User>());
+            User user2 = new User("u2", "you2", "salt", new List<User>());
 
         //     List<User> attendees = new List<User>();
         //     attendees.Add(vince);
@@ -85,7 +85,7 @@ namespace GamingGroupFinderTests {
         //     evMan.AttendEvent(otherUser);
 
         //     Assert.IsTrue(attendees.SequenceEqual(ev.Attendees));
-        // }
+        }
 
         // [TestMethod]
         // [ExpectedException (typeof(ArgumentNullException))]
@@ -98,13 +98,13 @@ namespace GamingGroupFinderTests {
         //     Assert.Fail();
         // }
 
-        // [TestMethod]
-        // public void TestLeaveEvent_RemovesUser() {
-        //     Event ev = CreateBaseEvent();
-        //     User user1 = new User("u1", "you1", new List<User>());
+        [TestMethod]
+        public void TestLeaveEvent_RemovesUser() {
+            Event ev = CreateBaseEvent();
+            User user1 = new User("u1", "you1", "salt", new List<User>());
 
-        //     User vince = new User("vince", "vince", new List<User>());
-        //     User user2 = new User("u2", "you2", new List<User>());
+            User vince = new User("vince", "vince", "salt", new List<User>());
+            User user2 = new User("u2", "you2", "salt", new List<User>());
 
         //     List<User> attendees = new List<User>();
         //     attendees.Add(vince);
@@ -115,7 +115,7 @@ namespace GamingGroupFinderTests {
         //     evMan.LeaveEvent(user1);
 
         //     Assert.IsTrue(attendees.SequenceEqual(ev.Attendees));
-        // }
+        }
 
         // [TestMethod]
         // [ExpectedException (typeof(ArgumentNullException))]

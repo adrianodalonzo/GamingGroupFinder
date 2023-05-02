@@ -1,53 +1,78 @@
-﻿using GamingGroupFinder;
-using GamingGroupFinderDatabase;
+﻿// using GamingGroupFinder;
+// using GamingGroupFinderDatabase;
+// using System.Security.Cryptography;
 
-Console.Clear();
-Console.WriteLine("Welcome to GamingGroupFinder!");
+// public class Program {
 
-ApplicationContext db = new ApplicationContext();
-// UserManager userManager = new UserManager();
-ProfileManager profileManager = new ProfileManager();
+// <<<<<<< HEAD
+// ApplicationContext db = new ApplicationContext();
+// // UserManager userManager = new UserManager();
+// ProfileManager profileManager = new ProfileManager();
+// =======
+//     public static void Main(string[] args) {
+// >>>>>>> f091c9655bb96bbcb17450a7c8664061c0dd68cb
 
-User user1 = new User("user1", "password", "salt", new List<User>());
-Profile profile1 = new Profile(user1, "user1", "pro", 11, new List<Platform>(), new List<Game>(), "bio", "pic", new List<Interest>());
+//         Console.Clear();
+//         Console.WriteLine("Welcome to GamingGroupFinder!");
 
-// userEntity.Profile = profile1;
+//         ApplicationContext db = new ApplicationContext();
+//         UserManager userManager = UserManager.GetInstance();
+//         userManager.SetApplicationContext(db);
+//         ProfileManager profileManager = ProfileManager.GetInstance();
+//         profileManager.SetApplicationContext(db);
+//         MessageManager messageManager = MessageManager.GetInstance();
+//         EventManager eventManager = EventManager.GetInstance();
 
-// Event event1Object = new Event("event1", DateTime.Now, "here", new Game("Rocket League", new List<Platform>(), new List<Rank>()), new Platform(1, "plat"), new Rank(1,1,"rank1"), new Rank(2,2,"rank2"), "desc", user1Object, new List<User>());
-// EventDB eventEntity = new EventDB(userEntity, event1Object.Title, event1Object.DateTime, event1Object.Location, new GameDB(event1Object.Game.Name), new PlatformDB(event1Object.Platform.Name), new RankDB(event1Object.MinRank.RankValue, event1Object.MinRank.RankName), new RankDB(event1Object.MaxRank.RankValue, event1Object.MaxRank.RankName), event1Object.Description);
+//         var salt = GenerateSalt();
+//         var password = GenerateHash("password", salt);
+//         User u = new User("adridalo", ByteArrayToString(password), ByteArrayToString(salt), new List<User>());
+//         // userManager.CreateUser(u);
+//         // list of platforms
+//         List<Platform> platforms = new List<Platform>();
+//         platforms.Add(new Platform("PC"));
+//         platforms.Add(new Platform("Xbox"));
+//         platforms.Add(new Platform("Playstation"));
 
-// userEntity.EventsOwned.Add(eventEntity);
+//         //list of games
+//         List<Game> games = new List<Game>();
+//         games.Add(new Game("League of Legends"));
+//         games.Add(new Game("Valorant"));
+//         games.Add(new Game("Overwatch"));
 
-// userManager.CreateUser(user1);
-// profileManager.CreateProfile(profile1, user1);
-// Console.Write("User added");
+//         //list of interests
+//         List<Interest> interests = new List<Interest>();
+//         interests.Add(new Interest("Competitive"));
+//         interests.Add(new Interest("Casual"));
+//         interests.Add(new Interest("Co-op"));
 
-// userManager.LogInUser(user1);
-// userManager.ChangePassword("test");
-Console.Write("User password changed");
+//         // userManager.LogInUser(user1);
+//         // userManager.ChangePassword("test");
+//         // Console.Write("User password changed");
+//         Profile p = new Profile(u, "Adriano", "he/him", 19, platforms, games, "bio", "link", interests);
+//         profileManager.CreateProfile(p, u);
+        
+//     }
 
+//     private static byte[] GenerateSalt() {
+//         byte[] salt = new byte[8];
+//         using (RNGCryptoServiceProvider rngCsp = new RNGCryptoServiceProvider()) {
+//             rngCsp.GetBytes(salt);
+//         }
+//         return salt;
+//     }
 
+//     private static byte[] GenerateHash(string password, byte[] salt) {
+//         int numIterations = 1000;
+//         Rfc2898DeriveBytes key = new Rfc2898DeriveBytes(password, salt, numIterations);
+//         return key.GetBytes(32);
+//     }
 
+//     private static string ByteArrayToString(byte[] array) {
+//         string ByteString = "";
+//         foreach(byte val in array) {
+//             ByteString += val;
+//         }
+//         return ByteString;
+//     }
 
-
-
-
-
-
-
-
-
-
-
-// User user = new User("adriano", "pass", "salt", null);
-// List<Event> events = new List<Event>();
-// events.Add(new Event(user, "Event 1", DateTime.Now, "here", new Game("Game 1"), new Platform("PC"), new Rank(1, "Gold"), new Rank(3, "Master"), "desc"));
-// user.Profile = new Profile(user, "Adriano", "he/him", 19, "I like to play games", "https://i.imgur.com/0Y4Z4Z0.jpg");
-// user.Profile.Platforms.Add(new Platform("Nintendo Switch"));
-// Game game = new Game("Splatoon 2");
-// user.Profile.Games.Add(game);
-// user.EventsAttending = events;
-// db.Add(user);
-// db.Add(user.Profile);
-// db.SaveChanges();
-// Console.WriteLine("User added");
+// }
