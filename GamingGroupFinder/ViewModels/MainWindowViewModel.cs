@@ -1,4 +1,5 @@
-﻿using GamingGroupFinderGUI.Models;
+﻿using GamingGroupFinder;
+using GamingGroupFinderGUI.Models;
 using ReactiveUI;
 
 namespace GamingGroupFinderGUI.ViewModels;
@@ -19,8 +20,7 @@ class MainWindowViewModel : ViewModelBase
         {
 
             LogInViewModel vm = new LogInViewModel();
-            ProfileEditViewModel pvm = new ProfileEditViewModel(null);
-            
+
             vm.Login.Subscribe(x => {PrepareMainPage(vm.LoginUser());});
             vm.Register.Subscribe(x => {PrepareMainPage(vm.RegisterUser());});
             Content = vm;
@@ -28,9 +28,13 @@ class MainWindowViewModel : ViewModelBase
 
 
         public void PrepareMainPage(UserDB u) {
-            LoggedInUser = u;
-            ProfileDB p = new ProfileDB(u, null, null, 0, null, null);
-            Content = new ProfileDisplayViewModel(p);
+            if(u is null) {
+                
+            } else {
+                LoggedInUser = u;
+                ProfileDB p = new ProfileDB(u, null, null, 0, null, null);
+                Content = new ProfileEditViewModel(p);
+            }
         }
        
 

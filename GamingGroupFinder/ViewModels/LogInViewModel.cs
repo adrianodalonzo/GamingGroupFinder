@@ -10,7 +10,8 @@ namespace GamingGroupFinderGUI.ViewModels
     {
         public string _username;
         public string _password;
-        public bool _visible;
+        public bool _userExistsText;
+        public bool _userDoesNotExistText;
         public string Username {
             get => _username;
             private set => this.RaiseAndSetIfChanged(ref _username, value);
@@ -19,9 +20,13 @@ namespace GamingGroupFinderGUI.ViewModels
             get => _password;
             private set => this.RaiseAndSetIfChanged(ref _password, value);
         }
-        public bool Visible {
-            get => _visible;
-            private set => this.RaiseAndSetIfChanged(ref _visible, value);
+        public bool UserExistsText {
+            get => _userExistsText;
+            private set => this.RaiseAndSetIfChanged(ref _userExistsText, value);
+        }
+        public bool UserDoesNotExistText {
+            get => _userDoesNotExistText;
+            private set => this.RaiseAndSetIfChanged(ref _userDoesNotExistText, value);
         }
         public string Salt {get;set;}
         private UserManager Manager = UserManager.GetInstance();
@@ -36,7 +41,8 @@ namespace GamingGroupFinderGUI.ViewModels
             );
             Login = ReactiveCommand.Create(() => { }, loginEnabled);
             Register = ReactiveCommand.Create(() => { }, loginEnabled);
-            Visible = false;
+            UserExistsText = false;
+            UserDoesNotExistText = false;
         }
         public UserDB? User { get; private set;}
         public UserDB RegisterUser() {
@@ -44,11 +50,13 @@ namespace GamingGroupFinderGUI.ViewModels
                 // if a user exists, show a message
             byte[] UserSalt = GenerateSalt();
             byte[] UserHashedPassword = GenerateHash(this.Password, UserSalt);
-            this.User = new UserDB(this.Username, ByteArrayToString(UserHashedPassword), ByteArrayToString(UserSalt), null);
-            if(Manager.UserExists(UserDBToUser(User), Manager.GetListOfUsers())) {
-                Visible = true;
+            UserDB testUser = new UserDB(this.Username, ByteArrayToString(UserHashedPassword), ByteArrayToString(UserSalt), null);
+            if(Manager.UserExists(UserDBToUser(testUser), Manager.GetListOfUsers())) {
+                UserExistsText = true;
+            } else {
+                this.User = testUser;
+                Manager.CreateUser(UserDBToUser(User));
             }
-            Manager.CreateUser(UserDBToUser(User));
             return this.User;
         }
 
