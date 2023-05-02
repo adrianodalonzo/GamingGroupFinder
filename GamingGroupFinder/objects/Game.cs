@@ -40,7 +40,15 @@ namespace GamingGroupFinder {
             this.AvailablePlatforms = platforms;
             this.Ranks = ranks;
         }
-        private Game(){
+
+        public Game(string name) {
+            if (name == null){
+                throw new ArgumentNullException("one or multiple of the input is null");
+            }
+            this.Name = name;
+        }
+        private 
+        Game(){
         }
     }
 }

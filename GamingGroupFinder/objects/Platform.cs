@@ -27,6 +27,13 @@ namespace GamingGroupFinder {
             this.PlatformId = platformId;
             this.Name = name;
         }
+
+        public Platform(string name){
+            if (name == null){
+                throw new ArgumentNullException("Name can't be null!");
+            }
+            this.Name = name;
+        }
         private Platform(){
         }
     }
