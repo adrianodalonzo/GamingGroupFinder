@@ -6,69 +6,69 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace _410project.Migrations
 {
     /// <inheritdoc />
-    public partial class InitialCreate : Migration
+    public partial class Tables : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
-                name: "Games",
+                name: "GamesDB",
                 columns: table => new
                 {
-                    GameId = table.Column<int>(type: "NUMBER(10)", nullable: false)
+                    GameDBId = table.Column<int>(type: "NUMBER(10)", nullable: false)
                         .Annotation("Oracle:Identity", "START WITH 1 INCREMENT BY 1"),
                     GameName = table.Column<string>(type: "NVARCHAR2(2000)", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Games", x => x.GameId);
+                    table.PrimaryKey("PK_GamesDB", x => x.GameDBId);
                 });
 
             migrationBuilder.CreateTable(
-                name: "Interest",
+                name: "InterestsDB",
                 columns: table => new
                 {
-                    InterestId = table.Column<int>(type: "NUMBER(10)", nullable: false)
+                    InterestDBId = table.Column<int>(type: "NUMBER(10)", nullable: false)
                         .Annotation("Oracle:Identity", "START WITH 1 INCREMENT BY 1"),
                     InterestName = table.Column<string>(type: "NVARCHAR2(2000)", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Interest", x => x.InterestId);
+                    table.PrimaryKey("PK_InterestsDB", x => x.InterestDBId);
                 });
 
             migrationBuilder.CreateTable(
-                name: "Platforms",
+                name: "PlatformsDB",
                 columns: table => new
                 {
-                    PlatformId = table.Column<int>(type: "NUMBER(10)", nullable: false)
+                    PlatformDBId = table.Column<int>(type: "NUMBER(10)", nullable: false)
                         .Annotation("Oracle:Identity", "START WITH 1 INCREMENT BY 1"),
                     PlatformName = table.Column<string>(type: "NVARCHAR2(2000)", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Platforms", x => x.PlatformId);
+                    table.PrimaryKey("PK_PlatformsDB", x => x.PlatformDBId);
                 });
 
             migrationBuilder.CreateTable(
-                name: "Ranks",
+                name: "RanksDB",
                 columns: table => new
                 {
-                    RankId = table.Column<int>(type: "NUMBER(10)", nullable: false)
+                    RankDBId = table.Column<int>(type: "NUMBER(10)", nullable: false)
                         .Annotation("Oracle:Identity", "START WITH 1 INCREMENT BY 1"),
                     RankValue = table.Column<int>(type: "NUMBER(10)", nullable: false),
                     RankName = table.Column<string>(type: "NVARCHAR2(2000)", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Ranks", x => x.RankId);
+                    table.PrimaryKey("PK_RanksDB", x => x.RankDBId);
                 });
 
             migrationBuilder.CreateTable(
-                name: "Users",
+                name: "UsersDB",
                 columns: table => new
                 {
-                    UserId = table.Column<int>(type: "NUMBER(10)", nullable: false)
+                    UserDBId = table.Column<int>(type: "NUMBER(10)", nullable: false)
                         .Annotation("Oracle:Identity", "START WITH 1 INCREMENT BY 1"),
                     Username = table.Column<string>(type: "NVARCHAR2(2000)", nullable: false),
                     Password = table.Column<string>(type: "NVARCHAR2(2000)", nullable: false),
@@ -76,62 +76,61 @@ namespace _410project.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Users", x => x.UserId);
+                    table.PrimaryKey("PK_UsersDB", x => x.UserDBId);
                 });
 
             migrationBuilder.CreateTable(
-                name: "GamePlatform",
+                name: "GameDBPlatformDB",
                 columns: table => new
                 {
-                    GamesGameId = table.Column<int>(type: "NUMBER(10)", nullable: false),
-                    PlatformsPlatformId = table.Column<int>(type: "NUMBER(10)", nullable: false)
+                    GamesGameDBId = table.Column<int>(type: "NUMBER(10)", nullable: false),
+                    PlatformsPlatformDBId = table.Column<int>(type: "NUMBER(10)", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_GamePlatform", x => new { x.GamesGameId, x.PlatformsPlatformId });
+                    table.PrimaryKey("PK_GameDBPlatformDB", x => new { x.GamesGameDBId, x.PlatformsPlatformDBId });
                     table.ForeignKey(
-                        name: "FK_GamePlatform_Games_GamesGameId",
-                        column: x => x.GamesGameId,
-                        principalTable: "Games",
-                        principalColumn: "GameId",
+                        name: "FK_GameDBPlatformDB_GamesDB_GamesGameDBId",
+                        column: x => x.GamesGameDBId,
+                        principalTable: "GamesDB",
+                        principalColumn: "GameDBId",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_GamePlatform_Platforms_PlatformsPlatformId",
-                        column: x => x.PlatformsPlatformId,
-                        principalTable: "Platforms",
-                        principalColumn: "PlatformId",
+                        name: "FK_GameDBPlatformDB_PlatformsDB_PlatformsPlatformDBId",
+                        column: x => x.PlatformsPlatformDBId,
+                        principalTable: "PlatformsDB",
+                        principalColumn: "PlatformDBId",
                         onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
-                name: "GameRank",
+                name: "GamesDBRanksDB",
                 columns: table => new
                 {
-                    GamesGameId = table.Column<int>(type: "NUMBER(10)", nullable: false),
-                    RanksRankId = table.Column<int>(type: "NUMBER(10)", nullable: false)
+                    GameDBId = table.Column<int>(type: "NUMBER(10)", nullable: false),
+                    RankDBId = table.Column<int>(type: "NUMBER(10)", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_GameRank", x => new { x.GamesGameId, x.RanksRankId });
                     table.ForeignKey(
-                        name: "FK_GameRank_Games_GamesGameId",
-                        column: x => x.GamesGameId,
-                        principalTable: "Games",
-                        principalColumn: "GameId",
+                        name: "FK_GamesDBRanksDB_GamesDB_GameDBId",
+                        column: x => x.GameDBId,
+                        principalTable: "GamesDB",
+                        principalColumn: "GameDBId",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_GameRank_Ranks_RanksRankId",
-                        column: x => x.RanksRankId,
-                        principalTable: "Ranks",
-                        principalColumn: "RankId",
+                        name: "FK_GamesDBRanksDB_RanksDB_RankDBId",
+                        column: x => x.RankDBId,
+                        principalTable: "RanksDB",
+                        principalColumn: "RankDBId",
                         onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
-                name: "Events",
+                name: "EventsDB",
                 columns: table => new
                 {
-                    EventId = table.Column<int>(type: "NUMBER(10)", nullable: false)
+                    EventDBId = table.Column<int>(type: "NUMBER(10)", nullable: false)
                         .Annotation("Oracle:Identity", "START WITH 1 INCREMENT BY 1"),
                     OwnerId = table.Column<int>(type: "NUMBER(10)", nullable: false),
                     Title = table.Column<string>(type: "NVARCHAR2(2000)", nullable: false),
@@ -145,44 +144,44 @@ namespace _410project.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Events", x => x.EventId);
+                    table.PrimaryKey("PK_EventsDB", x => x.EventDBId);
                     table.ForeignKey(
-                        name: "FK_Events_Games_GameId",
+                        name: "FK_EventsDB_GamesDB_GameId",
                         column: x => x.GameId,
-                        principalTable: "Games",
-                        principalColumn: "GameId",
+                        principalTable: "GamesDB",
+                        principalColumn: "GameDBId",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_Events_Platforms_PlatformId",
+                        name: "FK_EventsDB_PlatformsDB_PlatformId",
                         column: x => x.PlatformId,
-                        principalTable: "Platforms",
-                        principalColumn: "PlatformId",
+                        principalTable: "PlatformsDB",
+                        principalColumn: "PlatformDBId",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_Events_Ranks_MaxRankId",
+                        name: "FK_EventsDB_RanksDB_MaxRankId",
                         column: x => x.MaxRankId,
-                        principalTable: "Ranks",
-                        principalColumn: "RankId",
+                        principalTable: "RanksDB",
+                        principalColumn: "RankDBId",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_Events_Ranks_MinRankId",
+                        name: "FK_EventsDB_RanksDB_MinRankId",
                         column: x => x.MinRankId,
-                        principalTable: "Ranks",
-                        principalColumn: "RankId",
+                        principalTable: "RanksDB",
+                        principalColumn: "RankDBId",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_Events_Users_OwnerId",
+                        name: "FK_EventsDB_UsersDB_OwnerId",
                         column: x => x.OwnerId,
-                        principalTable: "Users",
-                        principalColumn: "UserId",
+                        principalTable: "UsersDB",
+                        principalColumn: "UserDBId",
                         onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
-                name: "Messages",
+                name: "MessagesDB",
                 columns: table => new
                 {
-                    MessageId = table.Column<int>(type: "NUMBER(10)", nullable: false)
+                    MessageDBId = table.Column<int>(type: "NUMBER(10)", nullable: false)
                         .Annotation("Oracle:Identity", "START WITH 1 INCREMENT BY 1"),
                     SenderId = table.Column<int>(type: "NUMBER(10)", nullable: false),
                     ReceiverId = table.Column<int>(type: "NUMBER(10)", nullable: false),
@@ -192,26 +191,26 @@ namespace _410project.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Messages", x => x.MessageId);
+                    table.PrimaryKey("PK_MessagesDB", x => x.MessageDBId);
                     table.ForeignKey(
-                        name: "FK_Messages_Users_ReceiverId",
+                        name: "FK_MessagesDB_UsersDB_ReceiverId",
                         column: x => x.ReceiverId,
-                        principalTable: "Users",
-                        principalColumn: "UserId",
+                        principalTable: "UsersDB",
+                        principalColumn: "UserDBId",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_Messages_Users_SenderId",
+                        name: "FK_MessagesDB_UsersDB_SenderId",
                         column: x => x.SenderId,
-                        principalTable: "Users",
-                        principalColumn: "UserId",
+                        principalTable: "UsersDB",
+                        principalColumn: "UserDBId",
                         onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
-                name: "Profiles",
+                name: "ProfilesDB",
                 columns: table => new
                 {
-                    ProfileId = table.Column<int>(type: "NUMBER(10)", nullable: false)
+                    ProfileDBId = table.Column<int>(type: "NUMBER(10)", nullable: false)
                         .Annotation("Oracle:Identity", "START WITH 1 INCREMENT BY 1"),
                     UserId = table.Column<int>(type: "NUMBER(10)", nullable: false),
                     Name = table.Column<string>(type: "NVARCHAR2(2000)", nullable: false),
@@ -222,179 +221,184 @@ namespace _410project.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Profiles", x => x.ProfileId);
+                    table.PrimaryKey("PK_ProfilesDB", x => x.ProfileDBId);
                     table.ForeignKey(
-                        name: "FK_Profiles_Users_UserId",
+                        name: "FK_ProfilesDB_UsersDB_UserId",
                         column: x => x.UserId,
-                        principalTable: "Users",
-                        principalColumn: "UserId",
+                        principalTable: "UsersDB",
+                        principalColumn: "UserDBId",
                         onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
-                name: "EventUser",
+                name: "EventDBUserDB",
                 columns: table => new
                 {
-                    EventsAttendingEventId = table.Column<int>(type: "NUMBER(10)", nullable: false),
-                    UsersAttendingUserId = table.Column<int>(type: "NUMBER(10)", nullable: false)
+                    EventsAttendingEventDBId = table.Column<int>(type: "NUMBER(10)", nullable: false),
+                    UsersAttendingUserDBId = table.Column<int>(type: "NUMBER(10)", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_EventUser", x => new { x.EventsAttendingEventId, x.UsersAttendingUserId });
+                    table.PrimaryKey("PK_EventDBUserDB", x => new { x.EventsAttendingEventDBId, x.UsersAttendingUserDBId });
                     table.ForeignKey(
-                        name: "FK_EventUser_Events_EventsAttendingEventId",
-                        column: x => x.EventsAttendingEventId,
-                        principalTable: "Events",
-                        principalColumn: "EventId",
+                        name: "FK_EventDBUserDB_EventsDB_EventsAttendingEventDBId",
+                        column: x => x.EventsAttendingEventDBId,
+                        principalTable: "EventsDB",
+                        principalColumn: "EventDBId",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_EventUser_Users_UsersAttendingUserId",
-                        column: x => x.UsersAttendingUserId,
-                        principalTable: "Users",
-                        principalColumn: "UserId",
+                        name: "FK_EventDBUserDB_UsersDB_UsersAttendingUserDBId",
+                        column: x => x.UsersAttendingUserDBId,
+                        principalTable: "UsersDB",
+                        principalColumn: "UserDBId",
                         onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
-                name: "GameProfile",
+                name: "GameDBProfileDB",
                 columns: table => new
                 {
-                    GamesGameId = table.Column<int>(type: "NUMBER(10)", nullable: false),
-                    ProfilesProfileId = table.Column<int>(type: "NUMBER(10)", nullable: false)
+                    GamesGameDBId = table.Column<int>(type: "NUMBER(10)", nullable: false),
+                    ProfilesProfileDBId = table.Column<int>(type: "NUMBER(10)", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_GameProfile", x => new { x.GamesGameId, x.ProfilesProfileId });
+                    table.PrimaryKey("PK_GameDBProfileDB", x => new { x.GamesGameDBId, x.ProfilesProfileDBId });
                     table.ForeignKey(
-                        name: "FK_GameProfile_Games_GamesGameId",
-                        column: x => x.GamesGameId,
-                        principalTable: "Games",
-                        principalColumn: "GameId",
+                        name: "FK_GameDBProfileDB_GamesDB_GamesGameDBId",
+                        column: x => x.GamesGameDBId,
+                        principalTable: "GamesDB",
+                        principalColumn: "GameDBId",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_GameProfile_Profiles_ProfilesProfileId",
-                        column: x => x.ProfilesProfileId,
-                        principalTable: "Profiles",
-                        principalColumn: "ProfileId",
+                        name: "FK_GameDBProfileDB_ProfilesDB_ProfilesProfileDBId",
+                        column: x => x.ProfilesProfileDBId,
+                        principalTable: "ProfilesDB",
+                        principalColumn: "ProfileDBId",
                         onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
-                name: "InterestProfile",
+                name: "InterestDBProfileDB",
                 columns: table => new
                 {
-                    InterestsInterestId = table.Column<int>(type: "NUMBER(10)", nullable: false),
-                    ProfilesProfileId = table.Column<int>(type: "NUMBER(10)", nullable: false)
+                    InterestsInterestDBId = table.Column<int>(type: "NUMBER(10)", nullable: false),
+                    ProfilesProfileDBId = table.Column<int>(type: "NUMBER(10)", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_InterestProfile", x => new { x.InterestsInterestId, x.ProfilesProfileId });
+                    table.PrimaryKey("PK_InterestDBProfileDB", x => new { x.InterestsInterestDBId, x.ProfilesProfileDBId });
                     table.ForeignKey(
-                        name: "FK_InterestProfile_Interest_InterestsInterestId",
-                        column: x => x.InterestsInterestId,
-                        principalTable: "Interest",
-                        principalColumn: "InterestId",
+                        name: "FK_InterestDBProfileDB_InterestsDB_InterestsInterestDBId",
+                        column: x => x.InterestsInterestDBId,
+                        principalTable: "InterestsDB",
+                        principalColumn: "InterestDBId",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_InterestProfile_Profiles_ProfilesProfileId",
-                        column: x => x.ProfilesProfileId,
-                        principalTable: "Profiles",
-                        principalColumn: "ProfileId",
+                        name: "FK_InterestDBProfileDB_ProfilesDB_ProfilesProfileDBId",
+                        column: x => x.ProfilesProfileDBId,
+                        principalTable: "ProfilesDB",
+                        principalColumn: "ProfileDBId",
                         onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
-                name: "PlatformProfile",
+                name: "PlatformDBProfileDB",
                 columns: table => new
                 {
-                    PlatformsPlatformId = table.Column<int>(type: "NUMBER(10)", nullable: false),
-                    ProfilesProfileId = table.Column<int>(type: "NUMBER(10)", nullable: false)
+                    PlatformsPlatformDBId = table.Column<int>(type: "NUMBER(10)", nullable: false),
+                    ProfilesProfileDBId = table.Column<int>(type: "NUMBER(10)", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_PlatformProfile", x => new { x.PlatformsPlatformId, x.ProfilesProfileId });
+                    table.PrimaryKey("PK_PlatformDBProfileDB", x => new { x.PlatformsPlatformDBId, x.ProfilesProfileDBId });
                     table.ForeignKey(
-                        name: "FK_PlatformProfile_Platforms_PlatformsPlatformId",
-                        column: x => x.PlatformsPlatformId,
-                        principalTable: "Platforms",
-                        principalColumn: "PlatformId",
+                        name: "FK_PlatformDBProfileDB_PlatformsDB_PlatformsPlatformDBId",
+                        column: x => x.PlatformsPlatformDBId,
+                        principalTable: "PlatformsDB",
+                        principalColumn: "PlatformDBId",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_PlatformProfile_Profiles_ProfilesProfileId",
-                        column: x => x.ProfilesProfileId,
-                        principalTable: "Profiles",
-                        principalColumn: "ProfileId",
+                        name: "FK_PlatformDBProfileDB_ProfilesDB_ProfilesProfileDBId",
+                        column: x => x.ProfilesProfileDBId,
+                        principalTable: "ProfilesDB",
+                        principalColumn: "ProfileDBId",
                         onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_Events_GameId",
-                table: "Events",
+                name: "IX_EventDBUserDB_UsersAttendingUserDBId",
+                table: "EventDBUserDB",
+                column: "UsersAttendingUserDBId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_EventsDB_GameId",
+                table: "EventsDB",
                 column: "GameId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Events_MaxRankId",
-                table: "Events",
+                name: "IX_EventsDB_MaxRankId",
+                table: "EventsDB",
                 column: "MaxRankId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Events_MinRankId",
-                table: "Events",
+                name: "IX_EventsDB_MinRankId",
+                table: "EventsDB",
                 column: "MinRankId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Events_OwnerId",
-                table: "Events",
+                name: "IX_EventsDB_OwnerId",
+                table: "EventsDB",
                 column: "OwnerId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Events_PlatformId",
-                table: "Events",
+                name: "IX_EventsDB_PlatformId",
+                table: "EventsDB",
                 column: "PlatformId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_EventUser_UsersAttendingUserId",
-                table: "EventUser",
-                column: "UsersAttendingUserId");
+                name: "IX_GameDBPlatformDB_PlatformsPlatformDBId",
+                table: "GameDBPlatformDB",
+                column: "PlatformsPlatformDBId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_GamePlatform_PlatformsPlatformId",
-                table: "GamePlatform",
-                column: "PlatformsPlatformId");
+                name: "IX_GameDBProfileDB_ProfilesProfileDBId",
+                table: "GameDBProfileDB",
+                column: "ProfilesProfileDBId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_GameProfile_ProfilesProfileId",
-                table: "GameProfile",
-                column: "ProfilesProfileId");
+                name: "IX_GamesDBRanksDB_GameDBId",
+                table: "GamesDBRanksDB",
+                column: "GameDBId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_GameRank_RanksRankId",
-                table: "GameRank",
-                column: "RanksRankId");
+                name: "IX_GamesDBRanksDB_RankDBId",
+                table: "GamesDBRanksDB",
+                column: "RankDBId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_InterestProfile_ProfilesProfileId",
-                table: "InterestProfile",
-                column: "ProfilesProfileId");
+                name: "IX_InterestDBProfileDB_ProfilesProfileDBId",
+                table: "InterestDBProfileDB",
+                column: "ProfilesProfileDBId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Messages_ReceiverId",
-                table: "Messages",
+                name: "IX_MessagesDB_ReceiverId",
+                table: "MessagesDB",
                 column: "ReceiverId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Messages_SenderId",
-                table: "Messages",
+                name: "IX_MessagesDB_SenderId",
+                table: "MessagesDB",
                 column: "SenderId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_PlatformProfile_ProfilesProfileId",
-                table: "PlatformProfile",
-                column: "ProfilesProfileId");
+                name: "IX_PlatformDBProfileDB_ProfilesProfileDBId",
+                table: "PlatformDBProfileDB",
+                column: "ProfilesProfileDBId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Profiles_UserId",
-                table: "Profiles",
+                name: "IX_ProfilesDB_UserId",
+                table: "ProfilesDB",
                 column: "UserId",
                 unique: true);
         }
@@ -403,46 +407,46 @@ namespace _410project.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "EventUser");
+                name: "EventDBUserDB");
 
             migrationBuilder.DropTable(
-                name: "GamePlatform");
+                name: "GameDBPlatformDB");
 
             migrationBuilder.DropTable(
-                name: "GameProfile");
+                name: "GameDBProfileDB");
 
             migrationBuilder.DropTable(
-                name: "GameRank");
+                name: "GamesDBRanksDB");
 
             migrationBuilder.DropTable(
-                name: "InterestProfile");
+                name: "InterestDBProfileDB");
 
             migrationBuilder.DropTable(
-                name: "Messages");
+                name: "MessagesDB");
 
             migrationBuilder.DropTable(
-                name: "PlatformProfile");
+                name: "PlatformDBProfileDB");
 
             migrationBuilder.DropTable(
-                name: "Events");
+                name: "EventsDB");
 
             migrationBuilder.DropTable(
-                name: "Interest");
+                name: "InterestsDB");
 
             migrationBuilder.DropTable(
-                name: "Profiles");
+                name: "ProfilesDB");
 
             migrationBuilder.DropTable(
-                name: "Games");
+                name: "GamesDB");
 
             migrationBuilder.DropTable(
-                name: "Platforms");
+                name: "PlatformsDB");
 
             migrationBuilder.DropTable(
-                name: "Ranks");
+                name: "RanksDB");
 
             migrationBuilder.DropTable(
-                name: "Users");
+                name: "UsersDB");
         }
     }
 }

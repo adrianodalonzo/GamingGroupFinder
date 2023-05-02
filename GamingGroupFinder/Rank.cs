@@ -40,6 +40,11 @@ namespace GamingGroupFinder {
             this.RankName = RankName;
         }
 
+        public Rank(int RankValue, string RankName) {
+            this.RankValue = RankValue;
+            this.RankName = RankName;
+        }
+
         private Rank() {
         }
     }
