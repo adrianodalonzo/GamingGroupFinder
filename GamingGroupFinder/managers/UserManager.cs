@@ -45,6 +45,10 @@ namespace GamingGroupFinder {
             return false;
         }
 
+        public UserDB GetUser(string username) {
+            return (from u in db.UsersDB where u.Username.Equals(username) select u).SingleOrDefault();
+        }
+
         // this is probably just going to create a new user and add it to the database
         public void CreateUser(User u) {
             // add checking for an existing user

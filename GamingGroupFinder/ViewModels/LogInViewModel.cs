@@ -3,6 +3,7 @@ using GamingGroupFinderGUI.Models;
 using ReactiveUI;
 using System.Reactive;
 using System.Security.Cryptography;
+using System.Text;
 
 namespace GamingGroupFinderGUI.ViewModels
 {
@@ -12,6 +13,7 @@ namespace GamingGroupFinderGUI.ViewModels
         public string _password;
         public bool _userExistsText;
         public bool _userDoesNotExistText;
+        public bool _passwordIncorrect;
         public string Username {
             get => _username;
             private set => this.RaiseAndSetIfChanged(ref _username, value);
@@ -28,6 +30,10 @@ namespace GamingGroupFinderGUI.ViewModels
             get => _userDoesNotExistText;
             private set => this.RaiseAndSetIfChanged(ref _userDoesNotExistText, value);
         }
+        public bool PasswordIncorrect {
+            get => _passwordIncorrect;
+            private set => this.RaiseAndSetIfChanged(ref _passwordIncorrect, value);
+        }
         public string Salt {get;set;}
         private UserManager Manager = UserManager.GetInstance();
 
@@ -43,14 +49,14 @@ namespace GamingGroupFinderGUI.ViewModels
             Register = ReactiveCommand.Create(() => { }, loginEnabled);
             UserExistsText = false;
             UserDoesNotExistText = false;
+            PasswordIncorrect = false;
         }
         public UserDB? User { get; private set;}
         public UserDB RegisterUser() {
-            //add checking for if the user exists
-                // if a user exists, show a message
             byte[] UserSalt = GenerateSalt();
-            byte[] UserHashedPassword = GenerateHash(this.Password, UserSalt);
-            UserDB testUser = new UserDB(this.Username, ByteArrayToString(UserHashedPassword), ByteArrayToString(UserSalt), null);
+            string UserSaltString = Convert.ToBase64String(UserSalt);
+            string UserHashedPassword = GenerateHash(this.Password, UserSalt);
+            UserDB testUser = new UserDB(this.Username, UserHashedPassword, UserSaltString, null);
             if(Manager.UserExists(UserDBToUser(testUser), Manager.GetListOfUsers())) {
                 UserExistsText = true;
             } else {
@@ -63,25 +69,38 @@ namespace GamingGroupFinderGUI.ViewModels
         public UserDB LoginUser() {
             //add checking for if a user exists with credentials given
                 // if not, show a message
-                // else
-            
-            // this.User = new UserDB(this.Username, this.Password, this.Salt, null);
-            // Manager.SetLoggedInUser(u);
+            UserDB testUser = Manager.GetUser(Username);
+            if(testUser is null) {
+                UserDoesNotExistText = true;
+            } else {
+                // need to figure out how to check salt and passwords
+                string password = testUser.Password;
+                string salt = testUser.Salt;
+                byte[] saltBytes = Convert.FromBase64String(salt);
+
+                string testHash = GenerateHash(password, saltBytes);
+                if(testHash.Equals(password)) {
+                    this.User = testUser;
+                    Manager.LogInUser(UserDBToUser(this.User));
+                } else {
+                    PasswordIncorrect = true;
+                }
+            }
             return this.User;
         }
 
         private static byte[] GenerateSalt() {
-        byte[] salt = new byte[8];
-        using (RNGCryptoServiceProvider rngCsp = new RNGCryptoServiceProvider()) {
-            rngCsp.GetBytes(salt);
-        }
-        return salt;
+            byte[] salt = new byte[8];
+            using (RNGCryptoServiceProvider rngCsp = new RNGCryptoServiceProvider()) {
+                rngCsp.GetBytes(salt);
+            }
+            return salt;
         }
 
-        private static byte[] GenerateHash(string password, byte[] salt) {
+        private static string GenerateHash(string password, byte[] salt) {
             int numIterations = 1000;
             Rfc2898DeriveBytes key = new Rfc2898DeriveBytes(password, salt, numIterations);
-            return key.GetBytes(32);
+            return Convert.ToBase64String(key.GetBytes(32));
         }
 
         private static string ByteArrayToString(byte[] array) {
