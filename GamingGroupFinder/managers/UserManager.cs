@@ -31,7 +31,10 @@ namespace GamingGroupFinder {
         }
 
         public static List<UserDB> GetListOfUsers() {
-            List<UserDB> users = db.UsersDB.ToList();
+            List<UserDB> users = new List<UserDB>();
+            foreach(UserDB user in db.UsersDB) {
+                users.Add(user);
+            }
             return users;
         }
 
