@@ -1,4 +1,5 @@
 using GamingGroupFinderDatabase;
+using GamingGroupFinderGUI.Models;
 
 namespace GamingGroupFinder {
 

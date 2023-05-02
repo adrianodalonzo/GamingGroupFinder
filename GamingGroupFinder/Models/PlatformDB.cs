@@ -3,7 +3,7 @@ using GamingGroupFinderDatabase;
 namespace GamingGroupFinderGUI.Models;
 
 public class PlatformDB{
-    public int PlatformId { get; set; }
+    public int PlatformDBId { get; set; }
     public string PlatformName { get; set; }
     public List<GameDB> Games { get; } = new();
     public List<ProfileDB> Profiles { get; } = new();

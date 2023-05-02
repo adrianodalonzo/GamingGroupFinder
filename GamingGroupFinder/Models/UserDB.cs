@@ -4,7 +4,7 @@ using GamingGroupFinderDatabase;
 namespace GamingGroupFinderGUI.Models;
 
 public class UserDB {
-    public int UserId { get; set; }
+    public int UserDBId { get; set; }
     public string Username { get; set; }
     public string Password { get; set; }
     public string Salt { get; set; }

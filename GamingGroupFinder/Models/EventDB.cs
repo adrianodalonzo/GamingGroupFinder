@@ -3,7 +3,7 @@ using GamingGroupFinderDatabase;
 namespace GamingGroupFinderGUI.Models;
 
 public class EventDB {
-    public int EventId { get; set; }
+    public int EventDBId { get; set; }
     public int OwnerId { get; set; }
     public UserDB? Owner { get; set; }
     public string Title { get; set; }

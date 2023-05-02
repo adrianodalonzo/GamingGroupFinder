@@ -5,6 +5,7 @@
 */
 
 using GamingGroupFinderDatabase;
+using GamingGroupFinderGUI.Models;
 
 namespace GamingGroupFinder;
 
@@ -36,7 +37,7 @@ public class ProfileManager {
         List<PlatformDB> Platforms = new List<PlatformDB>(); 
         List<GameDB> Games = new List<GameDB>();
         UserDB profileUser = (from user in db.UsersDB where user.Username.Equals(u.Username) select user).First();
-        ProfileDB profile = new ProfileDB(profileUser, p.Name, p.Pronouns, p.Age, p.Bio, p.ProfilePicture, Interests, Platforms, Games);
+        ProfileDB profile = new ProfileDB(profileUser, p.Name, p.Pronouns, p.Age, p.Bio, p.ProfilePicture);
         
 
         // figure out how to add lists of items to the profiles in database
@@ -77,7 +78,7 @@ public class ProfileManager {
             Games.Add(Game);
         }
         UserDB profileUser = (from user in db.UsersDB where user.Username.Equals(u.Username) select user).First();
-        ProfileDB toDelete = new ProfileDB(profileUser, p.Name, p.Pronouns, p.Age, p.Bio, p.ProfilePicture, Interests, Platforms, Games);
+        ProfileDB toDelete = new ProfileDB(profileUser, p.Name, p.Pronouns, p.Age, p.Bio, p.ProfilePicture);
         db.Remove(toDelete);
         db.SaveChanges();
     }
@@ -135,7 +136,7 @@ public class ProfileManager {
             Games.Add(Game);
         }
         UserDB profileUser = (from user in db.UsersDB where user.Username.Equals(p.User.Username) select user).First();
-        ProfileDB Edited = new ProfileDB(profileUser, p.Name, p.Pronouns, p.Age, p.Bio, p.ProfilePicture, Interests, Platforms, Games);
+        ProfileDB Edited = new ProfileDB(profileUser, p.Name, p.Pronouns, p.Age, p.Bio, p.ProfilePicture);
         toEdit = Edited;
         db.SaveChanges();
     }

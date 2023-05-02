@@ -3,7 +3,7 @@ using GamingGroupFinderDatabase;
 namespace GamingGroupFinderGUI.Models;
 
 public class MessageDB {
-    public int MessageId { get; set; }
+    public int MessageDBId { get; set; }
     public int SenderId { get; set; }
     public UserDB Sender { get; set; } = null!;
     public int ReceiverId { get; set; }

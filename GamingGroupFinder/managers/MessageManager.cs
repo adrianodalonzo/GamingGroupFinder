@@ -1,6 +1,7 @@
 //might need to keep track of logged in user somewhere here (to know whos signed in and who sent/recieved messages)
 
 using GamingGroupFinderDatabase;
+using GamingGroupFinderGUI.Models;
 
 namespace GamingGroupFinder;
 

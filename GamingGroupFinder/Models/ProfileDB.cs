@@ -3,7 +3,7 @@ using GamingGroupFinderDatabase;
 namespace GamingGroupFinderGUI.Models;
 
 public class ProfileDB {
-    public int ProfileId { get; set; }
+    public int ProfileDBId { get; set; }
     public int UserId { get; set; }
     public UserDB User { get; set; } = null!;
     public string Name { get; set; }

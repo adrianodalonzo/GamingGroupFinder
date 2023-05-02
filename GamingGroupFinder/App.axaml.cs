@@ -1,6 +1,8 @@
 using Avalonia;
 using Avalonia.Controls.ApplicationLifetimes;
 using Avalonia.Markup.Xaml;
+using GamingGroupFinder;
+using GamingGroupFinderDatabase;
 using GamingGroupFinderGUI.ViewModels;
 using GamingGroupFinderGUI.Views;
 
@@ -16,6 +18,11 @@ public partial class App : Application
     public override void OnFrameworkInitializationCompleted()
     {
         base.OnFrameworkInitializationCompleted();
+        ApplicationContext context = new ApplicationContext();
+        UserManager.GetInstance().SetApplicationContext(context);
+        ProfileManager.getInstance().setApplicationContext(context);
+        EventManager.GetInstance().SetLibraryContext(context);
+        MessageManager.GetInstance().SetLibraryContext(context);
 
         if (ApplicationLifetime is IClassicDesktopStyleApplicationLifetime desktop)
         {
@@ -23,6 +30,7 @@ public partial class App : Application
             desktop.MainWindow = new MainWindow
             {
                 DataContext = new MainWindowViewModel(),
+
             };
         }
     }

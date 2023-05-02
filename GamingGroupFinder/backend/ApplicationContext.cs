@@ -1,5 +1,6 @@
 using GamingGroupFinderGUI.Models;
 using Microsoft.EntityFrameworkCore;
+using static GamingGroupFinderGUI.Models.GamEDBRankDB;
 
 namespace GamingGroupFinderDatabase;
 

@@ -3,7 +3,7 @@ using GamingGroupFinderDatabase;
 namespace GamingGroupFinderGUI.Models;
 
 public class RankDB {
-    public int RankId { get; set; }
+    public int RankDBId { get; set; }
     public int RankValue { get; set; }
     public string RankName { get; set; }
     public List<GameDB> Games { get; } = new();

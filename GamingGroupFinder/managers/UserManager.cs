@@ -1,4 +1,5 @@
 using GamingGroupFinderDatabase;
+using GamingGroupFinderGUI.Models;
 
 namespace GamingGroupFinder {
     public class UserManager {
@@ -30,12 +31,12 @@ namespace GamingGroupFinder {
             db = context;
         }
 
-        public static List<UserDB> GetListOfUsers() {
+        public List<UserDB> GetListOfUsers() {
             List<UserDB> users = db.UsersDB.ToList();
             return users;
         }
 
-        private static bool UserExists(User user, List<UserDB> users) {
+        internal bool UserExists(User user, List<UserDB> users) {
             foreach(UserDB testUser in users) {
                 if(testUser.Username.Equals(user.Username)) {
                     return true;

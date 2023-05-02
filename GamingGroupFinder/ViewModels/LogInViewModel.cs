@@ -8,23 +8,47 @@ namespace GamingGroupFinderGUI.ViewModels
 {
     public class LogInViewModel : ViewModelBase
     {
-        public string Username {get; set;}
-        public string Password {get; set;}
+        public string _username;
+        public string _password;
+        public bool _visible;
+        public string Username {
+            get => _username;
+            private set => this.RaiseAndSetIfChanged(ref _username, value);
+        }
+        public string Password {
+            get => _password;
+            private set => this.RaiseAndSetIfChanged(ref _password, value);
+        }
+        public bool Visible {
+            get => _visible;
+            private set => this.RaiseAndSetIfChanged(ref _visible, value);
+        }
         public string Salt {get;set;}
-        private UserManager Manager = new UserManager();
+        private UserManager Manager = UserManager.GetInstance();
 
-        public ReactiveCommand<Unit, Unit> Login { get; } = ReactiveCommand.Create(() => { });
+        public ReactiveCommand<Unit, Unit> Login { get; }
 
-        public ReactiveCommand<Unit, Unit> Register { get; } = ReactiveCommand.Create(() => { });
-
+        public ReactiveCommand<Unit, Unit> Register { get; }
+        public LogInViewModel() {
+            var loginEnabled = this.WhenAnyValue(
+                x => x.Username,
+                x => !string.IsNullOrWhiteSpace(x)
+            );
+            Login = ReactiveCommand.Create(() => { }, loginEnabled);
+            Register = ReactiveCommand.Create(() => { }, loginEnabled);
+            Visible = false;
+        }
         public UserDB? User { get; private set;}
-        public UserDB RegisterUser(){
+        public UserDB RegisterUser() {
             //add checking for if the user exists
                 // if a user exists, show a message
-                // else
-            // byte[] UserSalt = GenerateSalt();
-            // byte[] UserHashedPassword = GenerateHash(this.Password, UserSalt);
-            // this.User = new UserDB(this.Username, ByteArrayToString(UserHashedPassword), ByteArrayToString(UserSalt), null);
+            byte[] UserSalt = GenerateSalt();
+            byte[] UserHashedPassword = GenerateHash(this.Password, UserSalt);
+            this.User = new UserDB(this.Username, ByteArrayToString(UserHashedPassword), ByteArrayToString(UserSalt), null);
+            if(Manager.UserExists(UserDBToUser(User), Manager.GetListOfUsers())) {
+                Visible = true;
+            }
+            Manager.CreateUser(UserDBToUser(User));
             return this.User;
         }
 
@@ -58,6 +82,10 @@ namespace GamingGroupFinderGUI.ViewModels
                 ByteString += val;
             }
             return ByteString;
+        }
+
+        private User UserDBToUser(UserDB user) {
+            return new User(user.Username, user.Password, user.Salt, new List<User>());
         }
 
     }
