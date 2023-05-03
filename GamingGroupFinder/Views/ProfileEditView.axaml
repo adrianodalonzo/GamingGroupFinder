@@ -43,7 +43,7 @@
                         <TextBlock Text="Games: "
                                 HorizontalAlignment="Center"
                                 VerticalAlignment="Center"/>
-                        <ComboBox Items="{Binding Games}"
+                        <ComboBox Items="{Binding GameNames}"
                                 HorizontalAlignment="Center"
                                 VerticalAlignment="Center"/>
                         <Button Content="Add"

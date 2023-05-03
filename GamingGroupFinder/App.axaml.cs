@@ -23,6 +23,7 @@ public partial class App : Application
         ProfileManager.getInstance().setApplicationContext(context);
         EventManager.GetInstance().SetLibraryContext(context);
         MessageManager.GetInstance().SetLibraryContext(context);
+        GameManager.GetInstance().SetApplicationContext(context);
 
         if (ApplicationLifetime is IClassicDesktopStyleApplicationLifetime desktop)
         {
