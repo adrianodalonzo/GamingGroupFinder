@@ -3,6 +3,6 @@
         x:Class="GamingGroupFinderGUI.Views.MainWindow"
         Icon="/Assets/avalonia-logo.ico"
         Width="600" Height="450"
-        Title="Social Gaming App"
+        Title="GamingGroupFinder"
         Content="{Binding Content}">
 </Window>
