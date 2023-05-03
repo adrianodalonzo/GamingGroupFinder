@@ -24,6 +24,7 @@
                                 HorizontalAlignment="Center"
                                 VerticalAlignment="Center"/>
                         <ComboBox Items="{Binding Pronouns}" 
+                                  SelectedItem="{Binding SelectPronoun}"
                                   Width="100"
                                   HorizontalAlignment="Center"
                                   VerticalAlignment="Center"/>
@@ -55,7 +56,7 @@
                         <TextBlock Text="Platforms: "
                                 HorizontalAlignment="Center"
                                 VerticalAlignment="Center"/>
-                        <ComboBox Items="{Binding Platforms}"
+                        <ComboBox Items="{Binding PlatformNames}"
                                 HorizontalAlignment="Center"
                                 VerticalAlignment="Center"/>
                         <Button Content="Add"
