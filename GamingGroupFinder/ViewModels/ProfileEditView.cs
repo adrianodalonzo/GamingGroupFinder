@@ -8,7 +8,7 @@ namespace GamingGroupFinderGUI.ViewModels
     public class ProfileEditViewModel : ViewModelBase
     {
         
-        public ProfileDB Profile {get; set;}
+        public static ProfileDB Profile {get; set;}
         public ReactiveCommand<Unit, Unit> Ok { get; }
         public List<string> GameNames { get; } = GetGameNames();
         public List<string> PlatformNames { get; } = GetPlatformNames();
@@ -20,6 +20,15 @@ namespace GamingGroupFinderGUI.ViewModels
 
             Ok = ReactiveCommand.Create(() => { });
 
+        }
+
+        public static GameDB AddGame(string gameName) {
+            var game = (from g in GameManager.GetListOfGames() where g.GameName.Equals(gameName) select g).FirstOrDefault();
+            if(game is null) {
+                return null;
+            }
+            Profile.Games.Add(game);
+            return game;
         }
 
         public static List<string> GetGameNames() {
