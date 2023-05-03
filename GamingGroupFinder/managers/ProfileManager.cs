@@ -25,19 +25,45 @@ public class ProfileManager {
         return _instance;
     }
 
+    public static ProfileDB GetProfile(int userId) {
+        return (from p in db.ProfilesDB where p.UserId == userId select p).FirstOrDefault();
+    }
+
     public void setApplicationContext(ApplicationContext context) {
         db = context;
     }
     
-    // private Profile _profile;
+    private static List<InterestDB> InterestListToInterestsDBList(List<Interest> list) {
+        List<InterestDB> interests = new List<InterestDB>();
+        foreach(Interest i in list) {
+            interests.Add(new InterestDB(i.Name));
+        }
+        return interests;
+    }
+
+    private static List<GameDB> GameListToGameDBList(List<Game> list) {
+        List<GameDB> games = new List<GameDB>();
+        foreach(Game g in list) {
+            games.Add(new GameDB(g.Name));
+        }
+        return games;
+    }
+
+    private static List<PlatformDB> PlatformListToPlatformsDBList(List<Platform> list) {
+        List<PlatformDB> platforms = new List<PlatformDB>();
+        foreach(Platform p in list) {
+            platforms.Add(new PlatformDB(p.Name));
+        }
+        return platforms;
+    }
 
     // this is probably just going to create a new profile and add it to the database
-    public void CreateProfile(Profile p, User u) {
-        List<InterestDB> Interests = new List<InterestDB>();
-        List<PlatformDB> Platforms = new List<PlatformDB>(); 
-        List<GameDB> Games = new List<GameDB>();
+    public static void CreateProfile(Profile p, User u) {
+        List<InterestDB> Interests = InterestListToInterestsDBList(p.Interests);
+        List<PlatformDB> Platforms = PlatformListToPlatformsDBList(p.Platforms); 
+        List<GameDB> Games = GameListToGameDBList(p.Games);
         UserDB profileUser = (from user in db.UsersDB where user.Username.Equals(u.Username) select user).First();
-        ProfileDB profile = new ProfileDB(profileUser, p.Name, p.Pronouns, p.Age, p.Bio, p.ProfilePicture);
+        ProfileDB profile = new ProfileDB(profileUser, p.Name, p.Pronouns, p.Age, p.Bio, p.ProfilePicture, Interests, Platforms, Games);
         
 
         // figure out how to add lists of items to the profiles in database
@@ -78,7 +104,7 @@ public class ProfileManager {
             Games.Add(Game);
         }
         UserDB profileUser = (from user in db.UsersDB where user.Username.Equals(u.Username) select user).First();
-        ProfileDB toDelete = new ProfileDB(profileUser, p.Name, p.Pronouns, p.Age, p.Bio, p.ProfilePicture);
+        ProfileDB toDelete = new ProfileDB(profileUser, p.Name, p.Pronouns, p.Age, p.Bio, p.ProfilePicture, null, null, null);
         db.Remove(toDelete);
         db.SaveChanges();
     }
@@ -136,12 +162,19 @@ public class ProfileManager {
             Games.Add(Game);
         }
         UserDB profileUser = (from user in db.UsersDB where user.Username.Equals(p.User.Username) select user).First();
-        ProfileDB Edited = new ProfileDB(profileUser, p.Name, p.Pronouns, p.Age, p.Bio, p.ProfilePicture);
+        ProfileDB Edited = new ProfileDB(profileUser, p.Name, p.Pronouns, p.Age, p.Bio, p.ProfilePicture, null, null, null);
         toEdit = Edited;
         db.SaveChanges();
     }
 
-    
+    public static void EditProfile(ProfileDB profile) {
+        var testProfile = (from p in db.ProfilesDB where p.UserId == profile.UserId select p).FirstOrDefault();
+        if(testProfile is null) {
+            throw new Exception("Profile doesn't exist with that username");
+        }
+        testProfile = profile;
+        db.SaveChanges();
+    }
 
     public List<ProfileDB> SearchProfile(string username) {
         List<ProfileDB> ProfileList = new List<ProfileDB>();

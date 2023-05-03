@@ -15,13 +15,16 @@ public class ProfileDB {
     public List<PlatformDB> Platforms { get; } = new();
     public List<GameDB> Games { get; } = new();
 
-    public ProfileDB(UserDB user, string name, string pronouns, int age, string bio, string profilePicture) {
+    public ProfileDB(UserDB user, string name, string pronouns, int age, string bio, string profilePicture, List<InterestDB> interests, List<PlatformDB> platforms, List<GameDB> games) {
         this.User = user;
         this.Name = name;
         this.Pronouns = pronouns;
         this.Age = age;
         this.Bio = bio;
         this.ProfilePicture = profilePicture;
+        this.Games = games;
+        this.Interests = interests;
+        this.Platforms = platforms;
     }
 
     private ProfileDB() {

@@ -32,8 +32,8 @@ class MainWindowViewModel : ViewModelBase
                 
             } else {
                 LoggedInUser = u;
-                ProfileDB p = new ProfileDB(u, null, null, 0, null, null);
-                Content = new ProfileEditViewModel(p);
+                ProfileDB p = new ProfileDB(u, null, null, 0, null, null, null, null, null);
+                Content = new ProfileDisplayViewModel(p);
             }
         }
        
