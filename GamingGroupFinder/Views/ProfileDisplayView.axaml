@@ -18,10 +18,9 @@
           <TextBlock Text=", "/>
           <TextBlock Text="{Binding Profile.Age}"
                     IsVisible="{Binding Profile.Age, Converter={x:Static StringConverters.IsNotNullOrEmpty}}"/>
-        </StackPanel>
-
-        <TextBlock Text="{Binding Profile.Pronouns, StringFormat='Pronouns: {0}'}"
-                   IsVisible="{Binding Profile.Pronouns, Converter={x:Static StringConverters.IsNotNullOrEmpty}}"/>  
+          <TextBlock Text="{Binding SelectedPronoun, StringFormat='Pronouns: {0}'}"
+                    IsVisible="{Binding SelectedPronoun, Converter={x:Static StringConverters.IsNotNullOrEmpty}}"/> 
+        </StackPanel> 
 
         <TextBlock Text="{Binding Profile.Description}"
                    IsVisible="{Binding Profile.Description, Converter={x:Static StringConverters.IsNotNullOrEmpty}}"/>
