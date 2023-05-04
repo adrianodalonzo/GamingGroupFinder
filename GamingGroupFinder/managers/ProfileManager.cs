@@ -167,9 +167,13 @@ public class ProfileManager {
         db.SaveChanges();
     }
 
+    // add get profile
+    public static ProfileDB GetProfile(UserDB u) {
+        ProfileDB profile = (from p in db.ProfilesDB where p.User.Username.Equals(u.Username) select p).SingleOrDefault();
+        return profile;
+    }
+
     public static void EditProfile(ProfileDB profile) {
-        var testProfile = (from p in db.ProfilesDB where p.UserId == profile.UserId select p).FirstOrDefault();
-        testProfile = profile;
         db.SaveChanges();
     }
 

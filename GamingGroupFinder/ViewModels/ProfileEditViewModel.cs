@@ -12,7 +12,6 @@ namespace GamingGroupFinderGUI.ViewModels
         public ReactiveCommand<Unit, Unit> Ok { get; }
         public List<string> GameNames { get; } = GetGameNames();
         public List<string> PlatformNames { get; } = GetPlatformNames();
-        public string Pronouns { get; set; }
         public ProfileEditViewModel(ProfileDB p)
         {
             Profile = p;

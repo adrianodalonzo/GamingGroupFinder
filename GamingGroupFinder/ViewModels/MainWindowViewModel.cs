@@ -30,7 +30,7 @@ class MainWindowViewModel : ViewModelBase
         public void PrepareMainPage(UserDB u) {
             if(u != null) {
                 LoggedInUser = u;
-                ProfileDB p = new ProfileDB(u, null, null, 0, null, null, null, null, null);
+                ProfileDB p = ProfileManager.GetProfile(LoggedInUser);
                 Content = new ProfileDisplayViewModel(p);
             }
         }
