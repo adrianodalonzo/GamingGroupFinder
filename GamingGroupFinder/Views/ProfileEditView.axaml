@@ -44,9 +44,12 @@
                                 HorizontalAlignment="Center"
                                 VerticalAlignment="Center"/>
                         <ComboBox Items="{Binding GameNames}"
+                                SelectedItem="{Binding SelectedGame}"
                                 HorizontalAlignment="Center"
                                 VerticalAlignment="Center"/>
                         <Button Content="Add"
+                                Command="{Binding AddGame}"
+                                CommandParameter="{Binding SelectedGame}"
                                 HorizontalAlignment="Center"
                                 VerticalAlignment="Center"/>
                 </StackPanel>
@@ -56,9 +59,26 @@
                                 HorizontalAlignment="Center"
                                 VerticalAlignment="Center"/>
                         <ComboBox Items="{Binding PlatformNames}"
+                                SelectedItem="{Binding SelectedPlatform}"
                                 HorizontalAlignment="Center"
                                 VerticalAlignment="Center"/>
                         <Button Content="Add"
+                                Command="{Binding AddPlatform}"
+                                CommandParameter="{Binding SelectedPlatform}"
+                                HorizontalAlignment="Center"
+                                VerticalAlignment="Center"/>
+                </StackPanel>
+
+                <StackPanel>
+                        <TextBlock Text="Interests: "
+                                HorizontalAlignment="Center"
+                                VerticalAlignment="Center"/>
+                        <TextBox Text="{Binding SelectedInterest}"
+                                HorizontalAlignment="Center"
+                                VerticalAlignment="Center"/>
+                        <Button Content="Add"
+                                Command="{Binding AddInterest}"
+                                CommandParameter="{Binding SelectedInterest}"
                                 HorizontalAlignment="Center"
                                 VerticalAlignment="Center"/>
                 </StackPanel>

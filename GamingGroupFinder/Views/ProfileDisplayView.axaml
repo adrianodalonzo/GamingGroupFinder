@@ -18,44 +18,49 @@
           <TextBlock Text=", "/>
           <TextBlock Text="{Binding Profile.Age}"
                     IsVisible="{Binding Profile.Age, Converter={x:Static StringConverters.IsNotNullOrEmpty}}"/>
-          <TextBlock Text="{Binding SelectedPronoun, StringFormat='Pronouns: {0}'}"
-                    IsVisible="{Binding SelectedPronoun, Converter={x:Static StringConverters.IsNotNullOrEmpty}}"/> 
+          <TextBlock Text=" : "/>
+          <TextBlock Text="{Binding Profile.Pronouns}"
+                    IsVisible="{Binding Profile.Pronouns, Converter={x:Static StringConverters.IsNotNullOrEmpty}}"/> 
         </StackPanel> 
 
-        <TextBlock Text="{Binding Profile.Description}"
+        <TextBlock Text="{Binding Profile.Bio}"
                    IsVisible="{Binding Profile.Description, Converter={x:Static StringConverters.IsNotNullOrEmpty}}"/>
-
-        <TextBlock Text="{Binding Profile.Program, StringFormat='Program: {0}'}"
-                   IsVisible="{Binding Profile.Program, Converter={x:Static StringConverters.IsNotNullOrEmpty}}"/>
-      
-        <TextBlock Text="{Binding Profile.School, StringFormat='School: {0}'}"
-                   IsVisible="{Binding Profile.School, Converter={x:Static StringConverters.IsNotNullOrEmpty}}"/>
     
           
       </StackPanel>
 
       <StackPanel Width="200" Spacing="5">
-        <TextBlock Text="Subjects:"/>
-        <ItemsRepeater Items="{Binding Profile.Subjects}">
+        <TextBlock Text="Games:"/>
+        <ItemsRepeater Items="{Binding Profile.Games}">
           <ItemsRepeater.ItemTemplate>
             <DataTemplate>
              <Border Margin="10,0,0,0" Padding="2">
-               <TextBlock Text="{Binding}"/>
+               <TextBlock Text="{Binding GameName}"/>
               </Border>
             </DataTemplate>
           </ItemsRepeater.ItemTemplate>
         </ItemsRepeater>
-        <TextBlock Text="CoursesTaking:"/>
-        <ItemsRepeater Items="{Binding Profile.CoursesTaking}">
+        <TextBlock Text="Platforms:"/>
+        <ItemsRepeater Items="{Binding Profile.Platforms}">
           <ItemsRepeater.ItemTemplate>
             <DataTemplate>
              <Border Margin="10,0,0,0" Padding="2">
-               <TextBlock Text="{Binding}"/>
+               <TextBlock Text="{Binding PlatformName}"/>
               </Border>
             </DataTemplate>
           </ItemsRepeater.ItemTemplate>
         </ItemsRepeater>
-        <TextBlock Text="CoursesStudying:"/>
+        <TextBlock Text="Interests:"/>
+        <ItemsRepeater Items="{Binding Profile.Interests}">
+          <ItemsRepeater.ItemTemplate>
+            <DataTemplate>
+             <Border Margin="10,0,0,0" Padding="2">
+               <TextBlock Text="{Binding InterestName}"/>
+              </Border>
+            </DataTemplate>
+          </ItemsRepeater.ItemTemplate>
+        </ItemsRepeater>
+        <!-- <TextBlock Text="CoursesStudying:"/>
         <ItemsRepeater Items="{Binding Profile.CoursesStudying}">
           <ItemsRepeater.ItemTemplate>
             <DataTemplate>
@@ -74,7 +79,7 @@
               </Border>
             </DataTemplate>
           </ItemsRepeater.ItemTemplate>
-        </ItemsRepeater>
+        </ItemsRepeater> -->
       </StackPanel>
     </StackPanel>
       <Button Content="Edit Profile"
