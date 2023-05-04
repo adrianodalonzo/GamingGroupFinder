@@ -59,11 +59,11 @@ public class ProfileManager {
 
     // this is probably just going to create a new profile and add it to the database
     public static void CreateProfile(Profile p, User u) {
-        List<InterestDB> Interests = InterestListToInterestsDBList(p.Interests);
-        List<PlatformDB> Platforms = PlatformListToPlatformsDBList(p.Platforms); 
-        List<GameDB> Games = GameListToGameDBList(p.Games);
+        // List<InterestDB> Interests = InterestListToInterestsDBList(p.Interests);
+        // List<PlatformDB> Platforms = PlatformListToPlatformsDBList(p.Platforms); 
+        // List<GameDB> Games = GameListToGameDBList(p.Games);
         UserDB profileUser = (from user in db.UsersDB where user.Username.Equals(u.Username) select user).First();
-        ProfileDB profile = new ProfileDB(profileUser, p.Name, p.Pronouns, p.Age, p.Bio, p.ProfilePicture, Interests, Platforms, Games);
+        ProfileDB profile = new ProfileDB(profileUser, null, null, 0, null, null, new List<InterestDB>(), new List<PlatformDB>(), new List<GameDB>());
         
 
         // figure out how to add lists of items to the profiles in database
@@ -169,9 +169,6 @@ public class ProfileManager {
 
     public static void EditProfile(ProfileDB profile) {
         var testProfile = (from p in db.ProfilesDB where p.UserId == profile.UserId select p).FirstOrDefault();
-        if(testProfile is null) {
-            throw new Exception("Profile doesn't exist with that username");
-        }
         testProfile = profile;
         db.SaveChanges();
     }

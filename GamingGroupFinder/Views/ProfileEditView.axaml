@@ -23,8 +23,7 @@
                         <TextBlock Text="Pronouns: "
                                 HorizontalAlignment="Center"
                                 VerticalAlignment="Center"/>
-                        <ComboBox Items="{Binding Pronouns}" 
-                                  SelectedItem="{Binding SelectedPronoun}"
+                        <TextBox  Text="{Binding Pronouns}"
                                   Width="100"
                                   HorizontalAlignment="Center"
                                   VerticalAlignment="Center"/>

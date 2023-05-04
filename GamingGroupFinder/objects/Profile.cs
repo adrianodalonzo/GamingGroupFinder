@@ -98,6 +98,10 @@ namespace GamingGroupFinder {
             this.ProfilePicture = profilePicture;
             this.Interests = interests;
         }
+
+        public Profile(User user) {
+            this.User = user;
+        }
         private Profile() {
         }
 
