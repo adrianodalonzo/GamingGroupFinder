@@ -12,13 +12,13 @@ namespace GamingGroupFinderGUI.ViewModels
         public ReactiveCommand<Unit, Unit> Ok { get; }
         public List<string> GameNames { get; } = GetGameNames();
         public List<string> PlatformNames { get; } = GetPlatformNames();
-        public List<string> Pronouns { get; } = new List<string> { "He/Him", "She/Her", "They/Them", "Other" };
-        public string SelectedPronoun { get; set; }
         public ProfileEditViewModel(ProfileDB p)
         {
             Profile = p;
 
-            Ok = ReactiveCommand.Create(() => { });
+            Ok = ReactiveCommand.Create(() => {
+                ProfileManager.EditProfile(Profile);
+            });
 
         }
 

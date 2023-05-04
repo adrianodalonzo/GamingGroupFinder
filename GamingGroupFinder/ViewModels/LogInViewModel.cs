@@ -61,6 +61,8 @@ namespace GamingGroupFinderGUI.ViewModels
             } else {
                 this.User = testUser;
                 Manager.CreateUser(UserDBToUser(User));
+                Profile p = new Profile(UserDBToUser(User));
+                ProfileManager.CreateProfile(p, UserDBToUser(this.User));
             }
             return this.User;
         }
