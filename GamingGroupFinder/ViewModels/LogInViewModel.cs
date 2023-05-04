@@ -54,9 +54,8 @@ namespace GamingGroupFinderGUI.ViewModels
         public UserDB? User { get; private set;}
         public UserDB RegisterUser() {
             byte[] UserSalt = GenerateSalt();
-            string UserSaltString = Convert.ToBase64String(UserSalt);
             string UserHashedPassword = GenerateHash(this.Password, UserSalt);
-            UserDB testUser = new UserDB(this.Username, UserHashedPassword, UserSaltString, null);
+            UserDB testUser = new UserDB(this.Username, UserHashedPassword, UserSalt, null);
             if(Manager.UserExists(UserDBToUser(testUser), Manager.GetListOfUsers())) {
                 UserExistsText = true;
             } else {
@@ -75,10 +74,9 @@ namespace GamingGroupFinderGUI.ViewModels
             } else {
                 // need to figure out how to check salt and passwords
                 string password = testUser.Password;
-                string salt = testUser.Salt;
-                byte[] saltBytes = Convert.FromBase64String(salt);
+                byte[] salt = testUser.Salt;
 
-                string testHash = GenerateHash(password, saltBytes);
+                string testHash = GenerateHash(this.Password, salt);
                 if(testHash.Equals(password)) {
                     this.User = testUser;
                     Manager.LogInUser(UserDBToUser(this.User));

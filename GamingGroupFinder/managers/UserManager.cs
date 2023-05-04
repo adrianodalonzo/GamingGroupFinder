@@ -32,7 +32,10 @@ namespace GamingGroupFinder {
         }
 
         public List<UserDB> GetListOfUsers() {
-            List<UserDB> users = db.UsersDB.ToList();
+            List<UserDB> users = new List<UserDB>();
+            foreach(UserDB user in db.UsersDB) {
+                users.Add(user);
+            }
             return users;
         }
 
@@ -46,7 +49,8 @@ namespace GamingGroupFinder {
         }
 
         public UserDB GetUser(string username) {
-            return (from u in db.UsersDB where u.Username.Equals(username) select u).SingleOrDefault();
+            var userDB = (from u in db.UsersDB where u.Username.Equals(username) select u).FirstOrDefault();
+            return (UserDB)userDB;
         }
 
         // this is probably just going to create a new user and add it to the database
