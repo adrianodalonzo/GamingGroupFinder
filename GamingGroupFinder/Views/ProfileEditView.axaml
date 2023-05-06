@@ -52,6 +52,13 @@
                                 CommandParameter="{Binding SelectedGame}"
                                 HorizontalAlignment="Center"
                                 VerticalAlignment="Center"/>
+                        <ListBox Items="{Binding Profile.Games}" Width="200">
+                                <ListBox.ItemTemplate>
+                                        <DataTemplate>
+                                                <TextBlock Text="{Binding GameName}"/>
+                                        </DataTemplate>
+                                </ListBox.ItemTemplate>
+                        </ListBox>
                 </StackPanel>
 
                 <StackPanel>
@@ -67,6 +74,13 @@
                                 CommandParameter="{Binding SelectedPlatform}"
                                 HorizontalAlignment="Center"
                                 VerticalAlignment="Center"/>
+                        <ListBox Items="{Binding Profile.Platforms}" Width="200">
+                                <ListBox.ItemTemplate>
+                                        <DataTemplate>
+                                                <TextBlock Text="{Binding PlatformName}"/>
+                                        </DataTemplate>
+                                </ListBox.ItemTemplate>
+                        </ListBox>
                 </StackPanel>
 
                 <StackPanel>
@@ -81,6 +95,13 @@
                                 CommandParameter="{Binding SelectedInterest}"
                                 HorizontalAlignment="Center"
                                 VerticalAlignment="Center"/>
+                        <ListBox Items="{Binding Profile.Interests}" Width="200">
+                                <ListBox.ItemTemplate>
+                                        <DataTemplate >
+                                                <TextBlock Text="{Binding InterestName}"/>
+                                        </DataTemplate>
+                                </ListBox.ItemTemplate>
+                        </ListBox>
                 </StackPanel>
 
                 <StackPanel>

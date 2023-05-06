@@ -25,6 +25,7 @@ public partial class App : Application
         MessageManager.GetInstance().SetLibraryContext(context);
         GameManager.GetInstance().SetApplicationContext(context);
         PlatformManager.GetInstance().SetApplicationContext(context);
+        InterestManager.GetInstance().SetApplicationContext(context);
 
         if (ApplicationLifetime is IClassicDesktopStyleApplicationLifetime desktop)
         {

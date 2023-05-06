@@ -168,6 +168,9 @@ public class ProfileManager {
     }
 
     public static void EditProfile(ProfileDB profile) {
+        if(_profile is null) {
+            _profile = GetProfile(profile.User);
+        }
         _profile.Games = profile.Games;
         _profile.Interests = profile.Interests;
         _profile.Platforms = profile.Platforms;
