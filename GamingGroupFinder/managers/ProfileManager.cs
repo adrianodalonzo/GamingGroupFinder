@@ -13,6 +13,7 @@ public class ProfileManager {
 
     private static ProfileManager? _instance;
     private static ApplicationContext db = null!;
+    private static ProfileDB _profile;
 
     private ProfileManager() {
 
@@ -64,26 +65,10 @@ public class ProfileManager {
         // List<GameDB> Games = GameListToGameDBList(p.Games);
         UserDB profileUser = (from user in db.UsersDB where user.Username.Equals(u.Username) select user).First();
         ProfileDB profile = new ProfileDB(profileUser, null, null, 0, null, null, new List<InterestDB>(), new List<PlatformDB>(), new List<GameDB>());
-        
-
-        // figure out how to add lists of items to the profiles in database
-
-        // List<GameDB> profileGames = GetProfileGames(p);
-        // List<InterestDB> profileInterests = GetProfileInterests(p);
-        // List<PlatformDB> profilePlatforms = GetProfilePlatforms(p);
-
-        // if(profileGames.Count == 0) {
-        //     profile.Games = GetProfileGames(p);
-        // }
-        // if(profileInterests.Count == 0) {
-        //     profile.Interests = GetProfileInterests(p);
-        // }
-        // if(profilePlatforms.Count == 0) {
-        //     profile.Platforms = GetProfilePlatforms(p);
-        // }
 
         db.Add(profile);
         db.SaveChanges();
+        _profile = profile;
     }
 
     // this is probably just going to delete a profile from the database. not sure what would be taken in as a parameter (profile id?, profile object, ...)
@@ -170,10 +155,22 @@ public class ProfileManager {
     // add get profile
     public static ProfileDB GetProfile(UserDB u) {
         ProfileDB profile = (from p in db.ProfilesDB where p.User.Username.Equals(u.Username) select p).SingleOrDefault();
+        profile.Games = db.GamesDB
+                        .Where(g => g.Profiles.Contains(profile))
+                        .Select(g => g).ToList();
+        profile.Interests = db.InterestsDB
+                            .Where(i => i.Profiles.Contains(profile))
+                            .Select(i => i).ToList();
+        profile.Platforms = db.PlatformsDB
+                            .Where(p => p.Profiles.Contains(profile))
+                            .Select(p => p).ToList();
         return profile;
     }
 
     public static void EditProfile(ProfileDB profile) {
+        _profile.Games = profile.Games;
+        _profile.Interests = profile.Interests;
+        _profile.Platforms = profile.Platforms;
         db.SaveChanges();
     }
 
