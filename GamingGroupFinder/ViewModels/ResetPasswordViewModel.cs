@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Reactive;
+using GamingGroupFinder;
 using GamingGroupFinderGUI.Models;
 using ReactiveUI;
 
@@ -40,7 +41,22 @@ namespace GamingGroupFinderGUI.ViewModels
                 x => !string.IsNullOrWhiteSpace(x)
             );
             User = u;
-            Ok = ReactiveCommand.Create(() => { }, buttonEnabled);
+            Ok = ReactiveCommand.Create(() => {
+                if(ValidatePassword()) {
+                    return;
+                }
+            }, buttonEnabled);
+        }
+
+        public bool ValidatePassword() {
+            string oldPasswordHash = LogInViewModel.GenerateHash(OldPassword, User.Salt);
+            if(oldPasswordHash.Equals(User.Password)) {
+                if(NewPassword.Equals(RetypeNewPassword)) {
+                    UserManager.GetInstance().ChangePassword(NewPassword);
+                    return true;
+                }
+            }
+            return false;
         }
 
     }
