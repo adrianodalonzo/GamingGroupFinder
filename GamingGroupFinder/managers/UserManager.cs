@@ -1,5 +1,6 @@
 using GamingGroupFinderDatabase;
 using GamingGroupFinderGUI.Models;
+using GamingGroupFinderGUI.ViewModels;
 
 namespace GamingGroupFinder {
     public class UserManager {
@@ -96,7 +97,10 @@ namespace GamingGroupFinder {
                 if(testUser.Password.Equals(password)) {
                     throw new ArgumentException("New password must not match old password!");
                 }
-                testUser.Password = password;
+                db.Remove(testUser);
+                db.SaveChanges();
+                testUser.Password = LogInViewModel.GenerateHash(password, testUser.Salt);
+                db.Add(testUser);
                 db.SaveChanges();
             } else {
                 throw new Exception("Only the user of the requested account may change their password!");

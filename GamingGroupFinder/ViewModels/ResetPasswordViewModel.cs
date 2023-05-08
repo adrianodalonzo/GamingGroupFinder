@@ -43,7 +43,7 @@ namespace GamingGroupFinderGUI.ViewModels
             User = u;
             Ok = ReactiveCommand.Create(() => {
                 if(ValidatePassword()) {
-                    return;
+                    
                 }
             }, buttonEnabled);
         }
