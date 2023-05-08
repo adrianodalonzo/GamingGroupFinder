@@ -174,7 +174,15 @@ public class ProfileManager {
         _profile.Games = profile.Games;
         _profile.Interests = profile.Interests;
         _profile.Platforms = profile.Platforms;
-        db.SaveChanges();
+        try {
+            db.Remove(profile);
+            db.SaveChanges();
+            db.Add(profile);
+            db.SaveChanges();
+        }
+        catch (Exception e) {
+            Console.WriteLine(e);
+        }
     }
 
     public List<ProfileDB> SearchProfile(string username) {
