@@ -101,7 +101,7 @@ class MainWindowViewModel : ViewModelBase
 
         public void ViewEvent()
         {
-            Content = new EventDisplayViewModel(new EventDB(null, null, DateTime.Now, null, null, null, null, null, null)) ;
+            Content = new EventDisplayViewModel(new EventDB(null, null, DateTime.Now, null, null, null, null, null, null));
         }
 
         public void EditEvent()
