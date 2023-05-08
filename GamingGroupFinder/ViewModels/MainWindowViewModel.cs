@@ -75,11 +75,15 @@ class MainWindowViewModel : ViewModelBase
 
 
         public void PrepareMainPage(UserDB u) {
-            VisibleNavigation = true;
-            if(u != null) {
-                LoggedInUser = u;
-                ProfileDB p = ProfileManager.GetProfile(LoggedInUser);
-                ShowPersonalProfile();
+            if(u == null) {
+                VisibleNavigation = false;
+            } else {
+                VisibleNavigation = true;
+                if(u != null) {
+                    LoggedInUser = u;
+                    ProfileDB p = ProfileManager.GetProfile(LoggedInUser);
+                    ShowPersonalProfile();
+                }
             }
         }
 
@@ -131,8 +135,6 @@ class MainWindowViewModel : ViewModelBase
             vm.Ok.Subscribe((x) => { 
                 if(x) {
                     Content = oldView;
-                } else {
-                    
                 }
             });
         }

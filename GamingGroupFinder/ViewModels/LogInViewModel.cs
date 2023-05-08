@@ -81,7 +81,7 @@ namespace GamingGroupFinderGUI.ViewModels
                 string testHash = GenerateHash(this.Password, salt);
                 if(testHash.Equals(password)) {
                     this.User = testUser;
-                    Manager.LogInUser(UserDBToUser(this.User));
+                    UserManager.GetInstance().LogInUser(UserDBToUser(this.User));
                 } else {
                     PasswordIncorrect = true;
                 }
