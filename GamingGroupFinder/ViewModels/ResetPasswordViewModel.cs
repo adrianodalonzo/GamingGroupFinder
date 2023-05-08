@@ -9,10 +9,11 @@ namespace GamingGroupFinderGUI.ViewModels
 {
     public class ResetPasswordViewModel : ViewModelBase
     {
-        public ReactiveCommand<Unit, Unit> Ok { get; }
+        public ReactiveCommand<Unit, bool> Ok { get; }
         private string _oldPassword;
         private string _newPassword;
         private string _retypeNewPassword;
+        private bool _errorMessage;
         public string OldPassword {
             get => _oldPassword;
             private set => this.RaiseAndSetIfChanged(ref _oldPassword, value);
@@ -24,6 +25,10 @@ namespace GamingGroupFinderGUI.ViewModels
         public string RetypeNewPassword {
             get => _retypeNewPassword;
             private set => this.RaiseAndSetIfChanged(ref _retypeNewPassword, value);
+        }
+        public bool ErrorMessage {
+            get => _errorMessage;
+            private set => this.RaiseAndSetIfChanged(ref _errorMessage, value);
         }
         public UserDB User { get; }
         public ResetPasswordViewModel(UserDB u)
@@ -41,9 +46,13 @@ namespace GamingGroupFinderGUI.ViewModels
                 x => !string.IsNullOrWhiteSpace(x)
             );
             User = u;
+            ErrorMessage = false;
             Ok = ReactiveCommand.Create(() => {
                 if(ValidatePassword()) {
-                    
+                    return true;
+                } else {
+                    ErrorMessage = true;
+                    return false;
                 }
             }, buttonEnabled);
         }

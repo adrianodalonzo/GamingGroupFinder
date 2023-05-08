@@ -99,8 +99,9 @@ class MainWindowViewModel : ViewModelBase
         }
        
 
-        public void ViewEvent()
+        public void ViewEvents()
         {
+            // possibly take in a lis of events and display them in the view
             Content = new EventDisplayViewModel(new EventDB(null, null, DateTime.Now, null, null, null, null, null, null));
         }
 
@@ -123,6 +124,16 @@ class MainWindowViewModel : ViewModelBase
         }
 
         public void ResetPassword() {
-            Content = new ResetPasswordViewModel(LoggedInUser);
+            var vm = new ResetPasswordViewModel(LoggedInUser);
+            var oldView = (ProfileDisplayViewModel) Content;
+
+            Content = vm;
+            vm.Ok.Subscribe((x) => { 
+                if(x) {
+                    Content = oldView;
+                } else {
+                    
+                }
+            });
         }
     }
