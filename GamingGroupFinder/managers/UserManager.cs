@@ -79,6 +79,7 @@ namespace GamingGroupFinder {
             }
         }
 
+        // take in possible user
         public void LogOutUser() {
             if(LoggedInUser == null) {
                 throw new Exception("User is already logged out/never logged in!");

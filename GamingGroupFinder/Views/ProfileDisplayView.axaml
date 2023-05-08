@@ -60,30 +60,13 @@
             </DataTemplate>
           </ItemsRepeater.ItemTemplate>
         </ItemsRepeater>
-        <!-- <TextBlock Text="CoursesStudying:"/>
-        <ItemsRepeater Items="{Binding Profile.CoursesStudying}">
-          <ItemsRepeater.ItemTemplate>
-            <DataTemplate>
-             <Border Margin="10,0,0,0" Padding="2">
-               <TextBlock Text="{Binding}"/>
-              </Border>
-            </DataTemplate>
-          </ItemsRepeater.ItemTemplate>
-        </ItemsRepeater>
-        <TextBlock Text="Interests:"/>
-        <ItemsRepeater Items="{Binding Profile.Interests}">
-          <ItemsRepeater.ItemTemplate>
-            <DataTemplate>
-             <Border Margin="10,0,0,0" Padding="2">
-               <TextBlock Text="{Binding}"/>
-              </Border>
-            </DataTemplate>
-          </ItemsRepeater.ItemTemplate>
-        </ItemsRepeater> -->
       </StackPanel>
     </StackPanel>
       <Button Content="Edit Profile"
               Command="{Binding $parent[Window].DataContext.EditProfile}"/>
+
+      <Button Content="Reset Password"
+              Command="{Binding $parent[Window].DataContext.ResetPassword}"/>
 
       <Button Content="View Events"
               Command="{Binding $parent[Window].DataContext.ViewEvent}"/>       

@@ -45,7 +45,9 @@ class MainWindowViewModel : ViewModelBase
             Profile = ReactiveCommand.Create(() => {ShowPersonalProfile();});
             NewEvent =  ReactiveCommand.Create(() => {CreateEvent();});
             Search  = ReactiveCommand.Create(() => {OpenSearch();});
-            Logout = ReactiveCommand.Create(() => {Login();});
+            Logout = ReactiveCommand.Create(() => {
+                Login();
+            });
 
             Login();
         }
@@ -60,6 +62,9 @@ class MainWindowViewModel : ViewModelBase
         }
 
         public void Login() {
+            if(LoggedInUser != null) {
+                UserManager.GetInstance().LogOutUser();
+            }
             VisibleNavigation = false;
 
             LogInViewModel vm = new LogInViewModel();
@@ -115,5 +120,9 @@ class MainWindowViewModel : ViewModelBase
             
             vm.Ok.Subscribe(x => {Content = dispvm;});
             Content = vm;
+        }
+
+        public void ResetPassword() {
+            Content = new ResetPasswordViewModel(LoggedInUser);
         }
     }
