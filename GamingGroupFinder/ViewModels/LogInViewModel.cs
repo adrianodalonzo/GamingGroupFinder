@@ -89,7 +89,7 @@ namespace GamingGroupFinderGUI.ViewModels
             return this.User;
         }
 
-        private static byte[] GenerateSalt() {
+        internal static byte[] GenerateSalt() {
             byte[] salt = new byte[8];
             using (RNGCryptoServiceProvider rngCsp = new RNGCryptoServiceProvider()) {
                 rngCsp.GetBytes(salt);
@@ -97,7 +97,7 @@ namespace GamingGroupFinderGUI.ViewModels
             return salt;
         }
 
-        private static string GenerateHash(string password, byte[] salt) {
+        internal static string GenerateHash(string password, byte[] salt) {
             int numIterations = 1000;
             Rfc2898DeriveBytes key = new Rfc2898DeriveBytes(password, salt, numIterations);
             return Convert.ToBase64String(key.GetBytes(32));

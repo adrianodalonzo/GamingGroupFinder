@@ -1,11 +1,3 @@
-<!-- <Window xmlns="https://github.com/avaloniaui"
-        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        x:Class="GamingGroupFinderGUI.Views.MainWindow"
-        Icon="/Assets/avalonia-logo.ico"
-        Width="600" Height="450"
-        Title="GamingGroupFinder"
-        Content="{Binding Content}">
-</Window> -->
 <Window xmlns="https://github.com/avaloniaui"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         x:Class="GamingGroupFinderGUI.Views.MainWindow"

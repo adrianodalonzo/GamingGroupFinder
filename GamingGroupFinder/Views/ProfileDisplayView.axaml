@@ -66,7 +66,8 @@
               Command="{Binding $parent[Window].DataContext.EditProfile}"/>
 
       <Button Content="Reset Password"
-              Command="{Binding $parent[Window].DataContext.ResetPassword}"/>
+              Command="{Binding $parent[Window].DataContext.ResetPassword}"
+              IsVisible="{Binding Visible}"/>
 
       <Button Content="View Events"
               Command="{Binding $parent[Window].DataContext.ViewEvent}"/>       
