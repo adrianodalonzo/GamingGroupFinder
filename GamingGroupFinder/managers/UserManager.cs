@@ -77,6 +77,7 @@ namespace GamingGroupFinder {
                 // this is fine, it just means that no one is logged in
                 this.LoggedInUser = user;
             }
+            this.LoggedInUser = user;
         }
 
         // take in possible user
