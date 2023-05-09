@@ -25,7 +25,7 @@ class MainWindowViewModel : ViewModelBase
             get => _visibleNavigation;
             private set => this.RaiseAndSetIfChanged(ref _visibleNavigation, value);
         }
-        UserDB? LoggedInUser;
+        UserDB? LoggedInUser {get;set;}
 
         public ViewModelBase Content
         {
@@ -136,4 +136,12 @@ class MainWindowViewModel : ViewModelBase
                 }
             });
         }
+
+        // Clears profile, but need to update db somehow
+        public void ClearProfile() {
+            ProfileDB clearedProfile = new ProfileDB(LoggedInUser, null!, null!, 0, null!, null!, new List<InterestDB>(), new List<PlatformDB>(), new List<GameDB>());
+            LoggedInUser.Profile = clearedProfile;
+            DisplayProfile(LoggedInUser.Profile);
+        }
+
     }

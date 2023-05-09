@@ -50,14 +50,6 @@ namespace GamingGroupFinderGUI.ViewModels
             return game;
         }
 
-        // public static void RemoveGame(string gameName) {
-        //     var game = (from g in GameManager.GetListOfGames() where g.GameName.Equals(gameName) select g).FirstOrDefault();
-        //     if(game is null) {
-        //         return;
-        //     }
-        //     Profile.Games.Remove(game);
-        // }
-
         public static PlatformDB AddPlatform(string platformName) {
             var platform = (from p in PlatformManager.GetListOfPlatforms() where p.PlatformName.Equals(platformName) select p).FirstOrDefault();
             if(platform is null) {
@@ -67,30 +59,16 @@ namespace GamingGroupFinderGUI.ViewModels
             return platform;
         }
 
-        // public static void RemovePlatform(string platformName) {
-        //     var platform = (from p in PlatformManager.GetListOfPlatforms() where p.PlatformName.Equals(platformName) select p).FirstOrDefault();
-        //     if(platform is null) {
-        //         return;
-        //     }
-        //     Profile.Platforms.Remove(platform);
-        // }
-
         public static void AddInterest(string interestName) {
             Profile.Interests.Add(new InterestDB(interestName));
         }
 
+        // NOT WORKING 100%
         public static void RemoveInterest(string interestName) {
             var interest = (from i in InterestManager.GetListOfInterests() where i.InterestName.Equals(interestName) select i).FirstOrDefault();
             if(interest is null) {
                 return;
             }
-            // InterestDB interest = null!;
-            // foreach(InterestDB interestIter in InterestManager.GetListOfInterests()) {
-            //     if(interestIter.InterestName.Equals(interestName)) {
-            //         interest = new InterestDB(interestName);
-            //         break;
-            //     }
-            // }
             Profile.Interests.Remove(interest);
         }
 

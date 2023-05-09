@@ -70,6 +70,10 @@
               IsVisible="{Binding Visible}"/>
 
       <Button Content="View Events"
-              Command="{Binding $parent[Window].DataContext.ViewEvent}"/>       
+              Command="{Binding $parent[Window].DataContext.ViewEvent}"/>  
+
+      <Button Content="Clear Profile" 
+              Command="{Binding $parent[Window].DataContext.ClearProfile}"
+              IsVisible="{Binding Visible}"/>     
   </StackPanel>
 </UserControl>
