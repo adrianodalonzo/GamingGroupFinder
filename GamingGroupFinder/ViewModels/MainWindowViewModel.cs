@@ -8,7 +8,6 @@ namespace GamingGroupFinderGUI.ViewModels;
 // TODO
 // figure out how to get a clean login page when logging out
     // when logging out, then try to log in again (with first acc or another, user is still "logged in"). need to figure out how log out should work.
-    // reset password
     // delete account
 // figure out how to save profile without errors (unique constraint violated when saving new edits (even when no changes were made))
 // figure out events
@@ -16,7 +15,6 @@ namespace GamingGroupFinderGUI.ViewModels;
     // add event
     // leave event
 // figure out search
-    // profile
     // event
 
 class MainWindowViewModel : ViewModelBase
