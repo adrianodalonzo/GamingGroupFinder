@@ -84,6 +84,13 @@ namespace GamingGroupFinderGUI.ViewModels
             if(interest is null) {
                 return;
             }
+            // InterestDB interest = null!;
+            // foreach(InterestDB interestIter in InterestManager.GetListOfInterests()) {
+            //     if(interestIter.InterestName.Equals(interestName)) {
+            //         interest = new InterestDB(interestName);
+            //         break;
+            //     }
+            // }
             Profile.Interests.Remove(interest);
         }
 
