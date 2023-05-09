@@ -12,8 +12,8 @@ using Oracle.EntityFrameworkCore.Metadata;
 namespace _410project.Migrations
 {
     [DbContext(typeof(ApplicationContext))]
-    [Migration("20230504191128_saltModification")]
-    partial class saltModification
+    [Migration("20230509230331_UpdatedTables")]
+    partial class UpdatedTables
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -138,21 +138,6 @@ namespace _410project.Migrations
                     b.ToTable("EventsDB");
                 });
 
-            modelBuilder.Entity("GamingGroupFinderGUI.Models.GamEDBRankDB+GameDBRankDB", b =>
-                {
-                    b.Property<int>("GameDBId")
-                        .HasColumnType("NUMBER(10)");
-
-                    b.Property<int>("RankDBId")
-                        .HasColumnType("NUMBER(10)");
-
-                    b.HasIndex("GameDBId");
-
-                    b.HasIndex("RankDBId");
-
-                    b.ToTable("GamesDBRanksDB");
-                });
-
             modelBuilder.Entity("GamingGroupFinderGUI.Models.GameDB", b =>
                 {
                     b.Property<int>("GameDBId")
@@ -249,19 +234,15 @@ namespace _410project.Migrations
                         .HasColumnType("NUMBER(10)");
 
                     b.Property<string>("Bio")
-                        .IsRequired()
                         .HasColumnType("NVARCHAR2(2000)");
 
                     b.Property<string>("Name")
-                        .IsRequired()
                         .HasColumnType("NVARCHAR2(2000)");
 
                     b.Property<string>("ProfilePicture")
-                        .IsRequired()
                         .HasColumnType("NVARCHAR2(2000)");
 
                     b.Property<string>("Pronouns")
-                        .IsRequired()
                         .HasColumnType("NVARCHAR2(2000)");
 
                     b.Property<int>("UserId")
@@ -451,25 +432,6 @@ namespace _410project.Migrations
                     b.Navigation("Owner");
 
                     b.Navigation("Platform");
-                });
-
-            modelBuilder.Entity("GamingGroupFinderGUI.Models.GamEDBRankDB+GameDBRankDB", b =>
-                {
-                    b.HasOne("GamingGroupFinderGUI.Models.GameDB", "Game")
-                        .WithMany()
-                        .HasForeignKey("GameDBId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("GamingGroupFinderGUI.Models.RankDB", "Rank")
-                        .WithMany()
-                        .HasForeignKey("RankDBId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Game");
-
-                    b.Navigation("Rank");
                 });
 
             modelBuilder.Entity("GamingGroupFinderGUI.Models.MessageDB", b =>

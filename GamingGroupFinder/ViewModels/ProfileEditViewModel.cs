@@ -65,11 +65,11 @@ namespace GamingGroupFinderGUI.ViewModels
 
         // NOT WORKING 100%
         public static void RemoveInterest(string interestName) {
-            var interest = (from i in InterestManager.GetListOfInterests() where i.InterestName.Equals(interestName) select i).FirstOrDefault();
-            if(interest is null) {
-                return;
+            InterestDB interest = Profile.Interests
+                                    .FirstOrDefault(i => i.InterestName.Equals(interestName));
+            if(interest != null) {
+                Profile.Interests.Remove(interest);
             }
-            Profile.Interests.Remove(interest);
         }
 
         public static ObservableCollection<string> GetGameNames() {
