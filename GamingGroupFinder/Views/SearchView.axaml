@@ -1,0 +1,47 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+             x:Class="GamingGroupFinderGUI.Views.SearchView">
+      <StackPanel>
+
+        <StackPanel>
+          <TextBlock Text="Enter a value to search " />
+          <TextBox Text="{Binding SearchQuery}" />
+          <Button Command="{Binding SearchProfile}">Search Profiles</Button>
+          <Button Command="{Binding SearchEvent}">Search Events</Button>
+        </StackPanel>
+
+        <StackPanel>
+          <TextBlock Text="No Profiles were retrived with that query!" IsVisible="{Binding NoProfilesFound}" Foreground="Red"/>
+          <TextBlock Text="No Events were retrived with that query!" IsVisible="{Binding NoEventsFound}" Foreground="Red"/>
+        </StackPanel>
+
+        <StackPanel>
+
+          <ItemsControl Items="{Binding QueriedProfiles}">
+            <ItemsControl.ItemTemplate>
+              <DataTemplate>
+                <TextBlock Text="{Binding User.Username}" />
+              </DataTemplate>
+            </ItemsControl.ItemTemplate>
+          </ItemsControl>
+
+        </StackPanel>
+
+        <StackPanel>
+
+            <ItemsControl Items="{Binding QueriedEvents}">
+              <ItemsControl.ItemTemplate>
+                <DataTemplate>
+                  <TextBlock Text="{Binding Event.Title}" />
+                </DataTemplate>
+              </ItemsControl.ItemTemplate>
+            </ItemsControl>
+
+        </StackPanel>
+
+      </StackPanel>
+
+</UserControl>

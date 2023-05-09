@@ -6,6 +6,7 @@
 
 using GamingGroupFinderDatabase;
 using GamingGroupFinderGUI.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace GamingGroupFinder;
 
@@ -186,14 +187,12 @@ public class ProfileManager {
     }
 
     public List<ProfileDB> SearchProfile(string username) {
-        List<ProfileDB> ProfileList = new List<ProfileDB>();
-            for (int i = 0; i < db.ProfilesDB.Count(); i++) {
-                if (db.ProfilesDB.ElementAt(i).User.Username.Equals(username)) {
-                    ProfileDB DBProfile = db.ProfilesDB.ElementAt(i);
-                    ProfileList.Add(DBProfile);
-                }
-            }
-            return ProfileList;
+        List<ProfileDB> ProfileList = db.ProfilesDB
+                        .Include(p => p.User)
+                        .AsEnumerable()
+                        .Where(p => p.User.Username.Contains(username, StringComparison.OrdinalIgnoreCase))
+                        .ToList();
+        return ProfileList;
     }
 
 }

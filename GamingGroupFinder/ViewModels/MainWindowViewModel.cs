@@ -89,7 +89,7 @@ class MainWindowViewModel : ViewModelBase
 
         private void OpenSearch()
         {
-            throw new NotImplementedException();
+            Content = new SearchViewModel();
         }
 
         private void CreateEvent()

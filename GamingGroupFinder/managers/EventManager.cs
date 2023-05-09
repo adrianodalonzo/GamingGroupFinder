@@ -1,5 +1,6 @@
 using GamingGroupFinderDatabase;
 using GamingGroupFinderGUI.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace GamingGroupFinder {
 
@@ -120,6 +121,24 @@ namespace GamingGroupFinder {
             }
             return EventList;
         } 
+
+        public List<EventDB> SearchEvent(string query) {
+            // List<EventDB> EventList = new List<EventDB>();
+            // for (int i = 0; i < db.EventsDB.Count(); i++) {
+            //     if (db.EventsDB.ElementAt(i).Game.GameName.Equals(query) || db.EventsDB.ElementAt(i).Platform.PlatformName.Equals(query)) {
+            //         EventDB DBEvent = db.EventsDB.ElementAt(i);
+            //         EventList.Add(DBEvent);
+            //     }
+            // }
+            // return EventList;
+            List<EventDB> EventList = db.EventsDB
+                                        .Include(e => e.Game)
+                                        .AsEnumerable()
+                                        .Where(e => e.Game.GameName.Contains(query, StringComparison.OrdinalIgnoreCase) ||
+                                                    e.Platform.PlatformName.Contains(query, StringComparison.OrdinalIgnoreCase))
+                                        .ToList();
+            return EventList;
+        }
 
     }
 }
