@@ -63,14 +63,16 @@
       </StackPanel>
     </StackPanel>
       <Button Content="Edit Profile"
-              Command="{Binding $parent[Window].DataContext.EditProfile}"/>
+              Command="{Binding $parent[Window].DataContext.EditProfile}"
+              IsVisible="{Binding Visible}"/>
 
       <Button Content="Reset Password"
               Command="{Binding $parent[Window].DataContext.ResetPassword}"
               IsVisible="{Binding Visible}"/>
 
       <Button Content="View Events"
-              Command="{Binding $parent[Window].DataContext.ViewEvent}"/>  
+              Command="{Binding $parent[Window].DataContext.ViewEvent}"
+              IsVisible="{Binding Visible}"/>  
 
       <Button Content="Clear Profile" 
               Command="{Binding $parent[Window].DataContext.ClearProfile}"

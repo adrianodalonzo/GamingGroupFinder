@@ -6,7 +6,7 @@
              x:Class="GamingGroupFinderGUI.Views.SearchView">
       <StackPanel>
 
-        <StackPanel>
+        <StackPanel Margin="0,0,0,20">
           <TextBlock Text="Enter a value to search " />
           <TextBox Text="{Binding SearchQuery}" />
           <Button Command="{Binding SearchProfile}">Search Profiles</Button>
@@ -23,7 +23,9 @@
           <ItemsControl Items="{Binding QueriedProfiles}">
             <ItemsControl.ItemTemplate>
               <DataTemplate>
-                <TextBlock Text="{Binding User.Username}" />
+                <Button Content="{Binding User.Username}" 
+                        Command="{Binding $parent[Window].DataContext.DisplayProfile}"
+                        CommandParameter="{Binding}"/>
               </DataTemplate>
             </ItemsControl.ItemTemplate>
           </ItemsControl>
@@ -35,7 +37,9 @@
             <ItemsControl Items="{Binding QueriedEvents}">
               <ItemsControl.ItemTemplate>
                 <DataTemplate>
-                  <TextBlock Text="{Binding Event.Title}" />
+                  <Button Content="{Binding Event.Title}" 
+                          Command="{Binding $parent[Window].DataContext.DisplayEvent}"
+                          CommandParameter="{Binding}"/>
                 </DataTemplate>
               </ItemsControl.ItemTemplate>
             </ItemsControl>
