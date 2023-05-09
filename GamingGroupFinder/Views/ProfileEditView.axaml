@@ -98,7 +98,9 @@
                         <ListBox Items="{Binding Profile.Interests}" Width="200">
                                 <ListBox.ItemTemplate>
                                         <DataTemplate >
-                                                <TextBlock Text="{Binding InterestName}"/>
+                                                <Button Content="{Binding InterestName}"
+                                                        Command="{Binding $parent[UserControl].DataContext.RemoveInterest}"
+                                                        CommandParameter="{Binding InterestName}"/>
                                         </DataTemplate>
                                 </ListBox.ItemTemplate>
                         </ListBox>

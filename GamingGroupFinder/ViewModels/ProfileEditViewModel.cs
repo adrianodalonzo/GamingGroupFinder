@@ -1,3 +1,4 @@
+using System.Collections.ObjectModel;
 using System.Reactive;
 using GamingGroupFinder;
 using GamingGroupFinderGUI.Models;
@@ -10,8 +11,8 @@ namespace GamingGroupFinderGUI.ViewModels
         
         public static ProfileDB Profile {get; set;}
         public ReactiveCommand<Unit, Unit> Ok { get; }
-        public static List<string> GameNames { get; } = GetGameNames();
-        public static List<string> PlatformNames { get; } = GetPlatformNames();
+        public static ObservableCollection<string> GameNames { get; } = GetGameNames();
+        public static ObservableCollection<string> PlatformNames { get; } = GetPlatformNames();
         public string _selectedGame;
         public string SelectedGame
         {
@@ -49,13 +50,13 @@ namespace GamingGroupFinderGUI.ViewModels
             return game;
         }
 
-        public static void RemoveGame(string gameName) {
-            var game = (from g in GameManager.GetListOfGames() where g.GameName.Equals(gameName) select g).FirstOrDefault();
-            if(game is null) {
-                return;
-            }
-            Profile.Games.Remove(game);
-        }
+        // public static void RemoveGame(string gameName) {
+        //     var game = (from g in GameManager.GetListOfGames() where g.GameName.Equals(gameName) select g).FirstOrDefault();
+        //     if(game is null) {
+        //         return;
+        //     }
+        //     Profile.Games.Remove(game);
+        // }
 
         public static PlatformDB AddPlatform(string platformName) {
             var platform = (from p in PlatformManager.GetListOfPlatforms() where p.PlatformName.Equals(platformName) select p).FirstOrDefault();
@@ -66,36 +67,36 @@ namespace GamingGroupFinderGUI.ViewModels
             return platform;
         }
 
-        public static void RemovePlatform(string platformName) {
-            var platform = (from p in PlatformManager.GetListOfPlatforms() where p.PlatformName.Equals(platformName) select p).FirstOrDefault();
-            if(platform is null) {
-                return;
-            }
-            Profile.Platforms.Remove(platform);
-        }
+        // public static void RemovePlatform(string platformName) {
+        //     var platform = (from p in PlatformManager.GetListOfPlatforms() where p.PlatformName.Equals(platformName) select p).FirstOrDefault();
+        //     if(platform is null) {
+        //         return;
+        //     }
+        //     Profile.Platforms.Remove(platform);
+        // }
 
         public static void AddInterest(string interestName) {
             Profile.Interests.Add(new InterestDB(interestName));
         }
 
         public static void RemoveInterest(string interestName) {
-            var interest = (from i in InterestManager.GetListOfInterests() where i.InterestName.Equals(interestName) && i.Profiles.Contains(Profile) select i).FirstOrDefault();
+            var interest = (from i in InterestManager.GetListOfInterests() where i.InterestName.Equals(interestName) select i).FirstOrDefault();
             if(interest is null) {
                 return;
             }
             Profile.Interests.Remove(interest);
         }
 
-        public static List<string> GetGameNames() {
-            List<string> gameNames = new List<string>();
+        public static ObservableCollection<string> GetGameNames() {
+            ObservableCollection<string> gameNames = new ObservableCollection<string>();
             foreach(GameDB game in GameManager.GetListOfGames()) {
                 gameNames.Add(game.GameName);
             }
             return gameNames;
         }
 
-        public static List<string> GetPlatformNames() {
-            List<string> platformNames = new List<string>();
+        public static ObservableCollection<string> GetPlatformNames() {
+            ObservableCollection<string> platformNames = new ObservableCollection<string>();
             foreach(PlatformDB platform in PlatformManager.GetListOfPlatforms()) {
                 platformNames.Add(platform.PlatformName);
             }
