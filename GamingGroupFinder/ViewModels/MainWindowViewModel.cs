@@ -9,15 +9,12 @@ namespace GamingGroupFinderGUI.ViewModels;
 // TODO
 // figure out how to get a clean login page when logging out
     // when logging out, then try to log in again (with first acc or another, user is still "logged in"). need to figure out how log out should work.
-    // reset password
     // delete account
-// figure out how to save profile without errors (unique constraint violated when saving new edits (even when no changes were made))
 // figure out events
     // show all events?
     // add event
     // leave event
 // figure out search
-    // profile
     // event
 
 class MainWindowViewModel : ViewModelBase
@@ -28,7 +25,7 @@ class MainWindowViewModel : ViewModelBase
             get => _visibleNavigation;
             private set => this.RaiseAndSetIfChanged(ref _visibleNavigation, value);
         }
-        UserDB? LoggedInUser;
+        UserDB? LoggedInUser {get;set;}
 
         public ViewModelBase Content
         {
@@ -90,7 +87,7 @@ class MainWindowViewModel : ViewModelBase
 
         private void OpenSearch()
         {
-            throw new NotImplementedException();
+            Content = new SearchViewModel();
         }
 
         private void CreateEvent()
@@ -153,4 +150,17 @@ class MainWindowViewModel : ViewModelBase
                 }
             });
         }
+
+        public void ClearProfile() {
+            ProfileDB clearedProfile = new ProfileDB(LoggedInUser, null!, null!, 0, null!, null!, new List<InterestDB>(), new List<PlatformDB>(), new List<GameDB>());
+            LoggedInUser.Profile = clearedProfile;
+            ProfileManager.EditProfile(LoggedInUser.Profile);
+            DisplayProfile(LoggedInUser.Profile);
+        }
+
+        public void DeleteAccount() {
+            UserManager.GetInstance().DeleteAccount();
+            Login();
+        }
+
     }

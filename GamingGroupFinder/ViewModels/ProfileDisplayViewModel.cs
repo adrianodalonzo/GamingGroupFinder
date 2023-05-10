@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Reactive;
 using GamingGroupFinder;
 using GamingGroupFinderGUI.Models;
 using ReactiveUI;
@@ -8,7 +9,7 @@ namespace GamingGroupFinderGUI.ViewModels
 {
     public class ProfileDisplayViewModel : ViewModelBase
     {
-        public ProfileDB Profile { get; }
+        public ProfileDB Profile { get; set; }
         private bool _visible;
         public bool Visible {
             get => _visible;

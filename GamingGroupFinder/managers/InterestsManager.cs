@@ -1,5 +1,6 @@
 using GamingGroupFinderDatabase;
 using GamingGroupFinderGUI.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace GamingGroupFinder {
     public class InterestManager {
@@ -23,7 +24,8 @@ namespace GamingGroupFinder {
         }
 
         public static List<InterestDB> GetListOfInterests() {
-            return db.InterestsDB.ToList();
+            List<InterestDB> interests = db.InterestsDB.ToList();
+            return interests;
         }
     }
 }

@@ -53,6 +53,7 @@ namespace GamingGroupFinderGUI.ViewModels
         }
         public UserDB? User { get; private set;}
         public UserDB RegisterUser() {
+            ResetErrors();
             byte[] UserSalt = GenerateSalt();
             string UserHashedPassword = GenerateHash(this.Password, UserSalt);
             UserDB testUser = new UserDB(this.Username, UserHashedPassword, UserSalt, null);
@@ -67,7 +68,14 @@ namespace GamingGroupFinderGUI.ViewModels
             return this.User;
         }
 
+        private void ResetErrors() {
+            UserExistsText = false;
+            UserDoesNotExistText = false;
+            PasswordIncorrect = false;
+        }
+
         public UserDB LoginUser() {
+            ResetErrors();
             //add checking for if a user exists with credentials given
                 // if not, show a message
             UserDB testUser = Manager.GetUser(Username);

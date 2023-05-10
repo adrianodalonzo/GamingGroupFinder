@@ -8,9 +8,7 @@ public class ApplicationContext : DbContext {
     public DbSet<UserDB> UsersDB {get;set;}
     public DbSet<MessageDB> MessagesDB {get;set;}
     public DbSet<ProfileDB> ProfilesDB {get;set;}
-    // public DbSet<Contact> Contacts {get;set;}
     public DbSet<GameDB> GamesDB {get;set;}
-    // public DbSet<GameDBRankDB> GamesDBRanksDB {get;set;}
     public DbSet<RankDB> RanksDB {get;set;}
     public DbSet<PlatformDB> PlatformsDB {get;set;}
     public DbSet<EventDB> EventsDB {get;set;}
