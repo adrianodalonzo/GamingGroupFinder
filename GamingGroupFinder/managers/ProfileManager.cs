@@ -175,10 +175,15 @@ public class ProfileManager {
         _profile.Games = profile.Games;
         _profile.Interests = profile.Interests;
         _profile.Platforms = profile.Platforms;
+        _profile.Age = profile.Age;
+        _profile.Bio = profile.Bio;
+        _profile.Name = profile.Name;
+        _profile.Pronouns = profile.Pronouns;
+        _profile.ProfilePicture = profile.ProfilePicture;
         try {
-            db.Remove(profile);
+            db.Remove(_profile);
             db.SaveChanges();
-            db.Add(profile);
+            db.Add(_profile);
             db.SaveChanges();
         }
         catch (Exception e) {

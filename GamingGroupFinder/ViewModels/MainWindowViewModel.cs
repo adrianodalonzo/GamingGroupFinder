@@ -141,6 +141,7 @@ class MainWindowViewModel : ViewModelBase
         public void ClearProfile() {
             ProfileDB clearedProfile = new ProfileDB(LoggedInUser, null!, null!, 0, null!, null!, new List<InterestDB>(), new List<PlatformDB>(), new List<GameDB>());
             LoggedInUser.Profile = clearedProfile;
+            ProfileManager.EditProfile(LoggedInUser.Profile);
             DisplayProfile(LoggedInUser.Profile);
         }
 
