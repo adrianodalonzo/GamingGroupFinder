@@ -13,23 +13,18 @@ public class EventDB {
     public GameDB? Game { get; set; }
     public int PlatformId { get; set; }
     public PlatformDB? Platform { get; set; }
-    public int MinRankId { get; set; }
-    public RankDB? MinRank { get; set; }
-    public int MaxRankId { get; set; }
-    public RankDB? MaxRank { get; set; }
     public string Description { get; set; }
     public List<UserDB> UsersAttending { get; } = new();
 
-    public EventDB(UserDB owner, string title, DateTime time, string location, GameDB game, PlatformDB platform, RankDB minRank, RankDB maxRank, string description) {
+    public EventDB(UserDB owner, string title, DateTime time, string location, GameDB game, PlatformDB platform, string description, List<UserDB> usersAttending) {
         this.Owner = owner;
         this.Title = title;
         this.Time = time;
         this.Location = location;
         this.Game = game;
         this.Platform = platform;
-        this.MinRank = minRank;
-        this.MaxRank = maxRank;
         this.Description = description;
+        this.UsersAttending = usersAttending;
     }
 
     private EventDB() {

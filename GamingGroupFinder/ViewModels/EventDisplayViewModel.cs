@@ -6,11 +6,11 @@ namespace GamingGroupFinderGUI.ViewModels
 {
     public class EventDisplayViewModel : ViewModelBase
     {
-        public EventDisplayViewModel(EventDB e)
+        public EventDisplayViewModel(ObservableCollection<EventDB> e)
         {
-            Event = e;
+            Events = e;
         }
 
-        public EventDB Event { get; }
+        public ObservableCollection<EventDB> Events { get; }
     }
 }

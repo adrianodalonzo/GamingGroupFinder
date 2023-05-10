@@ -10,31 +10,49 @@
     
     <StackPanel Orientation="Horizontal" Spacing="10">
       <StackPanel Width="300" Spacing="5">
-        <TextBlock Text="{Binding Event.Description}"/>
-        <TextBlock Text="{Binding Event.Owner.Username, StringFormat='Organized By: {0}'}"/>
-        <TextBlock Text="Attendees:"/>
-        <ItemsRepeater Items="{Binding Event.UsersAttending}">
+        <ItemsRepeater Items="{Binding Events}">
           <ItemsRepeater.ItemTemplate>
             <DataTemplate>
-             <Border Margin="10,0,0,0" Padding="2">
-               <TextBlock Text="{Binding Username}"/>
-              </Border>
+              <StackPanel>
+                <TextBlock Text="Attendees:"/>
+                <ItemsRepeater Items="{Binding UsersAttending}">
+                  <ItemsRepeater.ItemTemplate>
+                    <DataTemplate>
+                      <StackPanel>
+                        <Border Margin="10,0,0,0" Padding="2">
+                          <TextBlock Text="{Binding Username}"/>
+                        </Border>
+                      </StackPanel>
+                    </DataTemplate>
+                  </ItemsRepeater.ItemTemplate>
+                </ItemsRepeater>
+              </StackPanel>
             </DataTemplate>
           </ItemsRepeater.ItemTemplate>
         </ItemsRepeater>
       </StackPanel>
 
-      <StackPanel Spacing="2">
-        <TextBlock Text="{Binding Event.Location, StringFormat='Location: {0}'}"/>
-        <TextBlock Text="{Binding Event.Time, StringFormat='Time: {0}'}"/>
-        <TextBlock Text="{Binding Event.Game, StringFormat='Game: {0}'}"
-                   IsVisible="{Binding Event.Game, Converter={x:Static StringConverters.IsNotNullOrEmpty}}"/>
-        <TextBlock Text="{Binding Event.Platform, StringFormat='Platform: {0}'}"
-                   IsVisible="{Binding Event.Platform, Converter={x:Static StringConverters.IsNotNullOrEmpty}}"/>
-        
-        <Button Content="Edit Event"
-                Command="{Binding $parent[Window].DataContext.EditEvent}"/>
-      </StackPanel>
+      <ItemsRepeater Items="{Binding Events}">
+        <ItemsRepeater.ItemTemplate>
+          <DataTemplate>
+            <StackPanel Spacing="2">
+              <TextBlock Text="{Binding Title}"/>
+              <TextBlock Text="{Binding Description}"/>
+              <TextBlock Text="{Binding Owner.Username, StringFormat='Organized By: {0}'}"/>
+              <TextBlock Text="{Binding Location, StringFormat='Location: {0}'}"/>
+              <TextBlock Text="{Binding Time, StringFormat='Time: {0}'}"/>
+              <TextBlock Text="{Binding Game, StringFormat='Game: {0}'}"
+                        IsVisible="{Binding Game, Converter={x:Static StringConverters.IsNotNullOrEmpty}}"/>
+              <TextBlock Text="{Binding Platform, StringFormat='Platform: {0}'}"
+                        IsVisible="{Binding Platform, Converter={x:Static StringConverters.IsNotNullOrEmpty}}"/>
+              
+              <Button Content="Edit Event"
+                      Command="{Binding $parent[Window].DataContext.EditEvent}"
+                      CommandParameter="{Binding}"/>
+            </StackPanel>
+          </DataTemplate>
+        </ItemsRepeater.ItemTemplate>
+      </ItemsRepeater>
     </StackPanel>       
   </StackPanel>
 </UserControl>

@@ -70,6 +70,6 @@
               IsVisible="{Binding Visible}"/>
 
       <Button Content="View Events"
-              Command="{Binding $parent[Window].DataContext.ViewEvent}"/>       
+              Command="{Binding $parent[Window].DataContext.ViewEvents}"/>       
   </StackPanel>
 </UserControl>
