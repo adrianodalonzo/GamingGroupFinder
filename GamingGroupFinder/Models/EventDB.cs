@@ -27,6 +27,11 @@ public class EventDB {
         this.UsersAttending = usersAttending;
     }
 
+    public EventDB(string title, UserDB owner) {
+        this.Title = title;
+        this.Owner = owner;
+    }
+
     private EventDB() {
         
     }

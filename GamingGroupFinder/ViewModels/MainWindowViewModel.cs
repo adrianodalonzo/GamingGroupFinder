@@ -92,7 +92,7 @@ class MainWindowViewModel : ViewModelBase
 
         private void CreateEvent()
         {
-            // DisplayEvent(new EventDB());
+            Content = new AddEventViewModel(LoggedInUser);
         }
 
         private void DisplayEvents(ObservableCollection<EventDB> e)

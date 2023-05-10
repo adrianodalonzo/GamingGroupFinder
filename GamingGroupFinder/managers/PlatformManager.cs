@@ -25,5 +25,9 @@ namespace GamingGroupFinder {
         public static List<PlatformDB> GetListOfPlatforms() {
             return db.PlatformsDB.ToList();
         }
+
+        public static PlatformDB GetPlatform(string platformName) {
+            return (from platform in db.PlatformsDB where platform.PlatformName.Equals(platformName) select platform).SingleOrDefault();
+        }
     }
 }

@@ -25,5 +25,9 @@ namespace GamingGroupFinder {
         public static List<GameDB> GetListOfGames() {
             return db.GamesDB.ToList();
         }
+
+        public static GameDB GetGame(string gameName) {
+            return (from game in db.GamesDB where game.GameName.Equals(gameName) select game).SingleOrDefault();
+        }
     }
 }

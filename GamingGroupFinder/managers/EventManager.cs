@@ -68,6 +68,15 @@ namespace GamingGroupFinder {
             }
         }
 
+        public void CreateEvent(EventDB e) {
+            try {
+                db.Add(e);
+                db.SaveChanges();
+            } catch(Exception ex) {
+                Console.WriteLine(ex);
+            }
+        }
+
         public void EditEvent(EventDB eDB) {
             if (_eventDB is null) {
                 _eventDB = GetEvent(eDB.EventDBId);
