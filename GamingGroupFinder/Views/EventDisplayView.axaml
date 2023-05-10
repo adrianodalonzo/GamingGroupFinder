@@ -41,10 +41,8 @@
               <TextBlock Text="{Binding Owner.Username, StringFormat='Organized By: {0}'}"/>
               <TextBlock Text="{Binding Location, StringFormat='Location: {0}'}"/>
               <TextBlock Text="{Binding Time, StringFormat='Time: {0}'}"/>
-              <TextBlock Text="{Binding Game, StringFormat='Game: {0}'}"
-                        IsVisible="{Binding Game, Converter={x:Static StringConverters.IsNotNullOrEmpty}}"/>
-              <TextBlock Text="{Binding Platform, StringFormat='Platform: {0}'}"
-                        IsVisible="{Binding Platform, Converter={x:Static StringConverters.IsNotNullOrEmpty}}"/>
+              <TextBlock Text="{Binding Game.GameName, StringFormat='Game: {0}'}"/>
+              <TextBlock Text="{Binding Platform.PlatformName, StringFormat='Platform: {0}'}"/>
               
               <Button Content="Edit Event"
                       Command="{Binding $parent[Window].DataContext.EditEvent}"

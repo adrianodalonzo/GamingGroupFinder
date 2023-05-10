@@ -11,6 +11,4 @@ insert into "PlatformsDB" ("PlatformName") values ('Nintendo Switch');
 insert into "PlatformsDB" ("PlatformName") values ('Xbox One');
 insert into "PlatformsDB" ("PlatformName") values ('Playstation 5');
 
---GameRanks
-
 commit;

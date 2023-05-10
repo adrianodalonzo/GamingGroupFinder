@@ -24,14 +24,12 @@
               Watermark="Event Location"/>
       
       <TextBlock Text="Game: "/>
-      <TextBox AcceptsReturn="False"
-              Text="{Binding Event.Game}"
-              Watermark="Event Game"/>
+      <ComboBox Items="{Binding GameNames}"
+                SelectedItem="{Binding SelectedGame}"/>
 
-      <TextBlock Text="Platform: "/>
-      <TextBox AcceptsReturn="False"
-              Text="{Binding Event.Platform}"
-              Watermark="Event Platform"/>
+      <TextBlock Text="Platforms: "/>
+      <ComboBox Items="{Binding PlatformNames}"
+                SelectedItem="{Binding SelectedPlatform}"/>
 
       <TextBlock Text="Date: "/>
       <DatePicker SelectedDate="{Binding Event.Date}"/>
