@@ -135,7 +135,9 @@ namespace GamingGroupFinder {
                                         .Include(e => e.Game)
                                         .AsEnumerable()
                                         .Where(e => e.Game.GameName.Contains(query, StringComparison.OrdinalIgnoreCase) ||
-                                                    e.Platform.PlatformName.Contains(query, StringComparison.OrdinalIgnoreCase))
+                                                    e.Platform.PlatformName.Contains(query, StringComparison.OrdinalIgnoreCase) ||
+                                                    e.Title.Contains(query, StringComparison.OrdinalIgnoreCase) ||
+                                                    e.Description.Contains(query, StringComparison.OrdinalIgnoreCase))
                                         .ToList();
             return EventList;
         }

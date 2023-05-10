@@ -97,8 +97,9 @@
                                 VerticalAlignment="Center"/>
                         <ListBox Items="{Binding Profile.Interests}" Width="200">
                                 <ListBox.ItemTemplate>
-                                        <DataTemplate >
-                                                <Button Content="{Binding InterestName}"
+                                        <DataTemplate>
+                                                <Button HorizontalAlignment="Center"
+                                                        Content="{Binding InterestName}"
                                                         Command="{Binding $parent[UserControl].DataContext.RemoveInterest}"
                                                         CommandParameter="{Binding InterestName}"/>
                                         </DataTemplate>

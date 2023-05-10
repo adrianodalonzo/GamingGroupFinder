@@ -170,7 +170,7 @@ public class ProfileManager {
 
     public static void EditProfile(ProfileDB profile) {
         if(_profile is null) {
-            _profile = GetProfile(profile.User);
+            _profile = profile;
         }
         _profile.Games = profile.Games;
         _profile.Interests = profile.Interests;
@@ -187,7 +187,7 @@ public class ProfileManager {
             db.SaveChanges();
         }
         catch (Exception e) {
-            Console.WriteLine(e);
+            return;
         }
     }
 
@@ -195,7 +195,9 @@ public class ProfileManager {
         List<ProfileDB> ProfileList = db.ProfilesDB
                         .Include(p => p.User)
                         .AsEnumerable()
-                        .Where(p => p.User.Username.Contains(username, StringComparison.OrdinalIgnoreCase))
+                        .Where(p => p.User.Username.Contains(username, StringComparison.OrdinalIgnoreCase) ||
+                                    p.Bio.Contains(username, StringComparison.OrdinalIgnoreCase) ||
+                                    p.Interests.Any(i => i.InterestName.Contains(username, StringComparison.OrdinalIgnoreCase)))
                         .ToList();
         return ProfileList;
     }
