@@ -61,9 +61,6 @@ public class ProfileManager {
 
     // this is probably just going to create a new profile and add it to the database
     public static void CreateProfile(Profile p, User u) {
-        // List<InterestDB> Interests = InterestListToInterestsDBList(p.Interests);
-        // List<PlatformDB> Platforms = PlatformListToPlatformsDBList(p.Platforms); 
-        // List<GameDB> Games = GameListToGameDBList(p.Games);
         UserDB profileUser = (from user in db.UsersDB where user.Username.Equals(u.Username) select user).First();
         ProfileDB profile = new ProfileDB(profileUser, null, null, 0, null, null, new List<InterestDB>(), new List<PlatformDB>(), new List<GameDB>());
 
@@ -94,42 +91,6 @@ public class ProfileManager {
         db.Remove(toDelete);
         db.SaveChanges();
     }
-
-    // public static List<InterestDB> GetProfileInterests(Profile p) {
-    //     var testInterests = new List<InterestDB>();
-    //     foreach(var interest in p.Interests) {
-    //         InterestDB testInterest = (from i in db.InterestsDB where i.InterestName.Equals(interest.Name) select i).FirstOrDefault();
-    //         if (testInterest == null) {
-    //             InterestDB newInterest = new InterestDB(interest.Name);
-    //             testInterests.Add(newInterest);
-    //         }
-    //     }
-    //     return testInterests;
-    // }
-
-    // public static List<PlatformDB> GetProfilePlatforms(Profile p) {
-    //     var testPlatforms = new List<PlatformDB>();
-    //     foreach(var platform in p.Platforms) {
-    //         PlatformDB testPlatform = (from plat in db.PlatformsDB where plat.PlatformName.Equals(platform.Name) select plat).FirstOrDefault();
-    //         if (testPlatform == null) {
-    //             PlatformDB newPlatform = new PlatformDB(platform.Name);
-    //             testPlatforms.Add(newPlatform);
-    //         }
-    //     }
-    //     return testPlatforms;
-    // }
-
-    // public static List<GameDB> GetProfileGames(Profile p) {
-    //     var testGames = new List<GameDB>();
-    //     foreach(var game in p.Games) {
-    //         GameDB testGame = (from g in db.GamesDB where g.GameName.Equals(game.Name) select g).FirstOrDefault();
-    //         if (testGame == null) {
-    //             GameDB newGame = new GameDB(game.Name);
-    //             testGames.Add(newGame);
-    //         }
-    //     }
-    //     return testGames;
-    // }
 
     public void EditProfile(Profile p, ProfileDB toEdit) {
         List<InterestDB> Interests = new List<InterestDB>();
