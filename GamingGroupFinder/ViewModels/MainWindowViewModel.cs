@@ -137,12 +137,16 @@ class MainWindowViewModel : ViewModelBase
             });
         }
 
-        // Clears profile, but need to update db somehow
         public void ClearProfile() {
             ProfileDB clearedProfile = new ProfileDB(LoggedInUser, null!, null!, 0, null!, null!, new List<InterestDB>(), new List<PlatformDB>(), new List<GameDB>());
             LoggedInUser.Profile = clearedProfile;
             ProfileManager.EditProfile(LoggedInUser.Profile);
             DisplayProfile(LoggedInUser.Profile);
+        }
+
+        public void DeleteAccount() {
+            UserManager.GetInstance().DeleteAccount();
+            Login();
         }
 
     }

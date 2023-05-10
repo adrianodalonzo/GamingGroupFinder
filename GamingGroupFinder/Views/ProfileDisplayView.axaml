@@ -77,5 +77,8 @@
       <Button Content="Clear Profile" 
               Command="{Binding $parent[Window].DataContext.ClearProfile}"
               IsVisible="{Binding Visible}"/>     
+
+      <Button Content="Delete Account"
+              Command="{Binding $parent[Window].DataContext.DeleteAccount}"/>
   </StackPanel>
 </UserControl>
