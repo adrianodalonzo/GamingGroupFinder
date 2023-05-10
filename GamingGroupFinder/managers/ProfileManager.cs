@@ -117,6 +117,9 @@ public class ProfileManager {
     // add get profile
     public static ProfileDB GetProfile(UserDB u) {
         ProfileDB profile = (from p in db.ProfilesDB where p.User.Username.Equals(u.Username) select p).SingleOrDefault();
+        if(profile is null) {
+            profile = new ProfileDB(u, null!, null!, 0, null!, null!, new List<InterestDB>(), new List<PlatformDB>(), new List<GameDB>());
+        }
         profile.Games = db.GamesDB
                         .Where(g => g.Profiles.Contains(profile))
                         .Select(g => g).ToList();
