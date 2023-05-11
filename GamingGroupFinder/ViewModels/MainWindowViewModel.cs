@@ -7,15 +7,9 @@ using ReactiveUI;
 namespace GamingGroupFinderGUI.ViewModels;
 
 // TODO
-// figure out how to get a clean login page when logging out
-    // when logging out, then try to log in again (with first acc or another, user is still "logged in"). need to figure out how log out should work.
-    // delete account
-// figure out events
-    // show all events?
-    // add event
-    // leave event
-// figure out search
-    // event
+    // Fix bug where when logging out then registering, throws exception
+    // Mini:
+        // can only edit event if you're the owner
 
 class MainWindowViewModel : ViewModelBase
     {
