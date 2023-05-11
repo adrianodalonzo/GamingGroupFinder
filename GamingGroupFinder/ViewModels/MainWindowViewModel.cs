@@ -95,7 +95,7 @@ class MainWindowViewModel : ViewModelBase
             EventDisplayViewModel edvm = (EventDisplayViewModel) Content;
             var vm = new AddEventViewModel(LoggedInUser);
 
-            vm.Ok.Subscribe(x => {Content = edvm;});
+            vm.Ok.Subscribe(x => {Content = new EventDisplayViewModel(new ObservableCollection<EventDB>(EventManager.GetInstance().GetEvents()));});
             Content = vm;
         }
 

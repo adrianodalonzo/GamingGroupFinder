@@ -11,6 +11,14 @@ namespace GamingGroupFinderGUI.ViewModels
         
         public EventDB Event {get; set;}
         public ReactiveCommand<Unit, Unit> Ok { get; }
+        public DateTimeOffset Date {
+            get => Event.Time.Date;
+            set { Event.Time = value.Add(Event.Time.TimeOfDay).DateTime; }
+        }
+        public TimeSpan TimeOfDay {
+            get => Event.Time.TimeOfDay;
+            set { Event.Time = Event.Time.Date.Add(value); }
+        }
         private string _selectedGame;
         public string SelectedGame {
             get => _selectedGame;
@@ -27,6 +35,7 @@ namespace GamingGroupFinderGUI.ViewModels
         {
 
             Event = new EventDB("", owner);
+            Date = DateTime.Now;
             Event.Owner.Profile = ProfileManager.GetProfile(owner);
             Ok = ReactiveCommand.Create(() => { 
                 CreateEvent();

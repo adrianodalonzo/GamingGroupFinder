@@ -32,7 +32,10 @@
                 SelectedItem="{Binding SelectedPlatform}"/>
 
       <TextBlock Text="Date: "/>
-      <DatePicker SelectedDate="{Binding Event.Date}"/>
+      <DatePicker SelectedDate="{Binding Date}"/>
+
+      <TextBlock Text="Time: "/>
+      <TimePicker SelectedTime="{Binding TimeOfDay}"/>
       
     </StackPanel>
   </DockPanel>

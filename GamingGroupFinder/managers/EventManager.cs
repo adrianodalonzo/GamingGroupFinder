@@ -26,53 +26,16 @@ namespace GamingGroupFinder {
 
         private EventDB _eventDB;
 
-        // public EventManager(Event _event) {
-        //     this._event = _event;
-        // }
-
-        private List<UserDB> UserToUserDB(List<User> users) {
-            List<UserDB> userDBs = new List<UserDB>();
-            foreach (User user in users) {
-                userDBs.Add(new UserDB(user.Username, user.Password, user.Salt, null));
-            }
-            return userDBs;
-        }
-
         public EventDB? GetEvent(int id)
         {
-            EventDB eventDB = db.EventsDB.Find(id);
+            EventDB eventDB = db.EventsDB
+                                .Include(ev => ev.Platform)
+                                .Include(ev => ev.Game)
+                                .Include(ev => ev.Owner)
+                                .Where(ev => ev.EventDBId == id)
+                                .Select(ev => ev).SingleOrDefault();
             _eventDB = eventDB;
             return eventDB;
-        }
-
-        public EventDB? GetEvent(UserDB owner) {
-            EventDB ownerRetrieved = (EventDB) db.EventsDB
-                                    .Where(ev => ev.Owner.Username.Equals(owner.Username))
-                                    .Select(ev => ev);
-            return ownerRetrieved;
-        }
-
-
-        // this is probably just going to create a new event and add it to the database
-        public void CreateEvent(Event e) {
-            // add checking for an existing event
-            // if (e.Title == (from Event in db.EventsDB select Event.Title).Single()) {
-            //     throw new ArgumentException("Event already exists");
-            // }
-            UserDB Owner = (from user in db.UsersDB where user.Username.Equals(e.Owner.Username) select user).Single();
-            GameDB Game = (from game in db.GamesDB where game.GameName.Equals(e.Game.Name) select game).Single();
-            PlatformDB Platform = (from platform in db.PlatformsDB where platform.PlatformName.Equals(e.Platform.Name) select platform).Single();
-            // List<UserDB> UsersAttending = ((List<UserDB>)(from evnt in db.EventsDB where evnt.Title.Equals(e.Title) select evnt));
-            // List<UserDB> usersAttending = (from ev in db.EventsDB where ev.Title.Equals(e.Title) select ev.UsersAttending).ToList();
-            EventDB eventEntity = new EventDB(Owner, e.Title, e.DateTime, e.Location, Game, Platform, e.Description, UserToUserDB(e.Attendees));
-            _eventDB = eventEntity;
-            try {
-                db.Add(_eventDB);
-                db.SaveChanges();
-            }
-            catch (Exception ex) {
-                Console.WriteLine(ex);
-            }
         }
 
         public void CreateEvent(EventDB e) {
@@ -122,9 +85,8 @@ namespace GamingGroupFinder {
 
         // this is probably just going to delete an event from the database. not sure what would be taken in as a parameter (event id?, event object, ...)
         public void DeleteEvent(EventDB e) {
-            if (_eventDB is null) {
-                _eventDB = GetEvent(e.EventDBId);
-            }
+            _eventDB = GetEvent(e.EventDBId);
+
             try {
                 db.EventsDB.Remove(_eventDB);
                 db.SaveChanges();
@@ -136,9 +98,7 @@ namespace GamingGroupFinder {
 
         // this is probably just going to add a user to the event's list of attendees
         public void AttendEvent(EventDB eventDB, string username) {
-            if (_eventDB is null) {
-                _eventDB = eventDB;
-            }
+            _eventDB = eventDB;
             
             UserDB userEntity = (from user in db.UsersDB where user.Username.Equals(username) select user).Single();
             
@@ -153,9 +113,7 @@ namespace GamingGroupFinder {
 
         // this is probably just going to remove a user from the event's list of attendees
         public void LeaveEvent(EventDB eventDB, string username) {
-            if (_eventDB is null) {
-                _eventDB = eventDB;
-            }
+            _eventDB = eventDB;
 
             UserDB userEntity = (from user in db.UsersDB where user.Username.Equals(username) select user).Single();
             
@@ -177,18 +135,6 @@ namespace GamingGroupFinder {
             return Attendees;
         }
 
-        // same as search event
-        public List<EventDB> FindEvent(Game game, string platform) {
-            List<EventDB> EventList = new List<EventDB>();
-            for (int i = 0; i < db.EventsDB.Count(); i++) {
-                if (db.EventsDB.ElementAt(i).Game.GameName.Equals(game.Name) || db.EventsDB.ElementAt(i).Platform.PlatformName.Equals(platform)) {
-                    EventDB DBEvent = db.EventsDB.ElementAt(i);
-                    EventList.Add(DBEvent);
-                }
-            }
-            return EventList;
-        } 
-
         public List<EventDB> SearchEvent(string query) {
             List<EventDB> EventList = db.EventsDB
                                         .AsEnumerable()
@@ -201,7 +147,12 @@ namespace GamingGroupFinder {
         }
 
         public List<EventDB> GetEvents() {
-            return db.EventsDB.ToList();
+            List<EventDB> events = db.EventsDB
+                                    .Include(ev => ev.Platform)
+                                    .Include(ev => ev.Game)
+                                    .Include(ev => ev.Owner)
+                                    .Select(ev => ev).ToList();
+            return events;
         }
 
     }
