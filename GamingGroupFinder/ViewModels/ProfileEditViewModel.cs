@@ -31,6 +31,14 @@ namespace GamingGroupFinderGUI.ViewModels
             get => _selectedPlatform;
             private set => this.RaiseAndSetIfChanged(ref _selectedPlatform, value);
         }
+        private string _profilePictureUrl;
+        public string ProfilePictureUrl
+        {
+            get => _profilePictureUrl;
+            set  {this.RaiseAndSetIfChanged(ref _profilePictureUrl, value); 
+                Profile.ProfilePicture = value;
+            }
+        }
         public ProfileEditViewModel(ProfileDB p)
         {
             Profile = p;

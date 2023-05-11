@@ -10,6 +10,7 @@
         <TextBlock Text="A user already exists with that username" IsVisible="{Binding UserExistsText}" Foreground="Red"/>
         <TextBlock Text="There isn't a user with the given username!" IsVisible="{Binding UserDoesNotExistText}" Foreground="Red"/>
         <TextBlock Text="Password is incorrect!" IsVisible="{Binding PasswordIncorrect}" Foreground="Red"/>
+        <Image Source="/Assets/giphy.gif" Height="200"/>
         <TextBlock Text="Username: "/>
         <TextBox AcceptsReturn="False"
                 Text="{Binding Username}"

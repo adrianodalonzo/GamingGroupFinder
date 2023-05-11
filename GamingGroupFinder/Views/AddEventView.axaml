@@ -31,7 +31,17 @@
                             HorizontalAlignment="Center"
                             VerticalAlignment="Center"/>
                     <DatePicker HorizontalAlignment="Center"
+                            VerticalAlignment="Center"
+                            SelectedDate="{Binding Date}"/>
+            </StackPanel>
+
+            <StackPanel>
+                    <TextBlock Text="Time: "
+                            HorizontalAlignment="Center"
                             VerticalAlignment="Center"/>
+                    <TimePicker HorizontalAlignment="Center"
+                            VerticalAlignment="Center"
+                            SelectedTime="{Binding TimeOfDay}"/>
             </StackPanel>
     
             <StackPanel>
@@ -66,7 +76,8 @@
         <StackPanel>
                 <Button Content="Add Event"
                         Command="{Binding Ok}" 
-                        VerticalAlignment="Center" />
+                        VerticalAlignment="Center" 
+                        HorizontalAlignment="Center"/>
         </StackPanel>
         </StackPanel>
 </UserControl>
