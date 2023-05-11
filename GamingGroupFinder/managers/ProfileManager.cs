@@ -90,22 +90,22 @@ public class ProfileManager {
         if (profile is null) {
             throw new ArgumentNullException("profile cannot be null");
         }
-        if(_profile is null) {
-            _profile = profile;
-        }
-        _profile.Games = profile.Games;
-        _profile.Interests = profile.Interests;
-        _profile.Platforms = profile.Platforms;
-        _profile.Age = profile.Age;
-        _profile.Bio = profile.Bio;
-        _profile.Name = profile.Name;
-        _profile.Pronouns = profile.Pronouns;
-        _profile.ProfilePicture = profile.ProfilePicture;
+        // if(_profile is null) {
+        _profile = profile;
+        // }
+        // _profile.Games = profile.Games;
+        // _profile.Interests = profile.Interests;
+        // _profile.Platforms = profile.Platforms;
+        // _profile.Age = profile.Age;
+        // _profile.Bio = profile.Bio;
+        // _profile.Name = profile.Name;
+        // _profile.Pronouns = profile.Pronouns;
+        // _profile.ProfilePicture = profile.ProfilePicture;
         try {
             db.SaveChanges();
         }
         catch (Exception e) {
-            return;
+            Console.WriteLine(e);
         }
     }
 

@@ -43,10 +43,19 @@ namespace GamingGroupFinderGUI.ViewModels
         }
         public void DownloadImage(string url)
         {
+            if(url == null) {
+                url = "https://upload.wikimedia.org/wikipedia/commons/thumb/2/2c/Default_pfp.svg/1200px-Default_pfp.svg.png";
+            }
             using (WebClient client = new WebClient())
             {
-                client.DownloadDataAsync(new Uri(url));
-                client.DownloadDataCompleted += DownloadComplete;
+                try {
+                    client.DownloadDataAsync(new Uri(url));
+                    client.DownloadDataCompleted += DownloadComplete;
+                } catch (Exception e) {
+                    url = "https://upload.wikimedia.org/wikipedia/commons/thumb/2/2c/Default_pfp.svg/1200px-Default_pfp.svg.png";
+                    client.DownloadDataAsync(new Uri(url));
+                    client.DownloadDataCompleted += DownloadComplete;
+                }
             }
         }
         private void DownloadComplete(object sender, DownloadDataCompletedEventArgs e)
