@@ -14,12 +14,12 @@ namespace GamingGroupFinderGUI.ViewModels
         private string _selectedGame;
         public string SelectedGame {
             get => _selectedGame;
-            set => this.RaiseAndSetIfChanged(ref _selectedGame, value);
+            private set => this.RaiseAndSetIfChanged(ref _selectedGame, value);
         }
         private string _selectedPlatform;
         public string SelectedPlatform {
             get => _selectedPlatform;
-            set => this.RaiseAndSetIfChanged(ref _selectedPlatform, value);
+            private set => this.RaiseAndSetIfChanged(ref _selectedPlatform, value);
         }
         public ObservableCollection<string> GameNames { get; } = ProfileEditViewModel.GetGameNames();
         public ObservableCollection<string> PlatformNames { get; } = ProfileEditViewModel.GetPlatformNames();

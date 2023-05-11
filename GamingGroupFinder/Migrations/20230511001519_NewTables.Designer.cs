@@ -12,7 +12,7 @@ using Oracle.EntityFrameworkCore.Metadata;
 namespace _410project.Migrations
 {
     [DbContext(typeof(ApplicationContext))]
-    [Migration("20230510185341_NewTables")]
+    [Migration("20230511001519_NewTables")]
     partial class NewTables
     {
         /// <inheritdoc />

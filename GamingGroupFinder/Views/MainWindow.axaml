@@ -13,7 +13,7 @@
                 <Button Command="{Binding Profile}"> 
                         <Image Source="/Assets/Icons/icons-profile.png" Width="20" Height="20"/>
                 </Button>
-                <Button Command="{Binding CreateEvent}">
+                <Button Command="{Binding ViewEvents}">
                         <Image Source="/Assets/Icons/icons-event.png" Width="20" Height="20"/>
                 </Button>
                 <Button Command="{Binding Search}">

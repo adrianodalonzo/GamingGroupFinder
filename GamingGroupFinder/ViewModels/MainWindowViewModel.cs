@@ -92,7 +92,11 @@ class MainWindowViewModel : ViewModelBase
 
         private void CreateEvent()
         {
-            Content = new AddEventViewModel(LoggedInUser);
+            EventDisplayViewModel edvm = (EventDisplayViewModel) Content;
+            var vm = new AddEventViewModel(LoggedInUser);
+
+            vm.Ok.Subscribe(x => {Content = edvm;});
+            Content = vm;
         }
 
         private void DisplayEvents(ObservableCollection<EventDB> e)
@@ -103,20 +107,7 @@ class MainWindowViewModel : ViewModelBase
 
         public void ViewEvents()
         {
-            // possibly take in a lis of events and display them in the view
-            // ObservableCollection<EventDB> eventDBs = new ObservableCollection<EventDB>();
-            // UserDB u = new UserDB("OwnerUser", "pass", new byte['s'], null);
-            // UserDB u2 = new UserDB("Attending1", "pass", new byte['s'], null);
-            // UserDB u3 = new UserDB("AttendingOne", "pass", new byte['s'], null);
-            // UserDB u4 = new UserDB("Attending2", "pass", new byte['s'], null);
-
-            // List<UserDB> users1 = new List<UserDB>{u2, u3};
-            // List<UserDB> users2 = new List<UserDB>{u4};
-
-            // eventDBs.Add(new EventDB(u, "EventOne", DateTime.Now, "Here", null, null, "EventOne Description", users1));
-            // eventDBs.Add(new EventDB(u, "EventTwo", DateTime.Today, "Over There", null, null, "EventTwo Description", users2));
-
-            ObservableCollection<EventDB> eventDBs = new ObservableCollection<EventDB>(){ EventManager.GetInstance().GetEvent(1)};
+            ObservableCollection<EventDB> eventDBs = new ObservableCollection<EventDB>(EventManager.GetInstance().GetEvents());
 
             Content = new EventDisplayViewModel(eventDBs);
         }
