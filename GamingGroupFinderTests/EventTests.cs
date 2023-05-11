@@ -23,9 +23,9 @@ namespace GamingGroupFinderTests {
 
             Game splatoon = new Game("Splatoon", platforms, GameSplatoonRanks());
 
-            User vince = new User("vince", "vince", "salt", new List<User>());
-            User user1 = new User("u1", "you1", "salt", new List<User>());
-            User user2 = new User("u2", "you2", "salt", new List<User>());
+            User vince = new User("vince", "vince", new byte['s'], new List<User>());
+            User user1 = new User("u1", "you1", new byte['s'], new List<User>());
+            User user2 = new User("u2", "you2", new byte['s'], new List<User>());
 
             List<User> attendees = new List<User>();
             attendees.Add(vince);
@@ -49,9 +49,9 @@ namespace GamingGroupFinderTests {
 
             Game splatoon = new Game("Splatoon", platforms, GameSplatoonRanks());
 
-            User vince = new User("vince", "vince", "salt", new List<User>());
-            User user1 = new User("u1", "you1", "salt", new List<User>());
-            User user2 = new User("u2", "you2", "salt", new List<User>());
+            User vince = new User("vince", "vince", new byte['s'], new List<User>());
+            User user1 = new User("u1", "you1", new byte['s'], new List<User>());
+            User user2 = new User("u2", "you2", new byte['s'], new List<User>());
 
             List<User> attendees = new List<User>();
             attendees.Add(vince);
@@ -64,78 +64,5 @@ namespace GamingGroupFinderTests {
             Event ev = new Event(null, DateTime.Now, "over there", splatoon, nintendoSwitch, minRank, maxRank, "smth", vince, attendees);
             Assert.Fail();
         }
-
-        [TestMethod]
-        public void TestAttendEvent_AddsUser() {
-            Event ev = CreateBaseEvent();
-            User otherUser = new User("other", "user", "salt", new List<User>());
-
-            User vince = new User("vince", "vince", "salt", new List<User>());
-            User user1 = new User("u1", "you1", "salt", new List<User>());
-            User user2 = new User("u2", "you2", "salt", new List<User>());
-
-        //     List<User> attendees = new List<User>();
-        //     attendees.Add(vince);
-        //     attendees.Add(user1);
-        //     attendees.Add(user2);
-        //     attendees.Add(otherUser);
-
-        //     EventManager evMan = new EventManager(ev);
-
-        //     evMan.AttendEvent(otherUser);
-
-        //     Assert.IsTrue(attendees.SequenceEqual(ev.Attendees));
-        }
-
-        // [TestMethod]
-        // [ExpectedException (typeof(ArgumentNullException))]
-        // public void TestAttendEvent_ThrowsWhenGivenNull() {
-        //     Event ev = CreateBaseEvent();
-        //     EventManager evMan = new EventManager(ev);
-        //     User? otherUser = null;
-
-        //     evMan.AttendEvent(otherUser);
-        //     Assert.Fail();
-        // }
-
-        [TestMethod]
-        public void TestLeaveEvent_RemovesUser() {
-            Event ev = CreateBaseEvent();
-            User user1 = new User("u1", "you1", "salt", new List<User>());
-
-            User vince = new User("vince", "vince", "salt", new List<User>());
-            User user2 = new User("u2", "you2", "salt", new List<User>());
-
-        //     List<User> attendees = new List<User>();
-        //     attendees.Add(vince);
-        //     attendees.Add(user2);
-
-        //     EventManager evMan = new EventManager(ev);
-
-        //     evMan.LeaveEvent(user1);
-
-        //     Assert.IsTrue(attendees.SequenceEqual(ev.Attendees));
-        }
-
-        // [TestMethod]
-        // [ExpectedException (typeof(ArgumentNullException))]
-        // public void TestLeaveEvent_ThrowsWhenGivenNull() {
-        //     Event ev = CreateBaseEvent();
-        //     EventManager evMan = new EventManager(ev);
-        //     User? user1 = null;
-
-        //     evMan.LeaveEvent(user1);
-        //     Assert.Fail();
-        // }
-
-        // [TestMethod]
-        // public void TestViewAttendees_ReturnsCorrect() {
-        //     Event ev = CreateBaseEvent();
-        //     EventManager evMan = new EventManager(ev);
-            
-        //     string expectedString = "vince, u1, u2, ";
-
-        //     Assert.AreEqual(expectedString, evMan.ViewAttendees());
-        // }
     }
 }

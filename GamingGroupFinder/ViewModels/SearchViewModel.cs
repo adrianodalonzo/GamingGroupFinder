@@ -42,7 +42,7 @@ namespace GamingGroupFinderGUI.ViewModels
 
         public void RetrieveProfiles() {
             ClearOptions();
-            var profiles = ProfileManager.getInstance().SearchProfile(SearchQuery);
+            var profiles = ProfileManager.GetInstance().SearchProfile(SearchQuery);
             if(profiles.Count == 0) {
                 NoProfilesFound = true;
             } else {

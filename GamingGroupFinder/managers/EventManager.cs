@@ -20,7 +20,7 @@ namespace GamingGroupFinder {
             return _instance;
         }
 
-        public void SetLibraryContext(ApplicationContext context) {
+        public void SetApplicationContext(ApplicationContext context) {
             db = context;
         }
 

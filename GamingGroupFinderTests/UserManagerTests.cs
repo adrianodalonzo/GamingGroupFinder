@@ -1,5 +1,6 @@
 using GamingGroupFinder;
 using GamingGroupFinderDatabase;
+using GamingGroupFinderGUI.Models;
 using Microsoft.EntityFrameworkCore;
 using Moq;
 
@@ -14,10 +15,10 @@ public class UserManagerTests {
         var mockContext = new Mock<ApplicationContext>();
         mockContext.Setup(u => u.UsersDB).Returns(mockSet.Object);
         UserManager userManager = UserManager.GetInstance();
-        userManager.setApplicationContext(mockContext.Object);
+        userManager.SetApplicationContext(mockContext.Object);
 
         // Act
-        User user = new User("newuser", "newpass", "salt", new List<User>());
+        User user = new User("newuser", "newpass", new byte['s'], new List<User>());
         userManager.CreateUser(user);
 
         // Assert
@@ -32,10 +33,10 @@ public class UserManagerTests {
         var mockContext = new Mock<ApplicationContext>();
         mockContext.Setup(u => u.UsersDB).Returns(mockSet.Object);
         UserManager userManager = UserManager.GetInstance();
-        userManager.setApplicationContext(mockContext.Object);
+        userManager.SetApplicationContext(mockContext.Object);
 
         // Act
-        User user = new User("newuser", "newpass", "salt", new List<User>());
+        User user = new User("newuser", "newpass", new byte['s'], new List<User>());
         userManager.LogInUser(user);
 
         // Assert
@@ -50,7 +51,7 @@ public class UserManagerTests {
         var mockContext = new Mock<ApplicationContext>();
         mockContext.Setup(u => u.UsersDB).Returns(mockSet.Object);
         UserManager userManager = UserManager.GetInstance();
-        userManager.setApplicationContext(mockContext.Object);
+        userManager.SetApplicationContext(mockContext.Object);
 
         // Act
         userManager.LogInUser(null);
@@ -66,9 +67,9 @@ public class UserManagerTests {
         var mockContext = new Mock<ApplicationContext>();
         mockContext.Setup(u => u.UsersDB).Returns(mockSet.Object);
         UserManager userManager = UserManager.GetInstance();
-        userManager.setApplicationContext(mockContext.Object);
+        userManager.SetApplicationContext(mockContext.Object);
 
-        User user = new User("newuser", "newpass", "salt", new List<User>());
+        User user = new User("newuser", "newpass", new byte['s'], new List<User>());
         userManager.LoggedInUser = user;
 
         // Act
@@ -85,9 +86,9 @@ public class UserManagerTests {
         var mockContext = new Mock<ApplicationContext>();
         mockContext.Setup(u => u.UsersDB).Returns(mockSet.Object);
         UserManager userManager = UserManager.GetInstance();
-        userManager.setApplicationContext(mockContext.Object);
+        userManager.SetApplicationContext(mockContext.Object);
 
-        User user = new User("newuser", "newpass", "salt", new List<User>());
+        User user = new User("newuser", "newpass", new byte['s'], new List<User>());
         userManager.LoggedInUser = user;
 
         // Act
@@ -105,9 +106,9 @@ public class UserManagerTests {
         var mockContext = new Mock<ApplicationContext>();
         mockContext.Setup(u => u.UsersDB).Returns(mockSet.Object);
         UserManager userManager = UserManager.GetInstance();
-        userManager.setApplicationContext(mockContext.Object);
+        userManager.SetApplicationContext(mockContext.Object);
 
-        User user = new User("newuser", "newpass", "salt", new List<User>());
+        User user = new User("newuser", "newpass", new byte['s'], new List<User>());
         userManager.LoggedInUser = user;
 
         // Act
@@ -124,9 +125,9 @@ public class UserManagerTests {
         var mockContext = new Mock<ApplicationContext>();
         mockContext.Setup(u => u.UsersDB).Returns(mockSet.Object);
         UserManager userManager = UserManager.GetInstance();
-        userManager.setApplicationContext(mockContext.Object);
+        userManager.SetApplicationContext(mockContext.Object);
 
-        User user = new User("newuser", "newpass", "salt", new List<User>());
+        User user = new User("newuser", "newpass", new byte['s'], new List<User>());
         userManager.CreateUser(user);
         userManager.LoggedInUser = user;
 
@@ -145,9 +146,9 @@ public class UserManagerTests {
         var mockContext = new Mock<ApplicationContext>();
         mockContext.Setup(u => u.UsersDB).Returns(mockSet.Object);
         UserManager userManager = UserManager.GetInstance();
-        userManager.setApplicationContext(mockContext.Object);
+        userManager.SetApplicationContext(mockContext.Object);
 
-        User user = new User("newuser", "newpass", "salt", new List<User>());
+        User user = new User("newuser", "newpass", new byte['s'], new List<User>());
         userManager.CreateUser(user);
         userManager.LoggedInUser = user;
 
@@ -167,9 +168,9 @@ public class UserManagerTests {
         var mockContext = new Mock<ApplicationContext>();
         mockContext.Setup(u => u.UsersDB).Returns(mockSet.Object);
         UserManager userManager = UserManager.GetInstance();
-        userManager.setApplicationContext(mockContext.Object);
+        userManager.SetApplicationContext(mockContext.Object);
 
-        User user = new User("newuser", "newpass", "salt", new List<User>());
+        User user = new User("newuser", "newpass", new byte['s'], new List<User>());
         userManager.CreateUser(user);
         userManager.LoggedInUser = user;
 

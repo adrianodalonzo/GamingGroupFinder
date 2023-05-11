@@ -1,5 +1,6 @@
 using GamingGroupFinder;
 using GamingGroupFinderDatabase;
+using GamingGroupFinderGUI.Models;
 using Microsoft.EntityFrameworkCore;
 using Moq;
 
@@ -14,10 +15,10 @@ public class MessageManagerTests {
         var mockContext = new Mock<ApplicationContext>();
         mockContext.Setup(u => u.MessagesDB).Returns(mockSet.Object);
         MessageManager messageManager = MessageManager.GetInstance();
-        messageManager.setApplicationContext(mockContext.Object);
+        messageManager.SetApplicationContext(mockContext.Object);
 
-        User user1 = new User("user1", "pass1", "salt1", new List<User>());
-        User user2 = new User("user2", "pass2", "salt2", new List<User>());
+        User user1 = new User("user1", "pass1", new byte['s'], new List<User>());
+        User user2 = new User("user2", "pass2", new byte['s'], new List<User>());
         Message m = new Message(user1, user2, DateTime.Now, "msg", false);
 
         // Act
@@ -36,7 +37,7 @@ public class MessageManagerTests {
         var mockContext = new Mock<ApplicationContext>();
         mockContext.Setup(u => u.UsersDB).Returns(mockSet.Object);
         MessageManager messageManager = MessageManager.GetInstance();
-        messageManager.setApplicationContext(mockContext.Object);
+        messageManager.SetApplicationContext(mockContext.Object);
 
         // Act
         messageManager.CreateMessage(null);
@@ -48,9 +49,9 @@ public class MessageManagerTests {
     [TestMethod]
     public void TestGetMessagesSent_GetsMessages() {
         // Arrange
-        UserDB user1 = new UserDB("user1", "pass1", "salt1", null);
-        UserDB user2 = new UserDB("user2", "pass2", "salt2", null);
-        UserDB user3 = new UserDB("user3", "pass3", "salt3", null);
+        UserDB user1 = new UserDB("user1", "pass1", new byte['s'], null);
+        UserDB user2 = new UserDB("user2", "pass2", new byte['s'], null);
+        UserDB user3 = new UserDB("user3", "pass3", new byte['s'], null);
         MessageDB m1 = new MessageDB(user1, user2, DateTime.Now, "a msg", false);
         MessageDB m2 = new MessageDB(user1, user2, DateTime.Now, "another msg", false);
         MessageDB m3 = new MessageDB(user1, user3, DateTime.Now, "perhaps", false);
@@ -71,10 +72,12 @@ public class MessageManagerTests {
         var mockContext = new Mock<ApplicationContext>();
         mockContext.Setup(u => u.MessagesDB).Returns(mockSet.Object);
         MessageManager messageManager = MessageManager.GetInstance();
-        messageManager.setApplicationContext(mockContext.Object);
+        messageManager.SetApplicationContext(mockContext.Object);
+
+        User user = new User("user1", "pass1", new byte['s'], null);
 
         // Act
-        var msgsSent = messageManager.GetMessagesSent(user1);
+        var msgsSent = messageManager.GetMessagesSent(user);
 
         // Assert
         Assert.AreEqual(3, msgsSent.Count);
@@ -96,7 +99,7 @@ public class MessageManagerTests {
         var mockContext = new Mock<ApplicationContext>();
         mockContext.Setup(u => u.MessagesDB).Returns(mockSet.Object);
         MessageManager messageManager = MessageManager.GetInstance();
-        messageManager.setApplicationContext(mockContext.Object);
+        messageManager.SetApplicationContext(mockContext.Object);
 
         // Act
         var msgsSent = messageManager.GetMessagesSent(null);
@@ -108,9 +111,9 @@ public class MessageManagerTests {
     [TestMethod]
     public void TestGetMessagesRecieved_GetsMessages() {
         // Arrange
-        UserDB user1 = new UserDB("user1", "pass1", "salt1", null);
-        UserDB user2 = new UserDB("user2", "pass2", "salt2", null);
-        UserDB user3 = new UserDB("user3", "pass3", "salt3", null);
+        UserDB user1 = new UserDB("user1", "pass1", new byte['s'], null);
+        UserDB user2 = new UserDB("user2", "pass2", new byte['s'], null);
+        UserDB user3 = new UserDB("user3", "pass3", new byte['s'], null);
         MessageDB m1 = new MessageDB(user1, user2, DateTime.Now, "a msg", false);
         MessageDB m2 = new MessageDB(user1, user2, DateTime.Now, "another msg", false);
         MessageDB m3 = new MessageDB(user1, user3, DateTime.Now, "perhaps", false);
@@ -131,10 +134,12 @@ public class MessageManagerTests {
         var mockContext = new Mock<ApplicationContext>();
         mockContext.Setup(u => u.MessagesDB).Returns(mockSet.Object);
         MessageManager messageManager = MessageManager.GetInstance();
-        messageManager.setApplicationContext(mockContext.Object);
+        messageManager.SetApplicationContext(mockContext.Object);
+
+        User user = new User("user2", "pass1", new byte['s'], null);
 
         // Act
-        var msgsRecieved = messageManager.GetMessagesRecieved(user2);
+        var msgsRecieved = messageManager.GetMessagesRecieved(user);
 
         // Assert
         Assert.AreEqual(2, msgsRecieved.Count);
@@ -155,7 +160,7 @@ public class MessageManagerTests {
         var mockContext = new Mock<ApplicationContext>();
         mockContext.Setup(u => u.MessagesDB).Returns(mockSet.Object);
         MessageManager messageManager = MessageManager.GetInstance();
-        messageManager.setApplicationContext(mockContext.Object);
+        messageManager.SetApplicationContext(mockContext.Object);
 
         // Act
         var msgsSent = messageManager.GetMessagesRecieved(null);
@@ -171,10 +176,10 @@ public class MessageManagerTests {
         var mockContext = new Mock<ApplicationContext>();
         mockContext.Setup(u => u.MessagesDB).Returns(mockSet.Object);
         MessageManager messageManager = MessageManager.GetInstance();
-        messageManager.setApplicationContext(mockContext.Object);
+        messageManager.SetApplicationContext(mockContext.Object);
 
-        User user1 = new User("user1", "pass1", "salt1", new List<User>());
-        User user2 = new User("user2", "pass2", "salt2", new List<User>());
+        User user1 = new User("user1", "pass1", new byte['s'], new List<User>());
+        User user2 = new User("user2", "pass2", new byte['s'], new List<User>());
         Message m = new Message(user1, user2, DateTime.Now, "msg", false);
 
         messageManager.CreateMessage(m);
@@ -200,7 +205,7 @@ public class MessageManagerTests {
         var mockContext = new Mock<ApplicationContext>();
         mockContext.Setup(u => u.MessagesDB).Returns(mockSet.Object);
         MessageManager messageManager = MessageManager.GetInstance();
-        messageManager.setApplicationContext(mockContext.Object);
+        messageManager.SetApplicationContext(mockContext.Object);
 
         // Act
         messageManager.MarkMessageSeen(null);

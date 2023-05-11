@@ -27,7 +27,7 @@ namespace GamingGroupFinderGUI.ViewModels
         {
 
             Event = new EventDB("", owner);
-            Event.Owner.Profile = ProfileManager.GetProfile(owner);
+            Event.Owner.Profile = ProfileManager.GetInstance().GetProfile(owner);
             Ok = ReactiveCommand.Create(() => { 
                 CreateEvent();
             });

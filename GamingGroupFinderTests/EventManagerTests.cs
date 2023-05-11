@@ -1,5 +1,6 @@
 using GamingGroupFinder;
 using GamingGroupFinderDatabase;
+using GamingGroupFinderGUI.Models;
 using Microsoft.EntityFrameworkCore;
 using Moq;
 
@@ -14,7 +15,7 @@ public class EventManagerTests {
         var mockContext = new Mock<ApplicationContext>();
         mockContext.Setup(u => u.EventsDB).Returns(mockSet.Object);
         EventManager eventManager = EventManager.GetInstance();
-        eventManager.setApplicationContext(mockContext.Object);
+        eventManager.SetApplicationContext(mockContext.Object);
 
         List<Platform> platforms = new List<Platform>();
         Platform nintendo = new Platform(1, "Nintendo Switch");
@@ -28,7 +29,7 @@ public class EventManagerTests {
         Rank ap = new Rank(3, 3, "A+");
         ranks.Add(ap);
 
-        User user = new User("newuser", "newpass", "salt", new List<User>());
+        User user = new User("newuser", "newpass", new byte['s'], new List<User>());
         Game game = new Game("Splatoon 3", platforms, ranks);
         Event e = new Event("newevent", DateTime.Now, "over there", game, nintendo, am, ap, "desc", user, new List<User>());
 
@@ -48,7 +49,7 @@ public class EventManagerTests {
         var mockContext = new Mock<ApplicationContext>();
         mockContext.Setup(u => u.EventsDB).Returns(mockSet.Object);
         EventManager eventManager = EventManager.GetInstance();
-        eventManager.setApplicationContext(mockContext.Object);
+        eventManager.SetApplicationContext(mockContext.Object);
 
         List<Platform> platforms = new List<Platform>();
         Platform nintendo = new Platform(1, "Nintendo Switch");
@@ -62,7 +63,7 @@ public class EventManagerTests {
         Rank ap = new Rank(3, 3, "A+");
         ranks.Add(ap);
 
-        User user = new User("newuser", "newpass", "salt", new List<User>());
+        User user = new User("newuser", "newpass", new byte['s'], new List<User>());
         Game game = new Game("Splatoon 3", platforms, ranks);
         Event e = new Event("newevent", DateTime.Now, "over there", game, nintendo, am, ap, "desc", user, new List<User>());
 
@@ -81,10 +82,10 @@ public class EventManagerTests {
         var mockContext = new Mock<ApplicationContext>();
         mockContext.Setup(u => u.EventsDB).Returns(mockSet.Object);
         EventManager eventManager = EventManager.GetInstance();
-        eventManager.setApplicationContext(mockContext.Object);
+        eventManager.SetApplicationContext(mockContext.Object);
 
         // Act
-        eventManager.CreateEvent(null);
+        eventManager.CreateEvent((EventDB)null);
 
         // Assert
         Assert.Fail();
@@ -97,7 +98,7 @@ public class EventManagerTests {
         var mockContext = new Mock<ApplicationContext>();
         mockContext.Setup(u => u.EventsDB).Returns(mockSet.Object);
         EventManager eventManager = EventManager.GetInstance();
-        eventManager.setApplicationContext(mockContext.Object);
+        eventManager.SetApplicationContext(mockContext.Object);
 
         List<Platform> platforms = new List<Platform>();
         Platform nintendo = new Platform(1, "Nintendo Switch");
@@ -111,26 +112,20 @@ public class EventManagerTests {
         Rank ap = new Rank(3, 3, "A+");
         ranks.Add(ap);
 
-        User user = new User("newuser", "newpass", "salt", new List<User>());
+        User user = new User("newuser", "newpass", new byte['s'], new List<User>());
         Game game = new Game("Splatoon 3", platforms, ranks);
         Event e = new Event("newevent", DateTime.Now, "over there", game, nintendo, am, ap, "desc", user, new List<User>());
 
         eventManager.CreateEvent(e);
 
-        EventDB eDB = new EventDB(new UserDB("newuser", "newpass", "salt", null), "editedevent", DateTime.Now, "overthere"
-        , new GameDB("Splatoon 3"), new PlatformDB("Nintendo Switch"), new RankDB(1, "A-"), new RankDB(3, "A+")
-        , "desc");
+        EventDB eDB = new EventDB(new UserDB("newuser", "newpass", new byte['s'], null), "editedevent", DateTime.Now, "overthere"
+        , new GameDB("Splatoon 3"), new PlatformDB("Nintendo Switch"), "desc", new List<UserDB>());
 
         // Act
-        eventManager.EditEvent(e, eDB);
+        eventManager.EditEvent(eDB);
 
         // Assert
         mockContext.Verify(u => u.SaveChanges(), Times.Once());
-    }
-
-    [TestMethod]
-    public void TestEditEvent_ThrowsIfNoEvent() {
-
     }
 
     [TestMethod]
@@ -141,10 +136,10 @@ public class EventManagerTests {
         var mockContext = new Mock<ApplicationContext>();
         mockContext.Setup(u => u.EventsDB).Returns(mockSet.Object);
         EventManager eventManager = EventManager.GetInstance();
-        eventManager.setApplicationContext(mockContext.Object);
+        eventManager.SetApplicationContext(mockContext.Object);
 
         // Act
-        eventManager.EditEvent(null, null);
+        eventManager.EditEvent(null);
 
         // Assert
         Assert.Fail();
@@ -157,7 +152,7 @@ public class EventManagerTests {
         var mockContext = new Mock<ApplicationContext>();
         mockContext.Setup(u => u.EventsDB).Returns(mockSet.Object);
         EventManager eventManager = EventManager.GetInstance();
-        eventManager.setApplicationContext(mockContext.Object);
+        eventManager.SetApplicationContext(mockContext.Object);
 
         List<Platform> platforms = new List<Platform>();
         Platform nintendo = new Platform(1, "Nintendo Switch");
@@ -171,22 +166,22 @@ public class EventManagerTests {
         Rank ap = new Rank(3, 3, "A+");
         ranks.Add(ap);
 
-        User user = new User("newuser", "newpass", "salt", new List<User>());
+        User user = new User("newuser", "newpass", new byte['s'], new List<User>());
         Game game = new Game("Splatoon 3", platforms, ranks);
         Event e = new Event("newevent", DateTime.Now, "over there", game, nintendo, am, ap, "desc", user, new List<User>());
+        
+        UserDB userDB = new UserDB("newuser", "newpass", new byte['s'], null);
+        GameDB gameDB = new GameDB("Splatoon 3");
+        PlatformDB platformDB = new PlatformDB("Nintendo Switch");
+        EventDB eDB = new EventDB(userDB, "newevent", DateTime.Now, "over there", gameDB, platformDB,"desc", new List<UserDB>());
 
         eventManager.CreateEvent(e);
 
         // Act
-        eventManager.DeleteEvent(e);
+        eventManager.DeleteEvent(eDB);
         // Assert
         mockSet.Verify(u => u.Remove(It.IsAny<EventDB>()), Times.Once());
         mockContext.Verify(u => u.SaveChanges(), Times.AtLeastOnce());
-    }
-
-    [TestMethod]
-    public void TestDeleteEvent_ThrowsIfNoEvent() {
-
     }
 
     [TestMethod]
@@ -197,7 +192,7 @@ public class EventManagerTests {
         var mockContext = new Mock<ApplicationContext>();
         mockContext.Setup(u => u.EventsDB).Returns(mockSet.Object);
         EventManager eventManager = EventManager.GetInstance();
-        eventManager.setApplicationContext(mockContext.Object);
+        eventManager.SetApplicationContext(mockContext.Object);
 
         // Act
         eventManager.DeleteEvent(null);
@@ -213,7 +208,7 @@ public class EventManagerTests {
         var mockContext = new Mock<ApplicationContext>();
         mockContext.Setup(u => u.EventsDB).Returns(mockSet.Object);
         EventManager eventManager = EventManager.GetInstance();
-        eventManager.setApplicationContext(mockContext.Object);
+        eventManager.SetApplicationContext(mockContext.Object);
 
         List<Platform> platforms = new List<Platform>();
         Platform nintendo = new Platform(1, "Nintendo Switch");
@@ -227,30 +222,25 @@ public class EventManagerTests {
         Rank ap = new Rank(3, 3, "A+");
         ranks.Add(ap);
 
-        User user = new User("newuser", "newpass", "salt", new List<User>());
+        User user = new User("newuser", "newpass", new byte['s'], new List<User>());
         Game game = new Game("Splatoon 3", platforms, ranks);
         Event e = new Event("newevent", DateTime.Now, "over there", game, nintendo, am, ap, "desc", user, new List<User>());
 
         eventManager.CreateEvent(e);
 
-        User attendee = new User("attending", "event", "salt", new List<User>());
+        User attendee = new User("attending", "event", new byte['s'], new List<User>());
+
+        UserDB userDB = new UserDB("newuser", "newpass", new byte['s'], null);
+        GameDB gameDB = new GameDB("Splatoon 3");
+        PlatformDB platformDB = new PlatformDB("Nintendo Switch");
+        EventDB eDB = new EventDB(userDB, "newevent", DateTime.Now, "over there", gameDB, platformDB,"desc", new List<UserDB>());
+
 
         // Act
-        eventManager.AttendEvent(attendee, e);
+        eventManager.AttendEvent(eDB, "attending");
 
         // Assert
-        mockSet.Verify(u => u.Add(It.IsAny<EventDB>()), Times.Once());
         mockContext.Verify(u => u.SaveChanges(), Times.Once());
-    }
-
-    [TestMethod]
-    public void TestAttendEvent_ThrowsIfNoUser() {
-
-    }
-
-    [TestMethod]
-    public void TestAttendEvent_ThrowsIfNoEvent() {
-
     }
 
     [TestMethod]
@@ -261,7 +251,7 @@ public class EventManagerTests {
         var mockContext = new Mock<ApplicationContext>();
         mockContext.Setup(u => u.EventsDB).Returns(mockSet.Object);
         EventManager eventManager = EventManager.GetInstance();
-        eventManager.setApplicationContext(mockContext.Object);
+        eventManager.SetApplicationContext(mockContext.Object);
 
         // Act
         eventManager.AttendEvent(null, null);
@@ -277,7 +267,7 @@ public class EventManagerTests {
         var mockContext = new Mock<ApplicationContext>();
         mockContext.Setup(u => u.EventsDB).Returns(mockSet.Object);
         EventManager eventManager = EventManager.GetInstance();
-        eventManager.setApplicationContext(mockContext.Object);
+        eventManager.SetApplicationContext(mockContext.Object);
 
         List<Platform> platforms = new List<Platform>();
         Platform nintendo = new Platform(1, "Nintendo Switch");
@@ -291,33 +281,28 @@ public class EventManagerTests {
         Rank ap = new Rank(3, 3, "A+");
         ranks.Add(ap);
 
-        User user = new User("newuser", "newpass", "salt", new List<User>());
+        User user = new User("newuser", "newpass", new byte['s'], new List<User>());
         Game game = new Game("Splatoon 3", platforms, ranks);
 
         List<User> users = new List<User>();
-        User user2 = new User("user2", "user2", "salt", new List<User>());
+        User user2 = new User("user2", "user2", new byte['s'], new List<User>());
         users.Add(user2);
 
-        Event e = new Event("newevent", DateTime.Now, "over there", game, nintendo, am, ap, "desc", user, attendees);
+        Event e = new Event("newevent", DateTime.Now, "over there", game, nintendo, am, ap, "desc", user, users);
 
         eventManager.CreateEvent(e);
 
+        UserDB userDB = new UserDB("newuser", "newpass", new byte['s'], null);
+        GameDB gameDB = new GameDB("Splatoon 3");
+        PlatformDB platformDB = new PlatformDB("Nintendo Switch");
+        EventDB eDB = new EventDB(userDB, "newevent", DateTime.Now, "over there", gameDB, platformDB,"desc", new List<UserDB>(){new UserDB("user2", "pass2", new byte['s'], null)});
+
+
         // Act
-        eventManager.LeaveEvent(user2, e);
+        eventManager.LeaveEvent(eDB, "user2");
 
         // Assert
-        mockSet.Verify(u => u.Remove(It.IsAny<EventDB>()), Times.Once());
         mockContext.Verify(u => u.SaveChanges(), Times.AtLeastOnce());
-    }
-
-    [TestMethod]
-    public void TestLeaveEvent_ThrowsIfNoUser() {
-
-    }
-
-    [TestMethod]
-    public void TestLeaveEvent_ThrowsIfNoEvent() {
-
     }
 
     [TestMethod]
@@ -328,23 +313,13 @@ public class EventManagerTests {
         var mockContext = new Mock<ApplicationContext>();
         mockContext.Setup(u => u.EventsDB).Returns(mockSet.Object);
         EventManager eventManager = EventManager.GetInstance();
-        eventManager.setApplicationContext(mockContext.Object);
+        eventManager.SetApplicationContext(mockContext.Object);
 
         // Act
         eventManager.LeaveEvent(null, null);
 
         // Assert
         Assert.Fail();
-    }
-
-    [TestMethod]
-    public void TestViewAttendees_GivesCorrect() {
-
-    }
-
-    [TestMethod]
-    public void TestViewAttendees_ThrowsIfNoEvent() {
-
     }
 
     [TestMethod]
@@ -355,18 +330,13 @@ public class EventManagerTests {
         var mockContext = new Mock<ApplicationContext>();
         mockContext.Setup(u => u.EventsDB).Returns(mockSet.Object);
         EventManager eventManager = EventManager.GetInstance();
-        eventManager.setApplicationContext(mockContext.Object);
+        eventManager.SetApplicationContext(mockContext.Object);
 
         // Act
         eventManager.ViewAttendees(null);
 
         // Assert
         Assert.Fail();
-    }
-
-    [TestMethod]
-    public void TestFindEvent_FindsEvent() {
-
     }
 
     [TestMethod]
@@ -377,10 +347,10 @@ public class EventManagerTests {
         var mockContext = new Mock<ApplicationContext>();
         mockContext.Setup(u => u.EventsDB).Returns(mockSet.Object);
         EventManager eventManager = EventManager.GetInstance();
-        eventManager.setApplicationContext(mockContext.Object);
+        eventManager.SetApplicationContext(mockContext.Object);
 
         // Act
-        eventManager.FindEvent(null, "PC", "Bronze");
+        eventManager.FindEvent(null, "PC");
 
         // Assert
         Assert.Fail();
