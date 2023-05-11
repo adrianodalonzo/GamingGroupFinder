@@ -65,7 +65,7 @@
 
       </StackPanel>
 
-      <StackPanel VerticalAlignment="Center" >
+      <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center" Orientation="Horizontal">
         <Button Content="Edit Profile"
                 Command="{Binding $parent[Window].DataContext.EditProfile}"
                 IsVisible="{Binding Visible}"/>
