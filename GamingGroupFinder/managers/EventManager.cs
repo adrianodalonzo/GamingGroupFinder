@@ -45,6 +45,12 @@ namespace GamingGroupFinder {
             return eventDB;
         }
 
+        public List<EventDB>? GetEvents()
+        {
+            List<EventDB> eventDBs = db.EventsDB.ToList();
+            return eventDBs;
+        }
+
 
         // this is probably just going to create a new event and add it to the database
         public void CreateEvent(Event e) {
@@ -97,8 +103,12 @@ namespace GamingGroupFinder {
         }
 
         // this is probably just going to add a user to the event's list of attendees
-        public void AttendEvent(User u) {
-            UserDB userEntity = (from user in db.UsersDB where user.Username.Equals(u.Username) select user).Single();
+        public void AttendEvent(EventDB eventDB, string username) {
+            if (_eventDB is null) {
+                _eventDB = GetEvent(eventDB.EventDBId);
+            }
+            
+            UserDB userEntity = (from user in db.UsersDB where user.Username.Equals(username) select user).Single();
             
             try {
                 _eventDB.UsersAttending.Add(userEntity);
@@ -110,8 +120,12 @@ namespace GamingGroupFinder {
         }
 
         // this is probably just going to remove a user from the event's list of attendees
-        public void LeaveEvent(User u) {
-            UserDB userEntity = (from user in db.UsersDB where user.Username.Equals(u.Username) select user).Single();
+        public void LeaveEvent(EventDB eventDB, string username) {
+            if (_eventDB is null) {
+                _eventDB = GetEvent(eventDB.EventDBId);
+            }
+
+            UserDB userEntity = (from user in db.UsersDB where user.Username.Equals(username) select user).Single();
             
             try {
                 _eventDB.UsersAttending.Remove(userEntity);
