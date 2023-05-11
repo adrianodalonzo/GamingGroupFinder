@@ -18,3 +18,5 @@
     - Charles-Alexandre Bouchard 2135704
     - Adriano D'Alonzo 2035770
     - Vincent Keedwell 2137034
+
+**!When Editing Profile Picture, URL entered MUST be a link from the internet, NOT AN IMAGE ON YOUR COMPUTER!**
