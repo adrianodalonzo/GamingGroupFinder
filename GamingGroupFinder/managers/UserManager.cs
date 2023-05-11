@@ -1,4 +1,6 @@
 using GamingGroupFinderDatabase;
+using GamingGroupFinderGUI.Models;
+using GamingGroupFinderGUI.ViewModels;
 
 namespace GamingGroupFinder {
     public class UserManager {
@@ -30,18 +32,26 @@ namespace GamingGroupFinder {
             db = context;
         }
 
-        public static List<UserDB> GetListOfUsers() {
-            List<UserDB> users = db.UsersDB.ToList();
+        public List<UserDB> GetListOfUsers() {
+            List<UserDB> users = new List<UserDB>();
+            foreach(UserDB user in db.UsersDB) {
+                users.Add(user);
+            }
             return users;
         }
 
-        private static bool UserExists(User user, List<UserDB> users) {
+        internal bool UserExists(User user, List<UserDB> users) {
             foreach(UserDB testUser in users) {
                 if(testUser.Username.Equals(user.Username)) {
                     return true;
                 }
             }
             return false;
+        }
+
+        public UserDB GetUser(string username) {
+            var userDB = (from u in db.UsersDB where u.Username.Equals(username) select u).FirstOrDefault();
+            return (UserDB)userDB;
         }
 
         // this is probably just going to create a new user and add it to the database
@@ -70,6 +80,7 @@ namespace GamingGroupFinder {
             }
         }
 
+        // take in possible user
         public void LogOutUser() {
             if(LoggedInUser == null) {
                 throw new Exception("User is already logged out/never logged in!");
@@ -86,7 +97,10 @@ namespace GamingGroupFinder {
                 if(testUser.Password.Equals(password)) {
                     throw new ArgumentException("New password must not match old password!");
                 }
-                testUser.Password = password;
+                db.Remove(testUser);
+                db.SaveChanges();
+                testUser.Password = LogInViewModel.GenerateHash(password, testUser.Salt);
+                db.Add(testUser);
                 db.SaveChanges();
             } else {
                 throw new Exception("Only the user of the requested account may change their password!");

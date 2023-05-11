@@ -1,4 +1,6 @@
+using GamingGroupFinderGUI.Models;
 using Microsoft.EntityFrameworkCore;
+using static GamingGroupFinderGUI.Models.GamEDBRankDB;
 
 namespace GamingGroupFinderDatabase;
 
@@ -6,9 +8,7 @@ public class ApplicationContext : DbContext {
     public virtual DbSet<UserDB> UsersDB {get;set;}
     public virtual DbSet<MessageDB> MessagesDB {get;set;}
     public virtual DbSet<ProfileDB> ProfilesDB {get;set;}
-    // public DbSet<Contact> Contacts {get;set;}
     public virtual DbSet<GameDB> GamesDB {get;set;}
-    public virtual DbSet<GameDBRankDB> GamesDBRanksDB {get;set;}
     public virtual DbSet<RankDB> RanksDB {get;set;}
     public virtual DbSet<PlatformDB> PlatformsDB {get;set;}
     public virtual DbSet<EventDB> EventsDB {get;set;}
