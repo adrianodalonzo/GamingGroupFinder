@@ -118,6 +118,15 @@
                                 Width="300"
                                 Height="300"/>
                 </StackPanel>
+                <StackPanel>
+                        <TextBlock Text="Profile Picture URL: "
+                        HorizontalAlignment="Center"
+                        VerticalAlignment="Center"/>
+                        <TextBox AcceptsReturn="False"
+                                Text="{Binding ProfilePictureUrl}"
+                                HorizontalAlignment="Center"
+                                VerticalAlignment="Center"/>
+                </StackPanel>
           <Button Command="{Binding Ok}" HorizontalAlignment="Center">Done</Button>
         </StackPanel>
      </ScrollViewer>
