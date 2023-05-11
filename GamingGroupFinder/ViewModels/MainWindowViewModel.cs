@@ -114,7 +114,12 @@ class MainWindowViewModel : ViewModelBase
 
         public void DetailEvent(EventDB e)
         {
-            EventDisplayViewModel dispvm = (EventDisplayViewModel) Content;
+            ViewModelBase dispvm = new ViewModelBase();
+            if(Content.GetType() == typeof(EventDisplayViewModel)) {
+                dispvm = (EventDisplayViewModel) Content;
+            } else {
+                dispvm = (SearchViewModel) Content;
+            }
             var vm = new DetailEventViewModel(e, LoggedInUser.Username);
 
             vm.Attend.Subscribe(x => {Content = dispvm;});

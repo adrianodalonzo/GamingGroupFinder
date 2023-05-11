@@ -20,6 +20,11 @@ namespace GamingGroupFinderGUI.ViewModels
             get => _username;
             private set => this.RaiseAndSetIfChanged(ref _username, value);
         }
+        private bool _canAttend;
+        public bool CanAttend {
+            get => _canAttend;
+            private set => this.RaiseAndSetIfChanged(ref _canAttend, value);
+        }
 
         public ReactiveCommand<Unit, Unit> Attend { get; }
         public ReactiveCommand<Unit, Unit> Leave { get; }
@@ -33,6 +38,8 @@ namespace GamingGroupFinderGUI.ViewModels
             Attend = ReactiveCommand.Create(() => {AttendEvent(Event, Username);});
 
             Leave = ReactiveCommand.Create(() => {LeaveEvent(Event, Username);});
+
+            CanAttend = DetermineCanAttend();
         }
 
         private void AttendEvent(EventDB eventDB, string username)
@@ -43,6 +50,15 @@ namespace GamingGroupFinderGUI.ViewModels
         private void LeaveEvent(EventDB eventDB, string username)
         {
             EventManager.GetInstance().LeaveEvent(eventDB, username);
+        }
+
+        private bool DetermineCanAttend() {
+            foreach(UserDB u in Event.UsersAttending) {
+                if(u.Username.Equals(UserManager.GetInstance().LoggedInUser.Username)) {
+                    return false;
+                }
+            }
+            return true;
         }
     }
 }

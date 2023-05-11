@@ -37,8 +37,8 @@
             <ItemsControl Items="{Binding QueriedEvents}">
               <ItemsControl.ItemTemplate>
                 <DataTemplate>
-                  <Button Content="{Binding Event.Title}" 
-                          Command="{Binding $parent[Window].DataContext.DisplayEvent}"
+                  <Button Content="{Binding Title}" 
+                          Command="{Binding $parent[Window].DataContext.DetailEvent}"
                           CommandParameter="{Binding}"/>
                 </DataTemplate>
               </ItemsControl.ItemTemplate>
