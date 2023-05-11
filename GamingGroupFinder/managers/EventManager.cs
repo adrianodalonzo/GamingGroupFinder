@@ -137,7 +137,7 @@ namespace GamingGroupFinder {
         // this is probably just going to add a user to the event's list of attendees
         public void AttendEvent(EventDB eventDB, string username) {
             if (_eventDB is null) {
-                _eventDB = GetEvent(eventDB.EventDBId);
+                _eventDB = eventDB;
             }
             
             UserDB userEntity = (from user in db.UsersDB where user.Username.Equals(username) select user).Single();
@@ -154,7 +154,7 @@ namespace GamingGroupFinder {
         // this is probably just going to remove a user from the event's list of attendees
         public void LeaveEvent(EventDB eventDB, string username) {
             if (_eventDB is null) {
-                _eventDB = GetEvent(eventDB.EventDBId);
+                _eventDB = eventDB;
             }
 
             UserDB userEntity = (from user in db.UsersDB where user.Username.Equals(username) select user).Single();
