@@ -35,7 +35,7 @@ public class MessageManagerTests {
         // Arrange
         var mockSet = new Mock<DbSet<MessageDB>>();
         var mockContext = new Mock<ApplicationContext>();
-        mockContext.Setup(u => u.UsersDB).Returns(mockSet.Object);
+        mockContext.Setup(u => u.MessagesDB).Returns(mockSet.Object);
         MessageManager messageManager = MessageManager.GetInstance();
         messageManager.SetApplicationContext(mockContext.Object);
 
@@ -84,11 +84,6 @@ public class MessageManagerTests {
         Assert.AreEqual("a msg", msgsSent[0].MessageText);
         Assert.AreEqual("another msg", msgsSent[1].MessageText);
         Assert.AreEqual("perhaps", msgsSent[2].MessageText);
-    }
-
-    [TestMethod]
-    public void TestGetMessagesSent_ThrowsIfNoUser() {
-
     }
 
     [TestMethod]
@@ -148,11 +143,6 @@ public class MessageManagerTests {
     }
 
     [TestMethod]
-    public void TestGetMessagesRecieved_ThrowsIfNoUser() {
-
-    }
-
-    [TestMethod]
     [ExpectedException (typeof(ArgumentNullException))]
     public void TestGetMessagesRecieved_ThrowsWhenGivenNull() {
         // Arrange
@@ -190,11 +180,6 @@ public class MessageManagerTests {
         // Assert
         mockSet.Verify(u => u.Add(It.IsAny<MessageDB>()), Times.Once());
         mockContext.Verify(u => u.SaveChanges(), Times.Exactly(2));
-    }
-
-    [TestMethod]
-    public void TestMarkMessageSeen_ThrowsIfNoMessage() {
-
     }
 
     [TestMethod]

@@ -175,7 +175,7 @@ public class UserManagerTests {
         userManager.LoggedInUser = user;
 
         // Act
-        userManager.DeleteAccount(null);
+        userManager.DeleteAccount((User)null);
 
         // Assert
         Assert.Fail();

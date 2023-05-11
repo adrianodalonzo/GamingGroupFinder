@@ -89,6 +89,9 @@ namespace GamingGroupFinder {
         }
 
         public void ChangePassword(string password) {
+            if (password is null) {
+                throw new ArgumentNullException("password cannot be null");
+            }
             UserDB testUser = (from user in db.UsersDB where user.Username.Equals(LoggedInUser.Username) select user).SingleOrDefault();
             if(testUser == null) {
                 throw new NullReferenceException("User could not be found!");
@@ -122,7 +125,7 @@ namespace GamingGroupFinder {
 
         public void DeleteAccount(User u) {
             if(u == null) {
-                throw new NullReferenceException("User inputed can't be null!");
+                throw new ArgumentNullException("User inputed can't be null!");
             }
             UserDB testUser = (from user in db.UsersDB where user.Username.Equals(u.Username) select user).SingleOrDefault();
             if(testUser == null) {

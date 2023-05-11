@@ -76,6 +76,9 @@ namespace GamingGroupFinder {
         }
 
         public void CreateEvent(EventDB e) {
+            if (e is null) {
+                throw new ArgumentNullException("e (event) cannot be null");
+            }
             if(_eventDB == null) {
                 _eventDB = new EventDB(e.Title, e.Owner);
             }
@@ -107,6 +110,10 @@ namespace GamingGroupFinder {
         }
 
         public void EditEvent(EventDB eDB) {
+            if (eDB is null) {
+                throw new ArgumentNullException("eDB (eventDB) cannot be null");
+            }
+
             if (_eventDB is null) {
                 _eventDB = GetEvent(eDB.EventDBId);
             }
@@ -122,6 +129,10 @@ namespace GamingGroupFinder {
 
         // this is probably just going to delete an event from the database. not sure what would be taken in as a parameter (event id?, event object, ...)
         public void DeleteEvent(EventDB e) {
+            if (e is null) {
+                throw new ArgumentNullException("e (eventDB) cannot be null");
+            }
+
             if (_eventDB is null) {
                 _eventDB = GetEvent(e.EventDBId);
             }
@@ -136,6 +147,10 @@ namespace GamingGroupFinder {
 
         // this is probably just going to add a user to the event's list of attendees
         public void AttendEvent(EventDB eventDB, string username) {
+            if (eventDB is null || username is null) {
+                throw new ArgumentNullException("eventDB and username cannot be null");
+            }
+
             if (_eventDB is null) {
                 _eventDB = eventDB;
             }
@@ -153,6 +168,10 @@ namespace GamingGroupFinder {
 
         // this is probably just going to remove a user from the event's list of attendees
         public void LeaveEvent(EventDB eventDB, string username) {
+            if (eventDB is null || username is null) {
+                throw new ArgumentNullException("eventDB and username cannot be null");
+            }
+
             if (_eventDB is null) {
                 _eventDB = eventDB;
             }
@@ -170,6 +189,9 @@ namespace GamingGroupFinder {
 
         // this is probably just going to return the event's list of attendees
         public List<UserDB> ViewAttendees(Event e) {
+            if (e is null) {
+                throw new ArgumentNullException("e (event) cannot be null");
+            }
             List<UserDB> Attendees = new List<UserDB>();
             foreach (UserDB user in _eventDB.UsersAttending) {
                 Attendees.Add(user);
@@ -179,6 +201,10 @@ namespace GamingGroupFinder {
 
         // same as search event
         public List<EventDB> FindEvent(Game game, string platform) {
+            if (game is null || platform is null) {
+                throw new ArgumentNullException("game and platform cannot be null");
+            }
+            
             List<EventDB> EventList = new List<EventDB>();
             for (int i = 0; i < db.EventsDB.Count(); i++) {
                 if (db.EventsDB.ElementAt(i).Game.GameName.Equals(game.Name) || db.EventsDB.ElementAt(i).Platform.PlatformName.Equals(platform)) {
@@ -190,6 +216,10 @@ namespace GamingGroupFinder {
         } 
 
         public List<EventDB> SearchEvent(string query) {
+            if (query is null) {
+                throw new ArgumentNullException("query cannot be null");
+            }
+            
             List<EventDB> EventList = db.EventsDB
                                         .AsEnumerable()
                                         .Where(e => (e.Game != null && e.Game.GameName.Contains(query, StringComparison.OrdinalIgnoreCase)) ||

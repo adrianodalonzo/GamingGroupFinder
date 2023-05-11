@@ -62,6 +62,9 @@ public class MessageManager {
     }
 
     public void MarkMessageSeen(Message message) {
+        if (message is null) {
+            throw new ArgumentNullException("message cannot be null");
+        }
         var testMessage = db.MessagesDB.SingleOrDefault(
             m => m.Sender.Username.Equals(message.Sender.Username) &&
             m.Receiver.Username.Equals(message.Recipient.Username) &&

@@ -61,13 +61,13 @@ namespace GamingGroupFinderTests {
 
             bool isCleared = true;
 
-            if (profile.Name != "") isCleared = false;
-            else if (profile.Pronouns != "") isCleared = false;
-            else if (profile.Age != 0) isCleared = false;
+            if (profile.Name != " ") isCleared = false;
+            else if (profile.Pronouns != " ") isCleared = false;
+            else if (profile.Age != 1) isCleared = false;
             else if (profile.Platforms.Count != 0) isCleared = false;
             else if (profile.Games.Count != 0) isCleared = false;
-            else if (profile.Bio != "") isCleared = false;
-            else if (profile.ProfilePicture != "") isCleared = false;
+            else if (profile.Bio != " ") isCleared = false;
+            else if (profile.ProfilePicture != " ") isCleared = false;
             else if (profile.Interests.Count != 0) isCleared = false;
 
             Assert.IsTrue(isCleared);

@@ -116,6 +116,10 @@ public class ProfileManager {
 
     // add get profile
     public ProfileDB GetProfile(UserDB u) {
+        if (u is null) {
+            throw new ArgumentNullException("u (user) cannot be null");
+        }
+        
         ProfileDB profile = (from p in db.ProfilesDB where p.User.Username.Equals(u.Username) select p).SingleOrDefault();
         if(profile is null) {
             profile = new ProfileDB(u, null!, null!, 0, null!, null!, new List<InterestDB>(), new List<PlatformDB>(), new List<GameDB>());
@@ -133,6 +137,9 @@ public class ProfileManager {
     }
 
     public void EditProfile(ProfileDB profile) {
+        if (profile is null) {
+            throw new ArgumentNullException("profile cannot be null");
+        }
         if(_profile is null) {
             _profile = profile;
         }
@@ -156,6 +163,10 @@ public class ProfileManager {
     }
 
     public List<ProfileDB> SearchProfile(string username) {
+        if (username is null) {
+            throw new ArgumentNullException("username cannot be null");
+        }
+        
         List<ProfileDB> ProfileList = db.ProfilesDB
                         .Include(p => p.User)
                         .AsEnumerable()

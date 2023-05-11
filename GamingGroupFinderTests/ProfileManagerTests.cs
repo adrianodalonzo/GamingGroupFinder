@@ -29,11 +29,6 @@ public class ProfileManagerTests {
     }
 
     [TestMethod]
-    public void TestCreateProfile_ThrowsIfNoUser() {
-
-    }
-
-    [TestMethod]
     [ExpectedException (typeof(ArgumentNullException))]
     public void TestCreateProfile_ThrowsWhenGivenNull() {
         // Arrange
