@@ -25,6 +25,10 @@
       <Button Content="Leave Event"
               Command="{Binding Leave}" 
               IsVisible="{Binding CanLeave}"/>
+      <Button Content="Edit Event"
+              Command="{Binding $parent[Window].DataContext.EditEvent}"
+              CommandParameter="{Binding Event}"
+              IsVisible="{Binding CanEdit}"/>
     </StackPanel>
 
   </StackPanel>

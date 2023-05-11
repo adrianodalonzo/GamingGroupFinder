@@ -124,7 +124,7 @@ class MainWindowViewModel : ViewModelBase
 
         public void EditEvent(EventDB e)
         {
-            EventDisplayViewModel dispvm = (EventDisplayViewModel) Content;
+            DetailEventViewModel dispvm = (DetailEventViewModel) Content;
             var vm = new EventEditViewModel(e);
             
             vm.Ok.Subscribe(x => {Content = dispvm;});

@@ -42,9 +42,7 @@ namespace GamingGroupFinder {
             if (e is null) {
                 throw new ArgumentNullException("e (event) cannot be null");
             }
-            if(_eventDB == null) {
-                _eventDB = new EventDB(e.Title, e.Owner);
-            }
+            _eventDB = new EventDB(e.Title, e.Owner);
 
             try {
                 UserDB existingUser = db.UsersDB

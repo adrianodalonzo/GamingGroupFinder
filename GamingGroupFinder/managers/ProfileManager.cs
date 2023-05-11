@@ -27,36 +27,8 @@ public class ProfileManager {
         return _instance;
     }
 
-    public ProfileDB GetProfile(int userId) {
-        return (from p in db.ProfilesDB where p.UserId == userId select p).FirstOrDefault();
-    }
-
-    public void setApplicationContext(ApplicationContext context) {
+    public void SetApplicationContext(ApplicationContext context) {
         db = context;
-    }
-    
-    private List<InterestDB> InterestListToInterestsDBList(List<Interest> list) {
-        List<InterestDB> interests = new List<InterestDB>();
-        foreach(Interest i in list) {
-            interests.Add(new InterestDB(i.Name));
-        }
-        return interests;
-    }
-
-    private List<GameDB> GameListToGameDBList(List<Game> list) {
-        List<GameDB> games = new List<GameDB>();
-        foreach(Game g in list) {
-            games.Add(new GameDB(g.Name));
-        }
-        return games;
-    }
-
-    private List<PlatformDB> PlatformListToPlatformsDBList(List<Platform> list) {
-        List<PlatformDB> platforms = new List<PlatformDB>();
-        foreach(Platform p in list) {
-            platforms.Add(new PlatformDB(p.Name));
-        }
-        return platforms;
     }
 
     // this is probably just going to create a new profile and add it to the database
@@ -89,28 +61,6 @@ public class ProfileManager {
         UserDB profileUser = (from user in db.UsersDB where user.Username.Equals(u.Username) select user).First();
         ProfileDB toDelete = new ProfileDB(profileUser, p.Name, p.Pronouns, p.Age, p.Bio, p.ProfilePicture, null, null, null);
         db.Remove(toDelete);
-        db.SaveChanges();
-    }
-
-    public void EditProfile(Profile p, ProfileDB toEdit) {
-        List<InterestDB> Interests = new List<InterestDB>();
-        List<PlatformDB> Platforms = new List<PlatformDB>(); 
-        List<GameDB> Games = new List<GameDB>();
-        foreach(var interest in p.Interests) {
-            InterestDB Interest = (from i in db.InterestsDB where i.InterestName.Equals(interest.Name) select i).First();
-            Interests.Add(Interest);
-        }
-        foreach(var platform in p.Platforms) {
-            PlatformDB Platform = (from plat in db.PlatformsDB where plat.PlatformName.Equals(platform.Name) select plat).First();
-            Platforms.Add(Platform);
-        }
-        foreach(var game in p.Games) {
-            GameDB Game = (from g in db.GamesDB where g.GameName.Equals(game.Name) select g).First();
-            Games.Add(Game);
-        }
-        UserDB profileUser = (from user in db.UsersDB where user.Username.Equals(p.User.Username) select user).First();
-        ProfileDB Edited = new ProfileDB(profileUser, p.Name, p.Pronouns, p.Age, p.Bio, p.ProfilePicture, null, null, null);
-        toEdit = Edited;
         db.SaveChanges();
     }
 
@@ -152,9 +102,6 @@ public class ProfileManager {
         _profile.Pronouns = profile.Pronouns;
         _profile.ProfilePicture = profile.ProfilePicture;
         try {
-            db.Remove(_profile);
-            db.SaveChanges();
-            db.Add(_profile);
             db.SaveChanges();
         }
         catch (Exception e) {

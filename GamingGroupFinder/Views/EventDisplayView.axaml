@@ -29,7 +29,7 @@
                     </ItemsRepeater.ItemTemplate>
                   </ItemsRepeater>
 
-                  <Button Content="More Detail"
+                  <Button Content="More Details"
                           Command="{Binding $parent[Window].DataContext.DetailEvent}"
                           CommandParameter="{Binding}"/>
                 </StackPanel>
@@ -43,13 +43,9 @@
             <DataTemplate>
               <StackPanel Spacing="2">
                 <TextBlock Text="{Binding Title}" FontSize="28"/>
+                <TextBlock Text="{Binding Description}"/>
                 <TextBlock Text="{Binding Game.GameName, StringFormat='Game: {0}'}"/>
                 <TextBlock Text="{Binding Platform.PlatformName, StringFormat='Platform: {0}'}"/>
-                
-                <Button Content="Edit Event"
-                        Command="{Binding $parent[Window].DataContext.EditEvent}"
-                        CommandParameter="{Binding}"
-                        IsVisible="{Binding CanEdit}"/>
               </StackPanel>
             </DataTemplate>
           </ItemsRepeater.ItemTemplate>
