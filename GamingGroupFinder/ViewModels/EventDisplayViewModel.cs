@@ -22,6 +22,10 @@ namespace GamingGroupFinderGUI.ViewModels
         }
 
         private bool DetermineEventCreation() {
+            if (Events is null) {
+                return true;
+            }
+
             foreach(EventDB ev in Events) {
                 if(ev.Owner.Username.Equals(UserManager.GetInstance().LoggedInUser.Username)) {
                     return false;
