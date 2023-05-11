@@ -15,7 +15,7 @@ public class ProfileManagerTests {
         var mockContext = new Mock<ApplicationContext>();
         mockContext.Setup(u => u.ProfilesDB).Returns(mockSet.Object);
         ProfileManager profileManager = ProfileManager.GetInstance();
-        profileManager.setApplicationContext(mockContext.Object);
+        profileManager.SetApplicationContext(mockContext.Object);
 
         User user = new User("newuser", "newpass", new byte['s'], new List<User>());
         Profile profile = new Profile(user, "name", "pronouns", 20, new List<Platform>(), new List<Game>(), "bio", "pfp", new List<Interest>());
@@ -36,7 +36,7 @@ public class ProfileManagerTests {
         var mockContext = new Mock<ApplicationContext>();
         mockContext.Setup(u => u.ProfilesDB).Returns(mockSet.Object);
         ProfileManager profileManager = ProfileManager.GetInstance();
-        profileManager.setApplicationContext(mockContext.Object);
+        profileManager.SetApplicationContext(mockContext.Object);
 
         User user = new User("newuser", "newpass", new byte['s'], new List<User>());
 
@@ -54,7 +54,7 @@ public class ProfileManagerTests {
         var mockContext = new Mock<ApplicationContext>();
         mockContext.Setup(u => u.ProfilesDB).Returns(mockSet.Object);
         ProfileManager profileManager = ProfileManager.GetInstance();
-        profileManager.setApplicationContext(mockContext.Object);
+        profileManager.SetApplicationContext(mockContext.Object);
 
         User user = new User("newuser", "newpass", new byte['s'], new List<User>());
         Profile profile = new Profile(user, "name", "pronouns", 20, new List<Platform>(), new List<Game>(), "bio", "pfp", new List<Interest>());
@@ -76,7 +76,7 @@ public class ProfileManagerTests {
         var mockContext = new Mock<ApplicationContext>();
         mockContext.Setup(u => u.ProfilesDB).Returns(mockSet.Object);
         ProfileManager profileManager = ProfileManager.GetInstance();
-        profileManager.setApplicationContext(mockContext.Object);
+        profileManager.SetApplicationContext(mockContext.Object);
 
         User user = new User("newuser", "newpass", new byte['s'], new List<User>());
 
@@ -94,7 +94,7 @@ public class ProfileManagerTests {
         var mockContext = new Mock<ApplicationContext>();
         mockContext.Setup(u => u.ProfilesDB).Returns(mockSet.Object);
         ProfileManager profileManager = ProfileManager.GetInstance();
-        profileManager.setApplicationContext(mockContext.Object);
+        profileManager.SetApplicationContext(mockContext.Object);
 
         User user = new User("newuser", "newpass", new byte['s'], new List<User>());
         Profile profile = new Profile(user, "name", "pronouns", 20, new List<Platform>(), new List<Game>(), "bio", "pfp", new List<Interest>());
@@ -123,7 +123,7 @@ public class ProfileManagerTests {
         var mockContext = new Mock<ApplicationContext>();
         mockContext.Setup(u => u.ProfilesDB).Returns(mockSet.Object);
         ProfileManager profileManager = ProfileManager.GetInstance();
-        profileManager.setApplicationContext(mockContext.Object);
+        profileManager.SetApplicationContext(mockContext.Object);
 
         // Act
         profileManager.EditProfile(null);
@@ -138,7 +138,7 @@ public class ProfileManagerTests {
         var mockContext = new Mock<ApplicationContext>();
         mockContext.Setup(u => u.ProfilesDB).Returns(mockSet.Object);
         ProfileManager profileManager = ProfileManager.GetInstance();
-        profileManager.setApplicationContext(mockContext.Object);
+        profileManager.SetApplicationContext(mockContext.Object);
 
         User user = new User("newuser", "newpass", new byte['s'], new List<User>());
         Profile profile = new Profile(user, "name", "pronouns", 20, new List<Platform>(), new List<Game>(), "bio", "pfp", new List<Interest>());
@@ -158,7 +158,7 @@ public class ProfileManagerTests {
         var mockContext = new Mock<ApplicationContext>();
         mockContext.Setup(u => u.ProfilesDB).Returns(mockSet.Object);
         ProfileManager profileManager = ProfileManager.GetInstance();
-        profileManager.setApplicationContext(mockContext.Object);
+        profileManager.SetApplicationContext(mockContext.Object);
 
         // Act
         List<ProfileDB> searchedProfile = profileManager.SearchProfile(null);

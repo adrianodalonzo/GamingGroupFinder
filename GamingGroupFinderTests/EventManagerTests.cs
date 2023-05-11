@@ -8,6 +8,29 @@ namespace GamingGroupFinderTests;
 
 [TestClass]
 public class EventManagerTests {
+    private EventDB EventToEventDB(Event ev) {
+        return new EventDB(UserToUserDB(ev.Owner), ev.Title, ev.DateTime, ev.Location, GameToGameDB(ev.Game), PlatformToPlatformDB(ev.Platform), ev.Description, UsersToUsersDB(ev.Attendees));
+    }
+    // convert user to userdb
+    private UserDB UserToUserDB(User u) {
+        return new UserDB(u.Username, u.Password, u.Salt, null);
+    }
+    // convert game to gamedb
+    private GameDB GameToGameDB(Game g) {
+        return new GameDB(g.Name);
+    }
+    // convert platform to platformdb
+    private PlatformDB PlatformToPlatformDB(Platform p) {
+        return new PlatformDB(p.Name);
+    }
+    // convert list of users to list of userDB
+    private List<UserDB> UsersToUsersDB(List<User> users) {
+        List<UserDB> usersDB = new List<UserDB>();
+        foreach(var user in users) {
+            usersDB.Add(UserToUserDB(user));
+        }
+        return usersDB;
+    }
     [TestMethod]
     public void TestCreateEvent_CreatesEvent() {
         // Arrange
@@ -34,7 +57,7 @@ public class EventManagerTests {
         Event e = new Event("newevent", DateTime.Now, "over there", game, nintendo, am, ap, "desc", user, new List<User>());
 
         // Act
-        eventManager.CreateEvent(e);
+        eventManager.CreateEvent(EventToEventDB(e));
 
         // Assert
         mockSet.Verify(u => u.Add(It.IsAny<EventDB>()), Times.Once());
@@ -68,7 +91,7 @@ public class EventManagerTests {
         Event e = new Event("newevent", DateTime.Now, "over there", game, nintendo, am, ap, "desc", user, new List<User>());
 
         // Act
-        eventManager.CreateEvent(e);
+        eventManager.CreateEvent(EventToEventDB(e));
 
         // Assert
         Assert.Fail();
@@ -116,7 +139,7 @@ public class EventManagerTests {
         Game game = new Game("Splatoon 3", platforms, ranks);
         Event e = new Event("newevent", DateTime.Now, "over there", game, nintendo, am, ap, "desc", user, new List<User>());
 
-        eventManager.CreateEvent(e);
+        eventManager.CreateEvent(EventToEventDB(e));
 
         EventDB eDB = new EventDB(new UserDB("newuser", "newpass", new byte['s'], null), "editedevent", DateTime.Now, "overthere"
         , new GameDB("Splatoon 3"), new PlatformDB("Nintendo Switch"), "desc", new List<UserDB>());
@@ -175,7 +198,7 @@ public class EventManagerTests {
         PlatformDB platformDB = new PlatformDB("Nintendo Switch");
         EventDB eDB = new EventDB(userDB, "newevent", DateTime.Now, "over there", gameDB, platformDB,"desc", new List<UserDB>());
 
-        eventManager.CreateEvent(e);
+        eventManager.CreateEvent(EventToEventDB(e));
 
         // Act
         eventManager.DeleteEvent(eDB);
@@ -226,7 +249,7 @@ public class EventManagerTests {
         Game game = new Game("Splatoon 3", platforms, ranks);
         Event e = new Event("newevent", DateTime.Now, "over there", game, nintendo, am, ap, "desc", user, new List<User>());
 
-        eventManager.CreateEvent(e);
+        eventManager.CreateEvent(EventToEventDB(e));
 
         User attendee = new User("attending", "event", new byte['s'], new List<User>());
 
@@ -290,7 +313,7 @@ public class EventManagerTests {
 
         Event e = new Event("newevent", DateTime.Now, "over there", game, nintendo, am, ap, "desc", user, users);
 
-        eventManager.CreateEvent(e);
+        eventManager.CreateEvent(EventToEventDB(e));
 
         UserDB userDB = new UserDB("newuser", "newpass", new byte['s'], null);
         GameDB gameDB = new GameDB("Splatoon 3");
