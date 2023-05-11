@@ -159,9 +159,9 @@ public class ProfileManager {
         List<ProfileDB> ProfileList = db.ProfilesDB
                         .Include(p => p.User)
                         .AsEnumerable()
-                        .Where(p => p.User.Username.Contains(username, StringComparison.OrdinalIgnoreCase) ||
-                                    p.Bio.Contains(username, StringComparison.OrdinalIgnoreCase) ||
-                                    p.Interests.Any(i => i.InterestName.Contains(username, StringComparison.OrdinalIgnoreCase)))
+                        .Where(p => (p.User != null && p.User.Username.Contains(username, StringComparison.OrdinalIgnoreCase)) ||
+                                    (p.Bio != null && p.Bio.Contains(username, StringComparison.OrdinalIgnoreCase)) ||
+                                    (p.Interests != null && p.Interests.Any(i => i.InterestName.Contains(username, StringComparison.OrdinalIgnoreCase))))
                         .ToList();
         return ProfileList;
     }

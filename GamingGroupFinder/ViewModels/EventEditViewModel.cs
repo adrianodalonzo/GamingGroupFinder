@@ -21,13 +21,19 @@ namespace GamingGroupFinderGUI.ViewModels
         public string SelectedGame
         {
             get => _selectedGame;
-            private set => this.RaiseAndSetIfChanged(ref _selectedGame, value);
+            private set {
+                this.RaiseAndSetIfChanged(ref _selectedGame, value);
+                Event.Game = GameManager.GetGame(value);
+            } 
         }
         private string _selectedPlatform;
         public string SelectedPlatform
         {
             get => _selectedPlatform;
-            private set => this.RaiseAndSetIfChanged(ref _selectedPlatform, value);
+            private set {
+                this.RaiseAndSetIfChanged(ref _selectedPlatform, value);
+                Event.Platform = PlatformManager.GetPlatform(value);
+            }
         }
         public EventEditViewModel(EventDB e)
         {

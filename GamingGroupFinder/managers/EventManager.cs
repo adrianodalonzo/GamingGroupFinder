@@ -108,7 +108,7 @@ namespace GamingGroupFinder {
 
         public void EditEvent(EventDB eDB) {
             if (_eventDB is null) {
-                _eventDB = GetEvent(eDB.EventDBId);
+                _eventDB = eDB;
             }
             _eventDB = eDB;
 
