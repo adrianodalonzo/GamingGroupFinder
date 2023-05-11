@@ -45,10 +45,11 @@ namespace GamingGroupFinder {
             return eventDB;
         }
 
-        public List<EventDB>? GetEvents()
-        {
-            List<EventDB> eventDBs = db.EventsDB.ToList();
-            return eventDBs;
+        public EventDB? GetEvent(UserDB owner) {
+            EventDB ownerRetrieved = (EventDB) db.EventsDB
+                                    .Where(ev => ev.Owner.Username.Equals(owner.Username))
+                                    .Select(ev => ev);
+            return ownerRetrieved;
         }
 
 
@@ -70,6 +71,37 @@ namespace GamingGroupFinder {
                 db.SaveChanges();
             }
             catch (Exception ex) {
+                Console.WriteLine(ex);
+            }
+        }
+
+        public void CreateEvent(EventDB e) {
+            if(_eventDB == null) {
+                _eventDB = new EventDB(e.Title, e.Owner);
+            }
+
+            try {
+                UserDB existingUser = db.UsersDB
+                                        .FirstOrDefault(u => u.Username.Equals(e.Owner.Username));
+                
+                if(existingUser != null) {
+                    _eventDB.Owner = existingUser;
+                } else {
+                    db.UsersDB.Add(e.Owner);
+                    _eventDB.Owner = e.Owner;
+                }
+
+                _eventDB.Title = e.Title;
+                _eventDB.Time = e.Time;
+                _eventDB.Location = e.Location;
+                _eventDB.Game = e.Game;
+                _eventDB.Platform = e.Platform;
+                _eventDB.Description = e.Description;
+                _eventDB.UsersAttending = e.UsersAttending;
+            
+                db.EventsDB.Add(_eventDB);
+                db.SaveChanges();
+            } catch(Exception ex) {
                 Console.WriteLine(ex);
             }
         }
@@ -175,6 +207,10 @@ namespace GamingGroupFinder {
                                                     e.Description.Contains(query, StringComparison.OrdinalIgnoreCase))
                                         .ToList();
             return EventList;
+        }
+
+        public List<EventDB> GetEvents() {
+            return db.EventsDB.ToList();
         }
 
     }

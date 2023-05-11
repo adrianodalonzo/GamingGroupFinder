@@ -92,7 +92,11 @@ class MainWindowViewModel : ViewModelBase
 
         private void CreateEvent()
         {
-            // DisplayEvent(new EventDB());
+            EventDisplayViewModel edvm = (EventDisplayViewModel) Content;
+            var vm = new AddEventViewModel(LoggedInUser);
+
+            vm.Ok.Subscribe(x => {Content = edvm;});
+            Content = vm;
         }
 
         private void DisplayEvents(ObservableCollection<EventDB> e)
