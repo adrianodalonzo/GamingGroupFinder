@@ -8,6 +8,7 @@
     <StackPanel Margin="10,0,0,0">
       <TextBlock Text="{Binding Profile.User.Username}"
                   FontSize="28"/>
+                  <Image Width="100" Height="100" Source="{Binding ProfilePicture}" />
       
       <StackPanel Orientation="Horizontal" Spacing="10">
 
