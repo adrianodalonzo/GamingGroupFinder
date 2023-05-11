@@ -12,8 +12,8 @@ using Oracle.EntityFrameworkCore.Metadata;
 namespace _410project.Migrations
 {
     [DbContext(typeof(ApplicationContext))]
-    [Migration("20230420212313_UpdateTables")]
-    partial class UpdateTables
+    [Migration("20230425021849_Tables")]
+    partial class Tables
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -25,73 +25,58 @@ namespace _410project.Migrations
 
             OracleModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
-            modelBuilder.Entity("EventUser", b =>
+            modelBuilder.Entity("EventDBUserDB", b =>
                 {
-                    b.Property<int>("EventsAttendingEventId")
+                    b.Property<int>("EventsAttendingEventDBId")
                         .HasColumnType("NUMBER(10)");
 
-                    b.Property<int>("UsersAttendingUserId")
+                    b.Property<int>("UsersAttendingUserDBId")
                         .HasColumnType("NUMBER(10)");
 
-                    b.HasKey("EventsAttendingEventId", "UsersAttendingUserId");
+                    b.HasKey("EventsAttendingEventDBId", "UsersAttendingUserDBId");
 
-                    b.HasIndex("UsersAttendingUserId");
+                    b.HasIndex("UsersAttendingUserDBId");
 
-                    b.ToTable("EventUser");
+                    b.ToTable("EventDBUserDB");
                 });
 
-            modelBuilder.Entity("GamePlatform", b =>
+            modelBuilder.Entity("GameDBPlatformDB", b =>
                 {
-                    b.Property<int>("GamesGameId")
+                    b.Property<int>("GamesGameDBId")
                         .HasColumnType("NUMBER(10)");
 
-                    b.Property<int>("PlatformsPlatformId")
+                    b.Property<int>("PlatformsPlatformDBId")
                         .HasColumnType("NUMBER(10)");
 
-                    b.HasKey("GamesGameId", "PlatformsPlatformId");
+                    b.HasKey("GamesGameDBId", "PlatformsPlatformDBId");
 
-                    b.HasIndex("PlatformsPlatformId");
+                    b.HasIndex("PlatformsPlatformDBId");
 
-                    b.ToTable("GamePlatform");
+                    b.ToTable("GameDBPlatformDB");
                 });
 
-            modelBuilder.Entity("GameProfile", b =>
+            modelBuilder.Entity("GameDBProfileDB", b =>
                 {
-                    b.Property<int>("GamesGameId")
+                    b.Property<int>("GamesGameDBId")
                         .HasColumnType("NUMBER(10)");
 
-                    b.Property<int>("ProfilesProfileId")
+                    b.Property<int>("ProfilesProfileDBId")
                         .HasColumnType("NUMBER(10)");
 
-                    b.HasKey("GamesGameId", "ProfilesProfileId");
+                    b.HasKey("GamesGameDBId", "ProfilesProfileDBId");
 
-                    b.HasIndex("ProfilesProfileId");
+                    b.HasIndex("ProfilesProfileDBId");
 
-                    b.ToTable("GameProfile");
+                    b.ToTable("GameDBProfileDB");
                 });
 
-            modelBuilder.Entity("GameRank", b =>
+            modelBuilder.Entity("GamingGroupFinderDatabase.EventDB", b =>
                 {
-                    b.Property<int>("GamesGameId")
-                        .HasColumnType("NUMBER(10)");
-
-                    b.Property<int>("RanksRankId")
-                        .HasColumnType("NUMBER(10)");
-
-                    b.HasKey("GamesGameId", "RanksRankId");
-
-                    b.HasIndex("RanksRankId");
-
-                    b.ToTable("GameRank");
-                });
-
-            modelBuilder.Entity("GamingGroupFinderDatabase.Event", b =>
-                {
-                    b.Property<int>("EventId")
+                    b.Property<int>("EventDBId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("NUMBER(10)");
 
-                    OraclePropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("EventId"));
+                    OraclePropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("EventDBId"));
 
                     b.Property<string>("Description")
                         .IsRequired()
@@ -123,7 +108,7 @@ namespace _410project.Migrations
                         .IsRequired()
                         .HasColumnType("NVARCHAR2(2000)");
 
-                    b.HasKey("EventId");
+                    b.HasKey("EventDBId");
 
                     b.HasIndex("GameId");
 
@@ -135,50 +120,65 @@ namespace _410project.Migrations
 
                     b.HasIndex("PlatformId");
 
-                    b.ToTable("Events");
+                    b.ToTable("EventsDB");
                 });
 
-            modelBuilder.Entity("GamingGroupFinderDatabase.Game", b =>
+            modelBuilder.Entity("GamingGroupFinderDatabase.GameDB", b =>
                 {
-                    b.Property<int>("GameId")
+                    b.Property<int>("GameDBId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("NUMBER(10)");
 
-                    OraclePropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("GameId"));
+                    OraclePropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("GameDBId"));
 
                     b.Property<string>("GameName")
                         .IsRequired()
                         .HasColumnType("NVARCHAR2(2000)");
 
-                    b.HasKey("GameId");
+                    b.HasKey("GameDBId");
 
-                    b.ToTable("Games");
+                    b.ToTable("GamesDB");
                 });
 
-            modelBuilder.Entity("GamingGroupFinderDatabase.Interest", b =>
+            modelBuilder.Entity("GamingGroupFinderDatabase.GameDBRankDB", b =>
                 {
-                    b.Property<int>("InterestId")
+                    b.Property<int>("GameDBId")
+                        .HasColumnType("NUMBER(10)");
+
+                    b.Property<int>("RankDBId")
+                        .HasColumnType("NUMBER(10)");
+
+                    b.HasIndex("GameDBId");
+
+                    b.HasIndex("RankDBId");
+
+                    b.ToTable("GamesDBRanksDB");
+                });
+
+            modelBuilder.Entity("GamingGroupFinderDatabase.InterestDB", b =>
+                {
+                    b.Property<int>("InterestDBId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("NUMBER(10)");
 
-                    OraclePropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("InterestId"));
+                    OraclePropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("InterestDBId"));
 
                     b.Property<string>("InterestName")
                         .IsRequired()
                         .HasColumnType("NVARCHAR2(2000)");
 
-                    b.HasKey("InterestId");
+                    b.HasKey("InterestDBId");
 
-                    b.ToTable("Interest");
+                    b.ToTable("InterestsDB");
                 });
 
-            modelBuilder.Entity("GamingGroupFinderDatabase.Message", b =>
+            modelBuilder.Entity("GamingGroupFinderDatabase.MessageDB", b =>
                 {
-                    b.Property<int>("MessageId")
+                    b.Property<int>("MessageDBId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("NUMBER(10)");
 
-                    OraclePropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("MessageId"));
+                    OraclePropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("MessageDBId"));
 
                     b.Property<bool>("IsSeen")
                         .HasColumnType("NUMBER(1)");
@@ -196,39 +196,39 @@ namespace _410project.Migrations
                     b.Property<DateTime>("Time")
                         .HasColumnType("TIMESTAMP(7)");
 
-                    b.HasKey("MessageId");
+                    b.HasKey("MessageDBId");
 
                     b.HasIndex("ReceiverId");
 
                     b.HasIndex("SenderId");
 
-                    b.ToTable("Messages");
+                    b.ToTable("MessagesDB");
                 });
 
-            modelBuilder.Entity("GamingGroupFinderDatabase.Platform", b =>
+            modelBuilder.Entity("GamingGroupFinderDatabase.PlatformDB", b =>
                 {
-                    b.Property<int>("PlatformId")
+                    b.Property<int>("PlatformDBId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("NUMBER(10)");
 
-                    OraclePropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("PlatformId"));
+                    OraclePropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("PlatformDBId"));
 
                     b.Property<string>("PlatformName")
                         .IsRequired()
                         .HasColumnType("NVARCHAR2(2000)");
 
-                    b.HasKey("PlatformId");
+                    b.HasKey("PlatformDBId");
 
-                    b.ToTable("Platforms");
+                    b.ToTable("PlatformsDB");
                 });
 
-            modelBuilder.Entity("GamingGroupFinderDatabase.Profile", b =>
+            modelBuilder.Entity("GamingGroupFinderDatabase.ProfileDB", b =>
                 {
-                    b.Property<int>("ProfileId")
+                    b.Property<int>("ProfileDBId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("NUMBER(10)");
 
-                    OraclePropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ProfileId"));
+                    OraclePropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ProfileDBId"));
 
                     b.Property<int>("Age")
                         .HasColumnType("NUMBER(10)");
@@ -252,21 +252,21 @@ namespace _410project.Migrations
                     b.Property<int>("UserId")
                         .HasColumnType("NUMBER(10)");
 
-                    b.HasKey("ProfileId");
+                    b.HasKey("ProfileDBId");
 
                     b.HasIndex("UserId")
                         .IsUnique();
 
-                    b.ToTable("Profiles");
+                    b.ToTable("ProfilesDB");
                 });
 
-            modelBuilder.Entity("GamingGroupFinderDatabase.Rank", b =>
+            modelBuilder.Entity("GamingGroupFinderDatabase.RankDB", b =>
                 {
-                    b.Property<int>("RankId")
+                    b.Property<int>("RankDBId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("NUMBER(10)");
 
-                    OraclePropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("RankId"));
+                    OraclePropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("RankDBId"));
 
                     b.Property<string>("RankName")
                         .IsRequired()
@@ -275,18 +275,18 @@ namespace _410project.Migrations
                     b.Property<int>("RankValue")
                         .HasColumnType("NUMBER(10)");
 
-                    b.HasKey("RankId");
+                    b.HasKey("RankDBId");
 
-                    b.ToTable("Ranks");
+                    b.ToTable("RanksDB");
                 });
 
-            modelBuilder.Entity("GamingGroupFinderDatabase.User", b =>
+            modelBuilder.Entity("GamingGroupFinderDatabase.UserDB", b =>
                 {
-                    b.Property<int>("UserId")
+                    b.Property<int>("UserDBId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("NUMBER(10)");
 
-                    OraclePropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("UserId"));
+                    OraclePropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("UserDBId"));
 
                     b.Property<string>("Password")
                         .IsRequired()
@@ -300,128 +300,113 @@ namespace _410project.Migrations
                         .IsRequired()
                         .HasColumnType("NVARCHAR2(2000)");
 
-                    b.HasKey("UserId");
+                    b.HasKey("UserDBId");
 
-                    b.ToTable("Users");
+                    b.ToTable("UsersDB");
                 });
 
-            modelBuilder.Entity("InterestProfile", b =>
+            modelBuilder.Entity("InterestDBProfileDB", b =>
                 {
-                    b.Property<int>("InterestsInterestId")
+                    b.Property<int>("InterestsInterestDBId")
                         .HasColumnType("NUMBER(10)");
 
-                    b.Property<int>("ProfilesProfileId")
+                    b.Property<int>("ProfilesProfileDBId")
                         .HasColumnType("NUMBER(10)");
 
-                    b.HasKey("InterestsInterestId", "ProfilesProfileId");
+                    b.HasKey("InterestsInterestDBId", "ProfilesProfileDBId");
 
-                    b.HasIndex("ProfilesProfileId");
+                    b.HasIndex("ProfilesProfileDBId");
 
-                    b.ToTable("InterestProfile");
+                    b.ToTable("InterestDBProfileDB");
                 });
 
-            modelBuilder.Entity("PlatformProfile", b =>
+            modelBuilder.Entity("PlatformDBProfileDB", b =>
                 {
-                    b.Property<int>("PlatformsPlatformId")
+                    b.Property<int>("PlatformsPlatformDBId")
                         .HasColumnType("NUMBER(10)");
 
-                    b.Property<int>("ProfilesProfileId")
+                    b.Property<int>("ProfilesProfileDBId")
                         .HasColumnType("NUMBER(10)");
 
-                    b.HasKey("PlatformsPlatformId", "ProfilesProfileId");
+                    b.HasKey("PlatformsPlatformDBId", "ProfilesProfileDBId");
 
-                    b.HasIndex("ProfilesProfileId");
+                    b.HasIndex("ProfilesProfileDBId");
 
-                    b.ToTable("PlatformProfile");
+                    b.ToTable("PlatformDBProfileDB");
                 });
 
-            modelBuilder.Entity("EventUser", b =>
+            modelBuilder.Entity("EventDBUserDB", b =>
                 {
-                    b.HasOne("GamingGroupFinderDatabase.Event", null)
+                    b.HasOne("GamingGroupFinderDatabase.EventDB", null)
                         .WithMany()
-                        .HasForeignKey("EventsAttendingEventId")
+                        .HasForeignKey("EventsAttendingEventDBId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("GamingGroupFinderDatabase.User", null)
+                    b.HasOne("GamingGroupFinderDatabase.UserDB", null)
                         .WithMany()
-                        .HasForeignKey("UsersAttendingUserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
-            modelBuilder.Entity("GamePlatform", b =>
-                {
-                    b.HasOne("GamingGroupFinderDatabase.Game", null)
-                        .WithMany()
-                        .HasForeignKey("GamesGameId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("GamingGroupFinderDatabase.Platform", null)
-                        .WithMany()
-                        .HasForeignKey("PlatformsPlatformId")
+                        .HasForeignKey("UsersAttendingUserDBId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("GameProfile", b =>
+            modelBuilder.Entity("GameDBPlatformDB", b =>
                 {
-                    b.HasOne("GamingGroupFinderDatabase.Game", null)
+                    b.HasOne("GamingGroupFinderDatabase.GameDB", null)
                         .WithMany()
-                        .HasForeignKey("GamesGameId")
+                        .HasForeignKey("GamesGameDBId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("GamingGroupFinderDatabase.Profile", null)
+                    b.HasOne("GamingGroupFinderDatabase.PlatformDB", null)
                         .WithMany()
-                        .HasForeignKey("ProfilesProfileId")
+                        .HasForeignKey("PlatformsPlatformDBId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("GameRank", b =>
+            modelBuilder.Entity("GameDBProfileDB", b =>
                 {
-                    b.HasOne("GamingGroupFinderDatabase.Game", null)
+                    b.HasOne("GamingGroupFinderDatabase.GameDB", null)
                         .WithMany()
-                        .HasForeignKey("GamesGameId")
+                        .HasForeignKey("GamesGameDBId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("GamingGroupFinderDatabase.Rank", null)
+                    b.HasOne("GamingGroupFinderDatabase.ProfileDB", null)
                         .WithMany()
-                        .HasForeignKey("RanksRankId")
+                        .HasForeignKey("ProfilesProfileDBId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("GamingGroupFinderDatabase.Event", b =>
+            modelBuilder.Entity("GamingGroupFinderDatabase.EventDB", b =>
                 {
-                    b.HasOne("GamingGroupFinderDatabase.Game", "Game")
+                    b.HasOne("GamingGroupFinderDatabase.GameDB", "Game")
                         .WithMany()
                         .HasForeignKey("GameId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("GamingGroupFinderDatabase.Rank", "MaxRank")
+                    b.HasOne("GamingGroupFinderDatabase.RankDB", "MaxRank")
                         .WithMany()
                         .HasForeignKey("MaxRankId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("GamingGroupFinderDatabase.Rank", "MinRank")
+                    b.HasOne("GamingGroupFinderDatabase.RankDB", "MinRank")
                         .WithMany()
                         .HasForeignKey("MinRankId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("GamingGroupFinderDatabase.User", "Owner")
+                    b.HasOne("GamingGroupFinderDatabase.UserDB", "Owner")
                         .WithMany("EventsOwned")
                         .HasForeignKey("OwnerId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("GamingGroupFinderDatabase.Platform", "Platform")
+                    b.HasOne("GamingGroupFinderDatabase.PlatformDB", "Platform")
                         .WithMany()
                         .HasForeignKey("PlatformId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -438,15 +423,34 @@ namespace _410project.Migrations
                     b.Navigation("Platform");
                 });
 
-            modelBuilder.Entity("GamingGroupFinderDatabase.Message", b =>
+            modelBuilder.Entity("GamingGroupFinderDatabase.GameDBRankDB", b =>
                 {
-                    b.HasOne("GamingGroupFinderDatabase.User", "Receiver")
+                    b.HasOne("GamingGroupFinderDatabase.GameDB", "Game")
+                        .WithMany()
+                        .HasForeignKey("GameDBId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("GamingGroupFinderDatabase.RankDB", "Rank")
+                        .WithMany()
+                        .HasForeignKey("RankDBId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Game");
+
+                    b.Navigation("Rank");
+                });
+
+            modelBuilder.Entity("GamingGroupFinderDatabase.MessageDB", b =>
+                {
+                    b.HasOne("GamingGroupFinderDatabase.UserDB", "Receiver")
                         .WithMany()
                         .HasForeignKey("ReceiverId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("GamingGroupFinderDatabase.User", "Sender")
+                    b.HasOne("GamingGroupFinderDatabase.UserDB", "Sender")
                         .WithMany()
                         .HasForeignKey("SenderId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -457,48 +461,48 @@ namespace _410project.Migrations
                     b.Navigation("Sender");
                 });
 
-            modelBuilder.Entity("GamingGroupFinderDatabase.Profile", b =>
+            modelBuilder.Entity("GamingGroupFinderDatabase.ProfileDB", b =>
                 {
-                    b.HasOne("GamingGroupFinderDatabase.User", "User")
+                    b.HasOne("GamingGroupFinderDatabase.UserDB", "User")
                         .WithOne("Profile")
-                        .HasForeignKey("GamingGroupFinderDatabase.Profile", "UserId")
+                        .HasForeignKey("GamingGroupFinderDatabase.ProfileDB", "UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("User");
                 });
 
-            modelBuilder.Entity("InterestProfile", b =>
+            modelBuilder.Entity("InterestDBProfileDB", b =>
                 {
-                    b.HasOne("GamingGroupFinderDatabase.Interest", null)
+                    b.HasOne("GamingGroupFinderDatabase.InterestDB", null)
                         .WithMany()
-                        .HasForeignKey("InterestsInterestId")
+                        .HasForeignKey("InterestsInterestDBId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("GamingGroupFinderDatabase.Profile", null)
+                    b.HasOne("GamingGroupFinderDatabase.ProfileDB", null)
                         .WithMany()
-                        .HasForeignKey("ProfilesProfileId")
+                        .HasForeignKey("ProfilesProfileDBId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("PlatformProfile", b =>
+            modelBuilder.Entity("PlatformDBProfileDB", b =>
                 {
-                    b.HasOne("GamingGroupFinderDatabase.Platform", null)
+                    b.HasOne("GamingGroupFinderDatabase.PlatformDB", null)
                         .WithMany()
-                        .HasForeignKey("PlatformsPlatformId")
+                        .HasForeignKey("PlatformsPlatformDBId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("GamingGroupFinderDatabase.Profile", null)
+                    b.HasOne("GamingGroupFinderDatabase.ProfileDB", null)
                         .WithMany()
-                        .HasForeignKey("ProfilesProfileId")
+                        .HasForeignKey("ProfilesProfileDBId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("GamingGroupFinderDatabase.User", b =>
+            modelBuilder.Entity("GamingGroupFinderDatabase.UserDB", b =>
                 {
                     b.Navigation("EventsOwned");
 
