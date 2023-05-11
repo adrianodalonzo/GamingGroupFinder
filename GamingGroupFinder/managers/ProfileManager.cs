@@ -20,14 +20,14 @@ public class ProfileManager {
 
     }
 
-    public static ProfileManager getInstance() {
+    public static ProfileManager GetInstance() {
         if(_instance == null) {
             _instance = new ProfileManager();
         }
         return _instance;
     }
 
-    public static ProfileDB GetProfile(int userId) {
+    public ProfileDB GetProfile(int userId) {
         return (from p in db.ProfilesDB where p.UserId == userId select p).FirstOrDefault();
     }
 
@@ -35,7 +35,7 @@ public class ProfileManager {
         db = context;
     }
     
-    private static List<InterestDB> InterestListToInterestsDBList(List<Interest> list) {
+    private List<InterestDB> InterestListToInterestsDBList(List<Interest> list) {
         List<InterestDB> interests = new List<InterestDB>();
         foreach(Interest i in list) {
             interests.Add(new InterestDB(i.Name));
@@ -43,7 +43,7 @@ public class ProfileManager {
         return interests;
     }
 
-    private static List<GameDB> GameListToGameDBList(List<Game> list) {
+    private List<GameDB> GameListToGameDBList(List<Game> list) {
         List<GameDB> games = new List<GameDB>();
         foreach(Game g in list) {
             games.Add(new GameDB(g.Name));
@@ -51,7 +51,7 @@ public class ProfileManager {
         return games;
     }
 
-    private static List<PlatformDB> PlatformListToPlatformsDBList(List<Platform> list) {
+    private List<PlatformDB> PlatformListToPlatformsDBList(List<Platform> list) {
         List<PlatformDB> platforms = new List<PlatformDB>();
         foreach(Platform p in list) {
             platforms.Add(new PlatformDB(p.Name));
@@ -60,7 +60,7 @@ public class ProfileManager {
     }
 
     // this is probably just going to create a new profile and add it to the database
-    public static void CreateProfile(Profile p, User u) {
+    public void CreateProfile(Profile p, User u) {
         UserDB profileUser = (from user in db.UsersDB where user.Username.Equals(u.Username) select user).First();
         ProfileDB profile = new ProfileDB(profileUser, null, null, 0, null, null, new List<InterestDB>(), new List<PlatformDB>(), new List<GameDB>());
 
@@ -115,7 +115,11 @@ public class ProfileManager {
     }
 
     // add get profile
-    public static ProfileDB GetProfile(UserDB u) {
+    public ProfileDB GetProfile(UserDB u) {
+        if (u is null) {
+            throw new ArgumentNullException("u (user) cannot be null");
+        }
+        
         ProfileDB profile = (from p in db.ProfilesDB where p.User.Username.Equals(u.Username) select p).SingleOrDefault();
         if(profile is null) {
             profile = new ProfileDB(u, null!, null!, 0, null!, null!, new List<InterestDB>(), new List<PlatformDB>(), new List<GameDB>());
@@ -132,7 +136,10 @@ public class ProfileManager {
         return profile;
     }
 
-    public static void EditProfile(ProfileDB profile) {
+    public void EditProfile(ProfileDB profile) {
+        if (profile is null) {
+            throw new ArgumentNullException("profile cannot be null");
+        }
         if(_profile is null) {
             _profile = profile;
         }
@@ -156,6 +163,10 @@ public class ProfileManager {
     }
 
     public List<ProfileDB> SearchProfile(string username) {
+        if (username is null) {
+            throw new ArgumentNullException("username cannot be null");
+        }
+        
         List<ProfileDB> ProfileList = db.ProfilesDB
                         .Include(p => p.User)
                         .AsEnumerable()

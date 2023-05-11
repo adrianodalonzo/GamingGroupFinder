@@ -20,9 +20,9 @@ public partial class App : Application
         base.OnFrameworkInitializationCompleted();
         ApplicationContext context = new ApplicationContext();
         UserManager.GetInstance().SetApplicationContext(context);
-        ProfileManager.getInstance().setApplicationContext(context);
-        EventManager.GetInstance().SetLibraryContext(context);
-        MessageManager.GetInstance().SetLibraryContext(context);
+        ProfileManager.GetInstance().setApplicationContext(context);
+        EventManager.GetInstance().SetApplicationContext(context);
+        MessageManager.GetInstance().SetApplicationContext(context);
         GameManager.GetInstance().SetApplicationContext(context);
         PlatformManager.GetInstance().SetApplicationContext(context);
         InterestManager.GetInstance().SetApplicationContext(context);

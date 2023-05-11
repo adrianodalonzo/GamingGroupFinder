@@ -36,7 +36,7 @@ namespace GamingGroupFinderGUI.ViewModels
             Profile = p;
 
             Ok = ReactiveCommand.Create(() => {
-                ProfileManager.EditProfile(Profile);
+                ProfileManager.GetInstance().EditProfile(Profile);
             });
 
         }

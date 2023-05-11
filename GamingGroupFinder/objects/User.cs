@@ -64,6 +64,9 @@ namespace GamingGroupFinder {
             if(username == null || password == null){
                 throw new ArgumentNullException("one or multiple of the input is null");
             }
+            if (username == this.Username && password == this.Password) {
+                return true;
+            }
             return false;
         }   
 

@@ -52,7 +52,7 @@ class MainWindowViewModel : ViewModelBase
 
         private void ShowPersonalProfile()
         {
-            DisplayProfile(ProfileManager.GetProfile(LoggedInUser));
+            DisplayProfile(ProfileManager.GetInstance().GetProfile(LoggedInUser));
         }
 
         private void DisplayProfile(ProfileDB profile) {
@@ -79,7 +79,7 @@ class MainWindowViewModel : ViewModelBase
                 VisibleNavigation = true;
                 if(u != null) {
                     LoggedInUser = u;
-                    ProfileDB p = ProfileManager.GetProfile(LoggedInUser);
+                    ProfileDB p = ProfileManager.GetInstance().GetProfile(LoggedInUser);
                     ShowPersonalProfile();
                 }
             }
@@ -161,7 +161,7 @@ class MainWindowViewModel : ViewModelBase
         public void ClearProfile() {
             ProfileDB clearedProfile = new ProfileDB(LoggedInUser, null!, null!, 0, null!, null!, new List<InterestDB>(), new List<PlatformDB>(), new List<GameDB>());
             LoggedInUser.Profile = clearedProfile;
-            ProfileManager.EditProfile(LoggedInUser.Profile);
+            ProfileManager.GetInstance().EditProfile(LoggedInUser.Profile);
             DisplayProfile(LoggedInUser.Profile);
         }
 
