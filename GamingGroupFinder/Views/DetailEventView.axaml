@@ -20,8 +20,9 @@
 
     <StackPanel>
       <Button Content="Attend Event"
-              Command="{Binding Attend}"
-              IsVisible="{Binding CanAttend}"/>
+              Command="{Binding Attend}" />
+      <Button Content="Leave Event"
+              Command="{Binding Leave}" />
     </StackPanel>
 
   </StackPanel>
