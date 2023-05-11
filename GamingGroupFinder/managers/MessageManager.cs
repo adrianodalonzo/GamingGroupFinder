@@ -1,6 +1,7 @@
 //might need to keep track of logged in user somewhere here (to know whos signed in and who sent/recieved messages)
 
 using GamingGroupFinderDatabase;
+using GamingGroupFinderGUI.Models;
 
 namespace GamingGroupFinder;
 
@@ -19,7 +20,7 @@ public class MessageManager {
         return _instance;
     }
 
-    public void SetLibraryContext(ApplicationContext context) {
+    public void SetApplicationContext(ApplicationContext context) {
         db = context;
     }
 
@@ -61,6 +62,9 @@ public class MessageManager {
     }
 
     public void MarkMessageSeen(Message message) {
+        if (message is null) {
+            throw new ArgumentNullException("message cannot be null");
+        }
         var testMessage = db.MessagesDB.SingleOrDefault(
             m => m.Sender.Username.Equals(message.Sender.Username) &&
             m.Receiver.Username.Equals(message.Recipient.Username) &&

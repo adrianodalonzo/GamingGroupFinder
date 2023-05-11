@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace _410project.Migrations
 {
     /// <inheritdoc />
-    public partial class Tables : Migration
+    public partial class NewTables : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -72,7 +72,7 @@ namespace _410project.Migrations
                         .Annotation("Oracle:Identity", "START WITH 1 INCREMENT BY 1"),
                     Username = table.Column<string>(type: "NVARCHAR2(2000)", nullable: false),
                     Password = table.Column<string>(type: "NVARCHAR2(2000)", nullable: false),
-                    Salt = table.Column<string>(type: "NVARCHAR2(2000)", nullable: false)
+                    Salt = table.Column<byte[]>(type: "RAW(2000)", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -104,23 +104,24 @@ namespace _410project.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "GamesDBRanksDB",
+                name: "GameDBRankDB",
                 columns: table => new
                 {
-                    GameDBId = table.Column<int>(type: "NUMBER(10)", nullable: false),
-                    RankDBId = table.Column<int>(type: "NUMBER(10)", nullable: false)
+                    GamesGameDBId = table.Column<int>(type: "NUMBER(10)", nullable: false),
+                    RanksRankDBId = table.Column<int>(type: "NUMBER(10)", nullable: false)
                 },
                 constraints: table =>
                 {
+                    table.PrimaryKey("PK_GameDBRankDB", x => new { x.GamesGameDBId, x.RanksRankDBId });
                     table.ForeignKey(
-                        name: "FK_GamesDBRanksDB_GamesDB_GameDBId",
-                        column: x => x.GameDBId,
+                        name: "FK_GameDBRankDB_GamesDB_GamesGameDBId",
+                        column: x => x.GamesGameDBId,
                         principalTable: "GamesDB",
                         principalColumn: "GameDBId",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_GamesDBRanksDB_RanksDB_RankDBId",
-                        column: x => x.RankDBId,
+                        name: "FK_GameDBRankDB_RanksDB_RanksRankDBId",
+                        column: x => x.RanksRankDBId,
                         principalTable: "RanksDB",
                         principalColumn: "RankDBId",
                         onDelete: ReferentialAction.Cascade);
@@ -138,8 +139,6 @@ namespace _410project.Migrations
                     Location = table.Column<string>(type: "NVARCHAR2(2000)", nullable: false),
                     GameId = table.Column<int>(type: "NUMBER(10)", nullable: false),
                     PlatformId = table.Column<int>(type: "NUMBER(10)", nullable: false),
-                    MinRankId = table.Column<int>(type: "NUMBER(10)", nullable: false),
-                    MaxRankId = table.Column<int>(type: "NUMBER(10)", nullable: false),
                     Description = table.Column<string>(type: "NVARCHAR2(2000)", nullable: false)
                 },
                 constraints: table =>
@@ -156,18 +155,6 @@ namespace _410project.Migrations
                         column: x => x.PlatformId,
                         principalTable: "PlatformsDB",
                         principalColumn: "PlatformDBId",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_EventsDB_RanksDB_MaxRankId",
-                        column: x => x.MaxRankId,
-                        principalTable: "RanksDB",
-                        principalColumn: "RankDBId",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_EventsDB_RanksDB_MinRankId",
-                        column: x => x.MinRankId,
-                        principalTable: "RanksDB",
-                        principalColumn: "RankDBId",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_EventsDB_UsersDB_OwnerId",
@@ -213,11 +200,11 @@ namespace _410project.Migrations
                     ProfileDBId = table.Column<int>(type: "NUMBER(10)", nullable: false)
                         .Annotation("Oracle:Identity", "START WITH 1 INCREMENT BY 1"),
                     UserId = table.Column<int>(type: "NUMBER(10)", nullable: false),
-                    Name = table.Column<string>(type: "NVARCHAR2(2000)", nullable: false),
-                    Pronouns = table.Column<string>(type: "NVARCHAR2(2000)", nullable: false),
+                    Name = table.Column<string>(type: "NVARCHAR2(2000)", nullable: true),
+                    Pronouns = table.Column<string>(type: "NVARCHAR2(2000)", nullable: true),
                     Age = table.Column<int>(type: "NUMBER(10)", nullable: false),
-                    Bio = table.Column<string>(type: "NVARCHAR2(2000)", nullable: false),
-                    ProfilePicture = table.Column<string>(type: "NVARCHAR2(2000)", nullable: false)
+                    Bio = table.Column<string>(type: "NVARCHAR2(2000)", nullable: true),
+                    ProfilePicture = table.Column<string>(type: "NVARCHAR2(2000)", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -337,16 +324,6 @@ namespace _410project.Migrations
                 column: "GameId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_EventsDB_MaxRankId",
-                table: "EventsDB",
-                column: "MaxRankId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_EventsDB_MinRankId",
-                table: "EventsDB",
-                column: "MinRankId");
-
-            migrationBuilder.CreateIndex(
                 name: "IX_EventsDB_OwnerId",
                 table: "EventsDB",
                 column: "OwnerId");
@@ -367,14 +344,9 @@ namespace _410project.Migrations
                 column: "ProfilesProfileDBId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_GamesDBRanksDB_GameDBId",
-                table: "GamesDBRanksDB",
-                column: "GameDBId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_GamesDBRanksDB_RankDBId",
-                table: "GamesDBRanksDB",
-                column: "RankDBId");
+                name: "IX_GameDBRankDB_RanksRankDBId",
+                table: "GameDBRankDB",
+                column: "RanksRankDBId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_InterestDBProfileDB_ProfilesProfileDBId",
@@ -416,7 +388,7 @@ namespace _410project.Migrations
                 name: "GameDBProfileDB");
 
             migrationBuilder.DropTable(
-                name: "GamesDBRanksDB");
+                name: "GameDBRankDB");
 
             migrationBuilder.DropTable(
                 name: "InterestDBProfileDB");
@@ -431,6 +403,9 @@ namespace _410project.Migrations
                 name: "EventsDB");
 
             migrationBuilder.DropTable(
+                name: "RanksDB");
+
+            migrationBuilder.DropTable(
                 name: "InterestsDB");
 
             migrationBuilder.DropTable(
@@ -441,9 +416,6 @@ namespace _410project.Migrations
 
             migrationBuilder.DropTable(
                 name: "PlatformsDB");
-
-            migrationBuilder.DropTable(
-                name: "RanksDB");
 
             migrationBuilder.DropTable(
                 name: "UsersDB");

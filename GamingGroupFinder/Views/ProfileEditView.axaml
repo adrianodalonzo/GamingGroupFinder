@@ -1,0 +1,125 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+             x:Class="GamingGroupFinderGUI.Views.ProfileEditView">
+  <DockPanel>
+    <TextBlock Text="Edit Profile" FontSize="24" DockPanel.Dock="Top" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+    <ScrollViewer HorizontalScrollBarVisibility="Auto">
+        <StackPanel> 
+                <StackPanel>
+                        <TextBlock Text="Name: " 
+                                HorizontalAlignment="Center"
+                                VerticalAlignment="Center"/>
+                        <TextBox AcceptsReturn="False"
+                                Text="{Binding Profile.Name}"
+                                HorizontalAlignment="Center"
+                                VerticalAlignment="Center"
+                                Width="250"/>
+                </StackPanel>
+
+                <StackPanel>
+                        <TextBlock Text="Pronouns: "
+                                HorizontalAlignment="Center"
+                                VerticalAlignment="Center"/>
+                        <TextBox  Text="{Binding Profile.Pronouns}"
+                                  Width="100"
+                                  HorizontalAlignment="Center"
+                                  VerticalAlignment="Center"/>
+                </StackPanel>
+
+                <StackPanel>
+                        <TextBlock Text="Age: "
+                                HorizontalAlignment="Center"
+                                VerticalAlignment="Center"/>
+                        <TextBox AcceptsReturn="False"
+                                Text="{Binding Profile.Age}"
+                                HorizontalAlignment="Center"
+                                VerticalAlignment="Center"/>
+                </StackPanel>
+        
+                <StackPanel>
+                        <TextBlock Text="Games: "
+                                HorizontalAlignment="Center"
+                                VerticalAlignment="Center"/>
+                        <ComboBox Items="{Binding GameNames}"
+                                SelectedItem="{Binding SelectedGame}"
+                                HorizontalAlignment="Center"
+                                VerticalAlignment="Center"/>
+                        <Button Content="Add"
+                                Command="{Binding AddGame}"
+                                CommandParameter="{Binding SelectedGame}"
+                                HorizontalAlignment="Center"
+                                VerticalAlignment="Center"/>
+                        <ListBox Items="{Binding Profile.Games}" Width="200">
+                                <ListBox.ItemTemplate>
+                                        <DataTemplate>
+                                                <TextBlock Text="{Binding GameName}"/>
+                                        </DataTemplate>
+                                </ListBox.ItemTemplate>
+                        </ListBox>
+                </StackPanel>
+
+                <StackPanel>
+                        <TextBlock Text="Platforms: "
+                                HorizontalAlignment="Center"
+                                VerticalAlignment="Center"/>
+                        <ComboBox Items="{Binding PlatformNames}"
+                                SelectedItem="{Binding SelectedPlatform}"
+                                HorizontalAlignment="Center"
+                                VerticalAlignment="Center"/>
+                        <Button Content="Add"
+                                Command="{Binding AddPlatform}"
+                                CommandParameter="{Binding SelectedPlatform}"
+                                HorizontalAlignment="Center"
+                                VerticalAlignment="Center"/>
+                        <ListBox Items="{Binding Profile.Platforms}" Width="200">
+                                <ListBox.ItemTemplate>
+                                        <DataTemplate>
+                                                <TextBlock Text="{Binding PlatformName}"/>
+                                        </DataTemplate>
+                                </ListBox.ItemTemplate>
+                        </ListBox>
+                </StackPanel>
+
+                <StackPanel>
+                        <TextBlock Text="Interests: "
+                                HorizontalAlignment="Center"
+                                VerticalAlignment="Center"/>
+                        <TextBox Text="{Binding SelectedInterest}"
+                                HorizontalAlignment="Center"
+                                VerticalAlignment="Center"/>
+                        <Button Content="Add"
+                                Command="{Binding AddInterest}"
+                                CommandParameter="{Binding SelectedInterest}"
+                                HorizontalAlignment="Center"
+                                VerticalAlignment="Center"/>
+                        <ListBox Items="{Binding Profile.Interests}" Width="200">
+                                <ListBox.ItemTemplate>
+                                        <DataTemplate>
+                                                <Button HorizontalAlignment="Center"
+                                                        Content="{Binding InterestName}"
+                                                        Command="{Binding $parent[UserControl].DataContext.RemoveInterest}"
+                                                        CommandParameter="{Binding InterestName}"/>
+                                        </DataTemplate>
+                                </ListBox.ItemTemplate>
+                        </ListBox>
+                </StackPanel>
+
+                <StackPanel>
+                        <TextBlock Text="Biography: "
+                        HorizontalAlignment="Center"
+                        VerticalAlignment="Center"/>
+                        <TextBox AcceptsReturn="False"
+                                Text="{Binding Profile.Bio}"
+                                HorizontalAlignment="Center"
+                                VerticalAlignment="Center"
+                                Width="300"
+                                Height="300"/>
+                </StackPanel>
+          <Button Command="{Binding Ok}" HorizontalAlignment="Center">Done</Button>
+        </StackPanel>
+     </ScrollViewer>
+  </DockPanel>
+</UserControl>

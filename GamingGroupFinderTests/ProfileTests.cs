@@ -32,14 +32,14 @@ namespace GamingGroupFinderTests {
         [TestMethod]
         [ExpectedException (typeof(ArgumentNullException))]
         public void TestConstructor_ThrowsWhenGivenNull() {
-            User vince = new User("vince", "vince", "salt", new List<User>());
+            User vince = new User("vince", "vince", new byte['s'], new List<User>());
             Profile profile = new Profile(vince, "Vince", "hehim", 18, null, null, "uhhhhhh", "some link", null);
             Assert.Fail();
         }
 
         [TestMethod]
         public void TestClearData_Clears() {
-            User vince = new User("vince", "vince", "salt", new List<User>());
+            User vince = new User("vince", "vince", new byte['s'], new List<User>());
 
             List<Platform> platforms = new List<Platform>();
             platforms.Add(new Platform(1, "PC"));
@@ -61,13 +61,13 @@ namespace GamingGroupFinderTests {
 
             bool isCleared = true;
 
-            if (profile.Name != "") isCleared = false;
-            else if (profile.Pronouns != "") isCleared = false;
-            else if (profile.Age != 0) isCleared = false;
+            if (profile.Name != " ") isCleared = false;
+            else if (profile.Pronouns != " ") isCleared = false;
+            else if (profile.Age != 1) isCleared = false;
             else if (profile.Platforms.Count != 0) isCleared = false;
             else if (profile.Games.Count != 0) isCleared = false;
-            else if (profile.Bio != "") isCleared = false;
-            else if (profile.ProfilePicture != "") isCleared = false;
+            else if (profile.Bio != " ") isCleared = false;
+            else if (profile.ProfilePicture != " ") isCleared = false;
             else if (profile.Interests.Count != 0) isCleared = false;
 
             Assert.IsTrue(isCleared);

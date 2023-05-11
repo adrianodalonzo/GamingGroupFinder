@@ -19,10 +19,10 @@ namespace GamingGroupFinder {
             }
         }
 
-        private string _salt;
-        public string Salt { get { return _salt; } 
+        private byte[] _salt;
+        public byte[] Salt { get { return _salt; } 
             set {
-                if (string.IsNullOrEmpty(value)) {
+                if (value is null) {
                     throw new ArgumentNullException("Salt is null");
                 }
                 this._salt = value;
@@ -38,7 +38,7 @@ namespace GamingGroupFinder {
             }
         }
 
-        public User(string username, string password, string salt, List<User> contactList) {
+        public User(string username, string password, byte[] salt, List<User> contactList) {
             if(username == null || password == null || contactList == null){
                 throw new ArgumentNullException("one or multiple of the input is null");
             }
@@ -48,7 +48,7 @@ namespace GamingGroupFinder {
             this.ContactList = contactList;
         }
 
-        public User(string username, string password, string salt) {
+        public User(string username, string password, byte[] salt) {
             if(username == null || password == null){
                 throw new ArgumentNullException("one or multiple of the input is null");
             }
@@ -63,6 +63,9 @@ namespace GamingGroupFinder {
         public bool VerifyUser(string username, string password) {
             if(username == null || password == null){
                 throw new ArgumentNullException("one or multiple of the input is null");
+            }
+            if (username == this.Username && password == this.Password) {
+                return true;
             }
             return false;
         }   

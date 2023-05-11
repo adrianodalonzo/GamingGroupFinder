@@ -98,11 +98,22 @@ namespace GamingGroupFinder {
             this.ProfilePicture = profilePicture;
             this.Interests = interests;
         }
+
+        public Profile(User user) {
+            this.User = user;
+        }
         private Profile() {
         }
 
         public void ClearData() {
-            
+            this.Name = " ";
+            this.Pronouns = " ";
+            this.Age = 1;
+            this.Platforms = new List<Platform>();
+            this.Games = new List<Game>();
+            this.Bio = " ";
+            this.ProfilePicture = " ";
+            this.Interests = new List<Interest>();
         }
 
         public override string ToString() {
