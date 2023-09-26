@@ -1,0 +1,42 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+             x:Class="GamingGroupFinderGUI.Views.EventEditView">
+  <DockPanel>
+    <Button DockPanel.Dock="Bottom" Command="{Binding Ok}">Done</Button>
+    <TextBlock Text="Edit Event" FontSize="24" DockPanel.Dock="Top"/>
+    <StackPanel>
+        <TextBlock Text="Title: "/>
+        <TextBox AcceptsReturn="False"
+                Text="{Binding Event.Title}"
+                Watermark="Event Title"/>
+
+      <TextBlock Text="Description: "/>
+      <TextBox AcceptsReturn="False"
+              Text="{Binding Event.Description}"
+              Watermark="Event Description"/>
+
+      <TextBlock Text="Location: "/>
+      <TextBox AcceptsReturn="False"
+              Text="{Binding Event.Location}"
+              Watermark="Event Location"/>
+      
+      <TextBlock Text="Game: "/>
+      <ComboBox Items="{Binding GameNames}"
+                SelectedItem="{Binding SelectedGame}"/>
+
+      <TextBlock Text="Platforms: "/>
+      <ComboBox Items="{Binding PlatformNames}"
+                SelectedItem="{Binding SelectedPlatform}"/>
+
+      <TextBlock Text="Date: "/>
+      <DatePicker SelectedDate="{Binding Date}"/>
+
+      <TextBlock Text="Time: "/>
+      <TimePicker SelectedTime="{Binding TimeOfDay}"/>
+      
+    </StackPanel>
+  </DockPanel>
+</UserControl>

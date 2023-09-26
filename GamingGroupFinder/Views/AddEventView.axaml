@@ -1,0 +1,83 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+             x:Class="GamingGroupFinderGUI.Views.AddEventView">
+        <StackPanel> 
+            <StackPanel>
+                    <TextBlock Text="Event Title: " 
+                            HorizontalAlignment="Center"
+                            VerticalAlignment="Center"/>
+                    <TextBox AcceptsReturn="False"
+                            Text="{Binding Event.Title}"
+                            HorizontalAlignment="Center"
+                            VerticalAlignment="Center"
+                            Width="250"/>
+            </StackPanel>
+
+            <StackPanel>
+                    <TextBlock Text="Location: "
+                            HorizontalAlignment="Center"
+                            VerticalAlignment="Center"/>
+                    <TextBox  Text="{Binding Event.Location}"
+                              Width="100"
+                              HorizontalAlignment="Center"
+                              VerticalAlignment="Center"/>
+            </StackPanel>
+
+            <StackPanel>
+                    <TextBlock Text="Date: "
+                            HorizontalAlignment="Center"
+                            VerticalAlignment="Center"/>
+                    <DatePicker HorizontalAlignment="Center"
+                            VerticalAlignment="Center"
+                            SelectedDate="{Binding Date}"/>
+            </StackPanel>
+
+            <StackPanel>
+                    <TextBlock Text="Time: "
+                            HorizontalAlignment="Center"
+                            VerticalAlignment="Center"/>
+                    <TimePicker HorizontalAlignment="Center"
+                            VerticalAlignment="Center"
+                            SelectedTime="{Binding TimeOfDay}"/>
+            </StackPanel>
+    
+            <StackPanel>
+                    <TextBlock Text="Game: "
+                            HorizontalAlignment="Center"
+                            VerticalAlignment="Center"/>
+                    <ComboBox Items="{Binding GameNames}"
+                            SelectedItem="{Binding SelectedGame}"
+                            HorizontalAlignment="Center"
+                            VerticalAlignment="Center"/>
+            </StackPanel>
+
+            <StackPanel>
+                    <TextBlock Text="Platform: "
+                            HorizontalAlignment="Center"
+                            VerticalAlignment="Center"/>
+                    <ComboBox Items="{Binding PlatformNames}"
+                            SelectedItem="{Binding SelectedPlatform}"
+                            HorizontalAlignment="Center"
+                            VerticalAlignment="Center"/>
+            </StackPanel>
+
+            <StackPanel>
+                    <TextBlock Text="Description: "
+                            HorizontalAlignment="Center"
+                            VerticalAlignment="Center"/>
+                    <TextBox Text="{Binding Event.Description}"
+                            HorizontalAlignment="Center"
+                            VerticalAlignment="Center"/>
+            </StackPanel>
+
+        <StackPanel>
+                <Button Content="Add Event"
+                        Command="{Binding Ok}" 
+                        VerticalAlignment="Center" 
+                        HorizontalAlignment="Center"/>
+        </StackPanel>
+        </StackPanel>
+</UserControl>

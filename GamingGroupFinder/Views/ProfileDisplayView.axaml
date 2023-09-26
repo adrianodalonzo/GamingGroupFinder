@@ -1,0 +1,95 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+             x:Class="GamingGroupFinderGUI.Views.ProfileDisplayView">
+  <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
+    <StackPanel Margin="10,0,0,0">
+      <TextBlock Text="{Binding Profile.User.Username}"
+                  FontSize="28"/>
+                  <Image Width="100" Height="100" Source="{Binding ProfilePicture}" />
+      
+      <StackPanel Orientation="Horizontal" Spacing="10">
+
+
+        <StackPanel Spacing="2">
+          <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+            <TextBlock Text="{Binding Profile.Name}"
+                      IsVisible="{Binding Profile.Name, Converter={x:Static StringConverters.IsNotNullOrEmpty}}"/>
+            <TextBlock Text=", "/>
+            <TextBlock Text="{Binding Profile.Age}"
+                      IsVisible="{Binding Profile.Age, Converter={x:Static StringConverters.IsNotNullOrEmpty}}"/>
+            <TextBlock Text=" : "/>
+            <TextBlock Text="{Binding Profile.Pronouns}"
+                      IsVisible="{Binding Profile.Pronouns, Converter={x:Static StringConverters.IsNotNullOrEmpty}}"/> 
+          </StackPanel> 
+
+          <TextBlock Text="{Binding Profile.Bio}"
+                    IsVisible="{Binding Profile.Description, Converter={x:Static StringConverters.IsNotNullOrEmpty}}"/>
+      
+            
+        </StackPanel>
+
+        <StackPanel Width="200" Spacing="5">
+          <TextBlock Text="Games:"/>
+          <ItemsRepeater Items="{Binding Profile.Games}">
+            <ItemsRepeater.ItemTemplate>
+              <DataTemplate>
+              <Border Margin="10,0,0,0" Padding="2">
+                <TextBlock Text="{Binding GameName}"/>
+                </Border>
+              </DataTemplate>
+            </ItemsRepeater.ItemTemplate>
+          </ItemsRepeater>
+          <TextBlock Text="Platforms:"/>
+          <ItemsRepeater Items="{Binding Profile.Platforms}">
+            <ItemsRepeater.ItemTemplate>
+              <DataTemplate>
+              <Border Margin="10,0,0,0" Padding="2">
+                <TextBlock Text="{Binding PlatformName}"/>
+                </Border>
+              </DataTemplate>
+            </ItemsRepeater.ItemTemplate>
+          </ItemsRepeater>
+          <TextBlock Text="Interests:"/>
+          <ItemsRepeater Items="{Binding Profile.Interests}">
+            <ItemsRepeater.ItemTemplate>
+              <DataTemplate>
+              <Border Margin="10,0,0,0" Padding="2">
+                <TextBlock Text="{Binding InterestName}"/>
+                </Border>
+              </DataTemplate>
+            </ItemsRepeater.ItemTemplate>
+          </ItemsRepeater>
+        </StackPanel>
+
+      </StackPanel>
+
+      <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center" Orientation="Horizontal">
+        <Button Content="Edit Profile"
+                Command="{Binding $parent[Window].DataContext.EditProfile}"
+                IsVisible="{Binding Visible}"/>
+
+        <Button Content="Reset Password"
+                Command="{Binding $parent[Window].DataContext.ResetPassword}"
+                IsVisible="{Binding Visible}"/>
+
+        <Button Content="View Events"
+                Command="{Binding $parent[Window].DataContext.ViewEvents}"
+                IsVisible="{Binding Visible}"/>  
+
+        <Button Content="Clear Profile" 
+                Command="{Binding $parent[Window].DataContext.ClearProfile}"
+                IsVisible="{Binding Visible}"/>     
+
+        <Button Content="Delete Account"
+                Command="{Binding $parent[Window].DataContext.DeleteAccount}"
+                IsVisible="{Binding Visible}"/>
+      </StackPanel>
+
+    </StackPanel>
+
+  </ScrollViewer>
+  
+</UserControl>
